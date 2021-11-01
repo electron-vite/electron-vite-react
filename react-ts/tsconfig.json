@@ -1,4 +1,5 @@
 {
+  "extends": "../paths.json",
   "compilerOptions": {
     "target": "ESNext",
     "useDefineForClassFields": true,
