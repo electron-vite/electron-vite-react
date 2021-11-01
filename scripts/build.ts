@@ -1,7 +1,10 @@
-import { join } from 'path'
+import { join, relative } from 'path'
 import { readdirSync } from 'fs'
-import { OutputOptions, rollup, RollupOptions, RollupOutput } from 'rollup'
+import { OutputOptions, rollup, RollupOptions, RollupOutput, RollupError } from 'rollup'
+import { build as viteBuild2 } from 'vite'
 import { optionsFactory } from './rollup.config'
+
+export type BuildResult = [RollupError | null, RollupOutput | null]
 
 const TAG = '[build.ts]'
 
@@ -26,10 +29,32 @@ function preloadOptions() {
   })
 }
 
-async function doBuild(options: RollupOptions): Promise<[Error | null, RollupOutput | null]> {
+// build main、preload
+async function rollupBuild(options: RollupOptions): Promise<BuildResult> {
   try {
     const build = await rollup(options)
-    const output = await build.write(options.output as OutputOptions)
+    const optOutput = (options.output || {}) as OutputOptions
+    const output = await build.write(optOutput)
+
+    output.output.forEach(out => {
+      const relativePath = relative(__dirname, optOutput.dir as string)
+      console.log(TAG, `Build successful - ${join(relativePath, out.fileName)}`)
+    })
+
+    return [null, output]
+  } catch (error: any) {
+    console.error(TAG, 'Build failed:\n', error)
+    return [error, null]
+  }
+}
+
+// build react-ts
+async function buildReactTs(): Promise<BuildResult> {
+  try {
+    const output = await viteBuild2({
+      root: join(__dirname, '../react-ts'),
+      configFile: join(__dirname, '../react-ts/vite.config.ts'),
+    }) as RollupOutput
 
     return [null, output]
   } catch (error: any) {
@@ -37,16 +62,17 @@ async function doBuild(options: RollupOptions): Promise<[Error | null, RollupOut
   }
 }
 
-// build
-[mainOptions(), preloadOptions()].forEach(options => {
-  doBuild(options)
-    .then(([err, output]) => {
-      if (err) {
-        console.error(err)
-        process.exit(1)
-      }
-      output?.output.forEach(out => {
-        console.log(TAG, `Build successed -- ${(out as any).facadeModuleId}`)
-      })
-    })
-})
+; (async () => {
+
+  console.log(TAG, 'Build with rollup.')
+  try {
+    await Promise.all([
+      rollupBuild(mainOptions()),
+      rollupBuild(preloadOptions()),
+    ])
+    await buildReactTs()
+  } catch (error) {
+    console.error(TAG, error)
+    process.exit(1)
+  }
+})();
