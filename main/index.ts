@@ -1,3 +1,4 @@
+import { join } from 'path'
 import { app, BrowserWindow } from 'electron'
 
 const WINDOWS: Record<string, BrowserWindow | null> = {
@@ -11,7 +12,7 @@ function mainWin() {
   })
 
   if (app.isPackaged) {
-    WINDOWS.main.loadFile('')
+    WINDOWS.main.loadFile(join(__dirname, '../react-ts/index.html'))
   } else {
     WINDOWS.main.loadURL(`http://127.0.0.1:${process.env.PORT}`)
   }
