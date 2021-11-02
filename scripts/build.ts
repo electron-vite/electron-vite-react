@@ -1,6 +1,8 @@
 import { join, relative } from 'path'
 import { rollup, RollupOptions, OutputOptions, RollupOutput } from 'rollup'
 import { build as viteBuild2 } from 'vite'
+import { build as electronBuild2 } from 'electron-builder'
+import { config as builderConfig } from './electron-builder.config'
 import {
   mainOptions,
   preloadOptions,
@@ -42,15 +44,28 @@ async function buildReactTs(): Promise<BuildResult> {
   }
 }
 
-; (async () => {
+// build electron
+async function electronBuild() {
+  try {
+    const result = await electronBuild2({ config: builderConfig })
 
+    console.log(TAG, `electron-builder.build result - ${result}`)
+    return [null, result]
+  } catch (error) {
+    return [error, null]
+  }
+}
+
+; (async () => {
   console.log(TAG, 'Build with rollup.')
   try {
     await Promise.all([
+      // Avoid logs cleaned by vite
       rollupBuild(mainOptions()),
       rollupBuild(preloadOptions()),
     ])
     await buildReactTs()
+    await electronBuild()
   } catch (error) {
     console.error(TAG, error)
     process.exit(1)
