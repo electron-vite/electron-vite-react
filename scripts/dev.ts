@@ -15,7 +15,7 @@ function eventHandle(ev: RollupWatcherEvent) {
   if (ev.code === 'ERROR') {
     console.error(TAG, ev.error)
   } else if (ev.code === 'BUNDLE_START') {
-    console.log(TAG, `Rebuild start - ${ev.output}`)
+    console.log(TAG, `Rebuild - ${ev.output}`)
   }
 }
 

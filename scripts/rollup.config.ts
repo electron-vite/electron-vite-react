@@ -2,8 +2,8 @@ import { builtinModules } from 'module'
 import { RollupOptions } from 'rollup'
 import commonjs from '@rollup/plugin-commonjs'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
-// import typescript from '@rollup/plugin-typescript'
-import swc from 'rollup-plugin-swc'
+import typescript from '@rollup/plugin-typescript'
+// import swc from 'rollup-plugin-swc'
 
 function optionsFactory(options: RollupOptions): RollupOptions {
   return {
@@ -15,9 +15,11 @@ function optionsFactory(options: RollupOptions): RollupOptions {
     },
     plugins: [
       commonjs(),
-      nodeResolve(),
-      // typescript(),
-      swc(),
+      nodeResolve({
+        extensions: ['.ts', '.js', 'json'],
+      }),
+      typescript(),
+      // swc(), Error: Cannot find module 'regenerator-runtime'
     ],
     external: [
       'electron',
