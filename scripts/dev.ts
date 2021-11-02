@@ -1,21 +1,26 @@
+process.env.NODE_ENV = 'development'
+
 import { join } from 'path'
-import { spawn, ChildProcess } from 'child_process'
 import electron from 'electron'
-import { RollupWatcher, RollupWatcherEvent, watch } from 'rollup'
+import { spawn, ChildProcess } from 'child_process'
 import { createServer as createViteServer } from 'vite'
+import { RollupWatcher, RollupWatcherEvent, watch } from 'rollup'
+import WebSocket from 'ws'
+import chalk from 'chalk'
 import pkg from '../package.json'
 import {
   mainOptions,
   preloadOptions,
 } from './utils'
+import { createWsServer, formatWsSendData } from './ws'
 
-const TAG = '[dev.ts]'
+const TAG = chalk.bgGray('[dev.ts]')
 
 function eventHandle(ev: RollupWatcherEvent) {
   if (ev.code === 'ERROR') {
-    console.error(TAG, ev.error)
+    console.error(TAG, chalk.red(ev.error))
   } else if (ev.code === 'BUNDLE_START') {
-    console.log(TAG, `Rebuild - ${ev.output}`)
+    console.log(TAG, chalk.blue(`Rebuild - ${ev.output}`))
   }
 }
 
@@ -41,10 +46,16 @@ function watchMain(): RollupWatcher {
 }
 
 function watchPreload(): RollupWatcher {
+  const wssObj = createWsServer({ TAG })
+
   return watch(preloadOptions())
     .on('event', ev => {
       if (ev.code === 'END') {
-        // TODO Hot reload
+        // Hot reload renderer process !!!
+        if (wssObj.instance?.readyState === WebSocket.OPEN) {
+          console.log(TAG, chalk.yellow('Hot reload renderer process'))
+          wssObj.instance.send(formatWsSendData({ cmd: 'reload', data: Date.now() }))
+        }
       }
 
       eventHandle(ev)
@@ -59,11 +70,11 @@ function watchPreload(): RollupWatcher {
     })).listen()
     const { host = '127.0.0.1', port = 3000 } = server.config.server
 
-    console.log(TAG, `Server run at - http://${host}:${port}`)
+    console.log(TAG, chalk.yellow(`Server run at - http://${host}:${port}`))
 
     watchPreload()
     watchMain()
   } catch (error) {
-    console.error(TAG, error)
+    console.error(TAG, chalk.red(error))
   }
 })();
