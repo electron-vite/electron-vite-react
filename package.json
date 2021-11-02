@@ -19,10 +19,12 @@
   },
   "devDependencies": {
     "@rolldown/core": "^0.1.2",
+    "@rollup/plugin-replace": "^3.0.0",
     "@rollup/plugin-typescript": "^8.3.0",
     "@swc/core": "^1.2.106",
     "@types/react": "^17.0.33",
     "@types/react-dom": "^17.0.10",
+    "@types/ws": "^8.2.0",
     "@vitejs/plugin-react": "^1.0.7",
     "electron": "^15.3.0",
     "electron-builder": "^22.13.1",
@@ -30,9 +32,11 @@
     "ts-node": "^10.4.0",
     "tslib": "^2.3.1",
     "typescript": "^4.4.4",
-    "vite": "^2.6.13"
+    "vite": "^2.6.13",
+    "ws": "^8.2.3"
   },
   "env": {
+    "//": "Will be auto inject to main,renderer,preload process.env",
     "HOST": "127.0.0.1",
     "PORT": 3344,
     "PORT_WS": 3355
