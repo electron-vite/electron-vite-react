@@ -82,3 +82,5 @@ typings/
 # ----
 dist
 **/.tmp
+release
+.DS_Store
