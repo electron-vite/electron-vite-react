@@ -1,15 +1,18 @@
+process.env.NODE_ENV = 'production'
+
 import { join, relative } from 'path'
-import { rollup, RollupOptions, OutputOptions, RollupOutput } from 'rollup'
 import { build as viteBuild2 } from 'vite'
 import { build as electronBuild2 } from 'electron-builder'
+import { rollup, RollupOptions, OutputOptions, RollupOutput } from 'rollup'
 import { config as builderConfig } from './electron-builder.config'
+import chalk from 'chalk'
 import {
   mainOptions,
   preloadOptions,
   BuildResult,
 } from './utils'
 
-const TAG = '[build.ts]'
+const TAG = chalk.bgGray('[build.ts]')
 
 // build main、preload
 async function rollupBuild(options: RollupOptions): Promise<BuildResult> {
@@ -20,12 +23,12 @@ async function rollupBuild(options: RollupOptions): Promise<BuildResult> {
 
     output.output.forEach(out => {
       const relativePath = relative(__dirname, optOutput.dir as string)
-      console.log(TAG, `Build successful - ${join(relativePath, out.fileName)}`)
+      console.log(TAG, chalk.green(`Build successful - ${join(relativePath, out.fileName)}`))
     })
 
     return [null, output]
   } catch (error: any) {
-    console.error(TAG, 'Build failed:\n', error)
+    console.error(TAG, chalk.red('Build failed:\n'), error)
     return [error, null]
   }
 }
@@ -49,7 +52,7 @@ async function electronBuild() {
   try {
     const result = await electronBuild2({ config: builderConfig })
 
-    console.log(TAG, `electron-builder.build result - ${result}`)
+    console.log(TAG, chalk.green(`electron-builder.build result - ${result}`))
     return [null, result]
   } catch (error) {
     return [error, null]
@@ -57,7 +60,7 @@ async function electronBuild() {
 }
 
 ; (async () => {
-  console.log(TAG, 'Build with rollup.')
+  console.log(TAG, chalk.blue('Build with rollup.'))
   try {
     await Promise.all([
       // Avoid logs cleaned by vite
@@ -67,7 +70,7 @@ async function electronBuild() {
     await buildReactTs()
     await electronBuild()
   } catch (error) {
-    console.error(TAG, error)
+    console.error(TAG, chalk.red(error))
     process.exit(1)
   }
 })();
