@@ -21,7 +21,7 @@
   yarn dev
   ```
 
-## &nbsp;&nbsp;&nbsp;&nbsp; Wechat group &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 请我喝杯下午茶 🥳
+## &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Wechat group &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 请我喝杯下午茶 🥳
 <div style="display:flex;">
   <img width="244px" src="https://raw.githubusercontent.com/caoxiemeihao/blog/main/assets/wechat/group/qrcode.jpg" />
   &nbsp;&nbsp;&nbsp;&nbsp;
