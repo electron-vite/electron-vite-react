@@ -1,14 +1,16 @@
-import { Configuration } from 'electron-builder'
 
-const config: Configuration = {
+/**
+ * @type {import('electron-builder').Configuration}
+ */
+const config = {
   appId: "308487730@qq.com",
   asar: true,
   directories: {
     output: "release/${version}"
   },
   files: [
-    "!node_modules",
-    "dist/**"
+    "dist",
+    "package.json"
   ],
   mac: {
     artifactName: "${productName}_${version}.${ext}",
