@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import logo from './logo.svg'
-import electron from './electron.png'
+import vite from './assets/vite.svg'
+import react from './assets/react.svg'
+import electron from './assets/electron.png'
 import './App.css'
 
 function App() {
@@ -10,8 +11,15 @@ function App() {
     <div className="App">
       <header className="App-header">
         <div className="logos">
-          <img src={electron} className="App-logo" alt="electron" />
-          <img src={logo} className="App-logo" alt="logo" />
+          <div className="img-box">
+            <img src={electron} style={{ height: '24vw' }} className="App-logo" alt="electron" />
+          </div>
+          <div className="img-box">
+            <img src={vite} style={{ height: '19vw' }} alt="vite" />
+          </div>
+          <div className="img-box">
+            <img src={react} style={{ maxWidth: '100%' }} className="App-logo" alt="logo" />
+          </div>
         </div>
         <p>Hello Electron + Vite + React!</p>
         <p>
