@@ -4,7 +4,7 @@
     "baseUrl": ".",
     "paths": {
       "root/*": ["./*"],
-      "@/*": ["./react-ts/*"]
+      "@/*": ["src/react-ts/*"]
     }
   }
 }

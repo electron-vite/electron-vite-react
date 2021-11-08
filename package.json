@@ -4,10 +4,10 @@
   "description": "Electron React Vite boilerplate.",
   "author": "草鞋没号 <308487730@qq.com>",
   "license": "MIT",
-  "main": "dist/main/index.js",
+  "main": "dist/main/index.cjs",
   "scripts": {
-    "dev": "node -r ts-node/register scripts/dev.ts",
-    "build": "node -r ts-node/register scripts/build.ts"
+    "dev": "node scripts/watch.mjs",
+    "build": "node scripts/build.mjs"
   },
   "engines": {
     "node": ">=14.17.0"
