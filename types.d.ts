@@ -5,6 +5,5 @@ declare namespace NodeJS {
     readonly PORT: string
     readonly HOST: string
     readonly PORT: number
-    readonly PORT_WS: number
   }
 }
