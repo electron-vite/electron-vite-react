@@ -21,6 +21,10 @@
   yarn dev
   ```
 
+## Demo
+
+<img width="400px" src="https://raw.githubusercontent.com/caoxiemeihao/blog/main/electron-react-vite/main-win.png" />
+
 <div style="display:flex; text-align:center;">
   <h2 style="width:244px;">Wechat group</h2>
   <h2 style="width:244px;">请我喝杯下午茶 🥳</h2>
