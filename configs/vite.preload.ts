@@ -4,9 +4,9 @@ import { defineConfig } from 'vite'
 
 export default defineConfig({
   mode: process.env.NODE_ENV,
-  root: __dirname,
+  root: join(__dirname, '../src/preload'),
   build: {
-    outDir: join(process.cwd(), 'dist/preload'),
+    outDir: join(__dirname, '../dist/preload'),
     lib: {
       entry: 'index.ts',
       formats: ['cjs'],
