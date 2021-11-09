@@ -23,7 +23,7 @@
 
 ## Demo
 
-<img width="400px" src="https://raw.githubusercontent.com/caoxiemeihao/blog/main/electron-vite-template/main-win.png" />
+<img width="400px" src="https://raw.githubusercontent.com/caoxiemeihao/blog/main/electron-vite-template/react-win.png" />
 
 ## Wechat group || 请我喝杯下午茶 🥳
 
