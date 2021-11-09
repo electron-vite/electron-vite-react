@@ -1,18 +1,18 @@
 # electron-vite-template
 
-![GitHub stars](https://img.shields.io/github/stars/caoxiemeihao/electron-react-vite?color=fa6470&style=flat)
-![GitHub issues](https://img.shields.io/github/issues/caoxiemeihao/electron-react-vite?color=d8b22d&style=flat)
-![GitHub license](https://img.shields.io/github/license/caoxiemeihao/electron-react-vite?style=flat)
+![GitHub stars](https://img.shields.io/github/stars/caoxiemeihao/electron-vite-template?color=fa6470&style=flat)
+![GitHub issues](https://img.shields.io/github/issues/caoxiemeihao/electron-vite-template?color=d8b22d&style=flat)
+![GitHub license](https://img.shields.io/github/license/caoxiemeihao/electron-vite-template?style=flat)
 [![Required Node.JS >= v14.17.0](https://img.shields.io/static/v1?label=node&message=%3E=14.17.0&logo=node.js&color=3f893e&style=flat)](https://nodejs.org/about/releases)
 
 ## Run Setup
 
   ```bash
   # clone the project
-  git clone git@github.com:caoxiemeihao/electron-react-vite.git
+  git clone git@github.com:caoxiemeihao/electron-vite-template.git
 
   # enter the project directory
-  cd electron-react-vite
+  cd electron-vite-template
 
   # install dependency(Recommend use yarn)
   yarn
@@ -23,7 +23,7 @@
 
 ## Demo
 
-<img width="400px" src="https://raw.githubusercontent.com/caoxiemeihao/blog/main/electron-react-vite/main-win.png" />
+<img width="400px" src="https://raw.githubusercontent.com/caoxiemeihao/blog/main/electron-vite-template/main-win.png" />
 
 ## Wechat group || 请我喝杯下午茶 🥳
 
