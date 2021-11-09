@@ -32,8 +32,3 @@
   &nbsp;&nbsp;&nbsp;&nbsp;
   <img width="244px" src="https://raw.githubusercontent.com/caoxiemeihao/blog/main/assets/wechat/%24qrcode/%2419.99.png" />
 </div>
-
-## Reference links
-- [vite-electron-builder](https://github.com/cawa-93/vite-electron-builder)
-- [Vite](https://vitejs.dev)
-- [Rollup](https://rollupjs.org)
