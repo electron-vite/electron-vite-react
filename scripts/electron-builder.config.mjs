@@ -9,6 +9,7 @@ const config = {
     output: "release/${version}"
   },
   files: [
+    "!node_modules",
     "dist",
     "package.json"
   ],
