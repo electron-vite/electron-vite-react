@@ -21,6 +21,12 @@
   yarn dev
   ```
 
+## Branchs
+
+- `main` - **[Electron + Vite + React](https://github.com/caoxiemeihao/electron-vite-template/tree/main)**
+
+- `vue-ts` - **[Electron + Vite + Vue3](https://github.com/caoxiemeihao/electron-vite-template/tree/vue-ts)**
+
 ## Demo
 
 <img width="400px" src="https://raw.githubusercontent.com/caoxiemeihao/blog/main/electron-vite-template/react-win.png" />
