@@ -1,7 +1,7 @@
 {
-  "name": "electron-vite-template",
+  "name": "vite-react-electron",
   "version": "1.0.0",
-  "description": "Electron Vite React/Vue boilerplate.",
+  "description": "Vite React Electron boilerplate.",
   "author": "草鞋没号 <308487730@qq.com>",
   "license": "MIT",
   "main": "dist/main/index.cjs",

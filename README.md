@@ -29,7 +29,7 @@
 ├── configs
 ├   ├── vite.main.ts                 Main-process config file, for -> src/main
 ├   ├── vite.preload.ts              Preload-script config file, for -> src/preload
-├   ├── vite.react-ts.ts             Renderer-script config file, for -> src/react-ts
+├   ├── vite.renderer.ts             Renderer-script config file, for -> src/renderer
 ├
 ├── scripts
 ├   ├── build.mjs                    Build script, for -> npm run build
@@ -39,7 +39,7 @@
 ├── src
 ├   ├── main                         Main-process source code
 ├   ├── preload                      Preload-script source code
-├   ├── react-ts                     Renderer-process source code
+├   ├── renderer                     Renderer-process source code
 ├
 ```
 

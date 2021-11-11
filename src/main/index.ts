@@ -19,7 +19,7 @@ async function mainWin() {
   })
 
   if (app.isPackaged) {
-    win.loadFile(join(__dirname, '../react-ts/index.html'))
+    win.loadFile(join(__dirname, '../renderer/index.html'))
   } else {
     const pkg = await import('../../package.json')
     const url = `http://${pkg.env.HOST || '127.0.0.1'}:${pkg.env.PORT}`

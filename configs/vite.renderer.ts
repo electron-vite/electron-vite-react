@@ -5,13 +5,13 @@ import pkg from '../package.json'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  root: join(__dirname, '../src/react-ts'),
+  root: join(__dirname, '../src/renderer'),
   plugins: [react()],
   base: './',
   build: {
     emptyOutDir: true,
     minify: false,
-    outDir: join(__dirname, '../dist/react-ts'),
+    outDir: join(__dirname, '../dist/renderer'),
   },
   server: {
     host: pkg.env.HOST,

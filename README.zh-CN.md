@@ -30,7 +30,7 @@
 ├── configs
 ├   ├── vite.main.ts                 主进程配置文件，编译 src/main
 ├   ├── vite.preload.ts              预加载脚本配置文件，编译 src/preload
-├   ├── vite.react-ts.ts             渲染进程配置文件，编译 src/react-ts
+├   ├── vite.renderer.ts             渲染进程配置文件，编译 src/renderer
 ├
 ├── scripts
 ├   ├── build.mjs                    项目构建脚本，对应 npm run build
@@ -40,7 +40,7 @@
 ├── src
 ├   ├── main                         主进程源码
 ├   ├── preload                      预加载脚本源码
-├   ├── react-ts                     渲染进程源码
+├   ├── renderer                     渲染进程源码
 ├
 ```
 
