@@ -1,8 +1,8 @@
-# vite-electron-boilerplate
+# vite-react-electron
 
-![GitHub stars](https://img.shields.io/github/stars/caoxiemeihao/vite-electron-boilerplate?color=fa6470&style=flat)
-![GitHub issues](https://img.shields.io/github/issues/caoxiemeihao/vite-electron-boilerplate?color=d8b22d&style=flat)
-![GitHub license](https://img.shields.io/github/license/caoxiemeihao/vite-electron-boilerplate?style=flat)
+![GitHub stars](https://img.shields.io/github/stars/caoxiemeihao/vite-react-electron?color=fa6470&style=flat)
+![GitHub issues](https://img.shields.io/github/issues/caoxiemeihao/vite-react-electron?color=d8b22d&style=flat)
+![GitHub license](https://img.shields.io/github/license/caoxiemeihao/vite-react-electron?style=flat)
 [![Required Node.JS >= v14.17.0](https://img.shields.io/static/v1?label=node&message=%3E=14.17.0&logo=node.js&color=3f893e&style=flat)](https://nodejs.org/about/releases)
 
 **English | [简体中文](README.zh-CN.md)**
@@ -10,10 +10,10 @@
 
   ```bash
   # clone the project
-  git clone git@github.com:caoxiemeihao/vite-electron-boilerplate.git
+  git clone git@github.com:caoxiemeihao/vite-react-electron.git
 
   # enter the project directory
-  cd vite-electron-boilerplate
+  cd vite-react-electron
 
   # install dependency(Recommend use yarn)
   yarn
@@ -21,12 +21,6 @@
   # develop
   yarn dev
   ```
-
-## Branchs
-
-- `main` - **[Electron + Vite + React](https://github.com/caoxiemeihao/vite-electron-boilerplate/tree/main)**
-
-- `vue-ts` - **[Electron + Vite + Vue3](https://github.com/caoxiemeihao/vite-electron-boilerplate/tree/vue-ts)**
 
 ## Directory
 
@@ -63,7 +57,7 @@
 
 ## Demo
 
-<img width="400px" src="https://raw.githubusercontent.com/caoxiemeihao/blog/main/vite-electron-boilerplate/react-win.png" />
+<img width="400px" src="https://raw.githubusercontent.com/caoxiemeihao/blog/main/vite-react-electron/react-win.png" />
 
 ## Wechat group | | 请我喝杯下午茶 🥳
 
