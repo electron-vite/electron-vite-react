@@ -44,6 +44,24 @@
 ├
 ```
 
+#### dist 与 src
+
+- 一旦启动或打包脚本执行过，会在根目录产生 **`dist` 文件夹，里面的文件夹同 `src` 一模一样**
+
+- 在使用一些路径计算时，尤其是相对路径计算；`dist` 与 `src` 里面保持相同的目录结构能避开好多问题
+
+```tree
+├── dist
+|   ├── main
+|   ├── preload
+|   ├── renderer
+├── src
+|   ├── main
+|   ├── preload
+|   ├── renderer
+|
+```
+
 ## 原理
 
 - 主进程(main-process)、渲染进程(renderer-process)、预加载脚本(preload-script) 全部在 `configs/xxx.ts` 中配置 -- 全量级的 `Vite` 编译还是相当快的

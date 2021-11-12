@@ -43,17 +43,35 @@
 ├
 ```
 
+#### `dist` and `src`
+
+- Once `npm run dev` or `npm run build` is executed. Will be generated `dist`, it is the same as the `src` structure.
+
+- This ensures the accuracy of path calculation.
+
+```tree
+├── dist
+|   ├── main
+|   ├── preload
+|   ├── renderer
+├── src
+|   ├── main
+|   ├── preload
+|   ├── renderer
+|
+```
+
 ## How to work
 
-- The Main-process, Renderer-process and Preload-script are all config in `configs/xxx.ts`
+- The `Main-process`, `Renderer-process` and `Preload-script` are all config in `configs/xxx.ts`.
 
-- The full-scale `Vite` compilation is supper fast
+- All files are built using `Vite`, is supper fast.
 
-- `scripts/build.mjs` only calls the `Vite` API and uses the `configs/xxx.ts` config file to build
+- `scripts/build.mjs` only calls the `Vite` API and uses the `configs/xxx.ts` config file to build.
 
 - The difference between `scripts/watch.mjs` and `build.mjs` is that the watch option is configured for the Main-process and Preload-script. The Renderer-process uses `require ('vite').createServer`
 
-- The whole project tends to be configured rather than a large number of scripts, which is dazzling -- **🥳 上手简单**
+- Manage projects more through configuration other than scripts. -- **🥳 Simple and clear**
 
 ## Demo
 
