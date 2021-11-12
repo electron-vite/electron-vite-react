@@ -6,7 +6,7 @@ export default defineConfig({
   mode: process.env.NODE_ENV,
   root: join(__dirname, '../src/preload'),
   build: {
-    outDir: join(__dirname, '../dist/preload'),
+    outDir: '../../dist/preload',
     lib: {
       entry: 'index.ts',
       formats: ['cjs'],

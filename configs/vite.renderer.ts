@@ -11,7 +11,7 @@ export default defineConfig({
   build: {
     emptyOutDir: true,
     minify: false,
-    outDir: join(__dirname, '../dist/renderer'),
+    outDir: '../../dist/renderer',
   },
   server: {
     host: pkg.env.HOST,
