@@ -1,5 +1,6 @@
 import { join } from 'path'
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain } from 'electron'
+import Store from 'electron-store'
 
 app.disableHardwareAcceleration()
 
@@ -26,6 +27,7 @@ async function mainWin() {
 
     win.loadURL(url)
     win.maximize()
+    win.webContents.openDevTools()
   }
 }
 
@@ -40,8 +42,21 @@ app.on('window-all-closed', () => {
 
 app.on('second-instance', () => {
   if (win) {
-    // someone tried to run a second instance, we should focus our window.
+    // Someone tried to run a second instance, we should focus our window.
     if (win.isMinimized()) win.restore()
     win.focus()
   }
+})
+
+// -------------------------------------
+
+/**
+ * Expose 'electron-store' to renderer through 'ipcMain.handle'
+ */
+const store = new Store
+ipcMain.handle('electron-store', async (_evnet, methodSign: string, ...args: any[]) => {
+  if (typeof (store as any)[methodSign] === 'function') {
+    return (store as any)[methodSign](...args)
+  }
+  return (store as any)[methodSign]
 })
