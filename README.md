@@ -15,11 +15,11 @@
   # enter the project directory
   cd vite-react-electron
 
-  # install dependency(Recommend use yarn)
-  yarn
+  # install dependency
+  npm install
 
   # develop
-  yarn dev
+  npm run dev
   ```
 
 ## Directory
