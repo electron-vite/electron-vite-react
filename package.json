@@ -27,7 +27,7 @@
     "vite": "^2.6.13"
   },
   "env": {
-    "//": "Will be auto inject to main,renderer,preload process.env",
+    "//": "Used in build scripts",
     "HOST": "127.0.0.1",
     "PORT": 3344
   }
