@@ -28,7 +28,7 @@ async function packElectron() {
     // if you want to build windows platform
     // targets: Platform.WINDOWS.createTarget(),
   }).then(result => {
-    console.log(TAG, 'WINDOWS:', chalk.green(result))
+    console.log(TAG, 'files:', chalk.green(result))
   })
 }
 
