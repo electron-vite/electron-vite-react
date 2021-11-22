@@ -1,7 +1,7 @@
 process.env.NODE_ENV = 'production'
 
 import { build as viteBuild } from 'vite'
-import { build as electronBuild } from 'electron-builder'
+import { build as electronBuild, Platform } from 'electron-builder'
 import { config as builderConfig } from '../configs/electron-builder.config.mjs'
 import chalk from 'chalk'
 
@@ -23,10 +23,13 @@ async function buildElectron() {
 }
 
 async function packElectron() {
-  return electronBuild({ config: builderConfig })
-    .then(result => {
-      console.log(TAG, chalk.green(`[electron-builder.build result]: ${result}`))
-    })
+  return electronBuild({
+    config: builderConfig,
+    // if you want to build windows platform
+    // targets: Platform.WINDOWS.createTarget(),
+  }).then(result => {
+    console.log(TAG, 'WINDOWS:', chalk.green(result))
+  })
 }
 
 ; (async () => {
