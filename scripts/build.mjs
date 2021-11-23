@@ -32,12 +32,6 @@ async function packElectron() {
   })
 }
 
-; (async () => {
-  try {
-    await buildElectron()
-    await packElectron()
-  } catch (error) {
-    console.error(error)
-    process.exit(1)
-  }
-})()
+// bootstrap
+await buildElectron()
+await packElectron()
