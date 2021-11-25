@@ -29,6 +29,11 @@ async function mainWin() {
     win.maximize()
     win.webContents.openDevTools()
   }
+
+  // Test active push message to Renderer-process.
+  setInterval(() => {
+    win?.webContents.send('main-process-message', (new Date).toLocaleString())
+  }, 999)
 }
 
 app.whenReady().then(mainWin)

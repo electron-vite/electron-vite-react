@@ -17,6 +17,11 @@ ReactDOM.render(
 
 console.log('contextBridge ->', window.bridge)
 
+// Use ipcRenderer.on
+window.bridge.ipcRenderer.on('main-process-message', (_event, ...args) => {
+  console.log('[Receive Main-process message]:', ...args)
+})
+
 // Use 'electron-store'
 const store = {
   async get(key: string) {
@@ -40,7 +45,6 @@ const store = {
     }
   },
 };
-
 (async () => {
   await store.set('Date.now', Date.now())
   console.log('electron-store ->', 'Date.now:', await store.get('Date.now'))
