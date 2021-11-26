@@ -6,6 +6,7 @@ import pkg from '../package.json'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  mode: process.env.NODE_ENV,
   root: join(__dirname, '../src/renderer'),
   plugins: [
     react(),
@@ -20,7 +21,6 @@ export default defineConfig({
   base: './',
   build: {
     emptyOutDir: true,
-    minify: false,
     outDir: '../../dist/renderer',
   },
   css: {
