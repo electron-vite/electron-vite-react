@@ -31,9 +31,9 @@ async function mainWin() {
   }
 
   // Test active push message to Renderer-process.
-  setInterval(() => {
+  win.webContents.on('did-finish-load', () => {
     win?.webContents.send('main-process-message', (new Date).toLocaleString())
-  }, 999)
+  })
 }
 
 app.whenReady().then(mainWin)
