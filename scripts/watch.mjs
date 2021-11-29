@@ -17,6 +17,7 @@ const pkg = JSON.parse(readFileSync(join(process.cwd(), 'package.json'), 'utf8')
 function getWatcher({ name, configFile, writeBundle }) {
   return viteBuild({
     // Options here precedence over configFile
+    mode: process.env.NODE_ENV,
     build: {
       watch: {},
     },
@@ -46,7 +47,7 @@ async function watchMain() {
       electronProcess && electronProcess.kill()
       electronProcess = spawn(electron, ['.'], {
         stdio: 'inherit',
-        env: Object.assign(process.env, pkg.env), // Why don't work?
+        env: Object.assign(process.env, pkg.env),
       })
     },
   })
