@@ -3,7 +3,7 @@ import { Button } from 'antd'
 import vite from './assets/vite.svg'
 import react from './assets/react.svg'
 import electron from './assets/electron.png'
-import './App.css'
+import './App.less'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -49,9 +49,9 @@ function App() {
           >
             Vite Docs
           </a>
-          <div>
-            Place static files into the public folder
-            <img style={{ width: 100 }} src="./img/node.png" />
+          <div className="static-public">
+            Place static files into the <code>src/renderer/public</code> folder
+            <img style={{ width: 90 }} src="./images/node.png" />
           </div>
         </div>
       </header>
