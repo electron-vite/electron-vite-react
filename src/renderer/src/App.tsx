@@ -31,7 +31,7 @@ function App() {
         <p>
           Edit <code>App.tsx</code> and save to test HMR updates.
         </p>
-        <p>
+        <div>
           <a
             className="App-link"
             href="https://reactjs.org"
@@ -53,7 +53,7 @@ function App() {
             Place static files into the public folder
             <img style={{ width: 100 }} src="./img/node.png" />
           </div>
-        </p>
+        </div>
       </header>
     </div>
   )
