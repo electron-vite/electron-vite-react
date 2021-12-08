@@ -11,7 +11,7 @@ const TAG = chalk.bgBlue('[build.mjs]')
 const viteConfigs = {
   main: 'configs/vite.main.ts',
   preload: 'configs/vite.preload.ts',
-  reactTs: 'configs/vite.renderer.ts',
+  renderer: 'configs/vite.renderer.ts',
 }
 
 async function buildElectron() {
@@ -23,7 +23,7 @@ async function buildElectron() {
       mode: process.env.NODE_ENV,
     }
 
-    if (name === 'reactTs') {
+    if (name === 'renderer') {
       config.publicDir = path.resolve('./public')
     }
 
