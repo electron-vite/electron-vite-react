@@ -49,6 +49,10 @@ function App() {
           >
             Vite Docs
           </a>
+          <div>
+            Place static files into the public folder
+            <img style={{ width: 100 }} src="./img/node.png" />
+          </div>
         </p>
       </header>
     </div>
