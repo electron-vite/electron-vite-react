@@ -18,6 +18,9 @@ async function buildElectron() {
   for (const [name, configPath] of Object.entries(viteConfigs)) {
     console.group(TAG, name)
 
+    /**
+     * @type {import('vite').InlineConfig}
+     */
     const config = {
       configFile: configPath,
       mode: process.env.NODE_ENV,
