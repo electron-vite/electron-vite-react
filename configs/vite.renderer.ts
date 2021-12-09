@@ -8,7 +8,6 @@ import pkg from '../package.json'
 export default defineConfig({
   mode: process.env.NODE_ENV,
   root: join(__dirname, '../src/renderer'),
-  publicDir: join(__dirname, '../src/renderer/public'),
   plugins: [
     react(),
     styleImport({
