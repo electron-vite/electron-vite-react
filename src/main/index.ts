@@ -3,7 +3,6 @@ import { join } from 'path'
 import { app, BrowserWindow, ipcMain } from 'electron'
 import Store from 'electron-store'
 
-// https://stackoverflow.com/questions/42524606/how-to-get-windows-version-using-node-js
 const isWin7 = os.release().startsWith('6.1')
 if (isWin7) app.disableHardwareAcceleration()
 
