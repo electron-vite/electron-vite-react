@@ -72,7 +72,6 @@ async function watchPreload(viteDevServer) {
 // bootstrap
 const viteDevServer = await createServer({
   configFile: 'configs/vite.renderer.ts',
-  publicDir: resolve('./public'),
 })
 
 await viteDevServer.listen()
