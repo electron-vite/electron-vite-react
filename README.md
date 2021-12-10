@@ -71,7 +71,7 @@
 
 - The difference between `scripts/watch.mjs` and `build.mjs` is that the watch option is configured for the Main-process and Preload-script. The Renderer-process uses `require ('vite').createServer`
 
-- Manage projects more through configuration other than scripts. -- **🥳 Simple and clear**
+- Manage projects more through configuration other than scripts. -- **🥳 Simple and clearly**
 
 ## Demo
 
