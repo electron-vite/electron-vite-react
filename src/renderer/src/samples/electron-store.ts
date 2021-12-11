@@ -21,10 +21,11 @@ const store = {
     }
   },
 };
+
 (async () => {
   await store.set('Date.now', Date.now())
   console.log('electron-store ->', 'Date.now:', await store.get('Date.now'))
   console.log('electron-store ->', 'path:', await window.bridge.ipcRenderer.invoke('electron-store', 'path'))
 })();
 
-export { };
+export { }
