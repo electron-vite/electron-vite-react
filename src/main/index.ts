@@ -1,7 +1,7 @@
 import os from 'os'
 import { join } from 'path'
-import { app, BrowserWindow, ipcMain } from 'electron'
-import Store from 'electron-store'
+import { app, BrowserWindow } from 'electron'
+import './samples/electron-store'
 
 const isWin7 = os.release().startsWith('6.1')
 if (isWin7) app.disableHardwareAcceleration()
@@ -53,17 +53,4 @@ app.on('second-instance', () => {
     if (win.isMinimized()) win.restore()
     win.focus()
   }
-})
-
-// -------------------------------------
-
-/**
- * Expose 'electron-store' to renderer through 'ipcMain.handle'
- */
-const store = new Store
-ipcMain.handle('electron-store', async (_evnet, methodSign: string, ...args: any[]) => {
-  if (typeof (store as any)[methodSign] === 'function') {
-    return (store as any)[methodSign](...args)
-  }
-  return (store as any)[methodSign]
 })
