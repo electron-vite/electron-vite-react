@@ -30,6 +30,12 @@ export default defineConfig({
       },
     },
   },
+  resolve: {
+    alias: {
+      '@': join(__dirname, '../src/renderer/src'),
+      'src': join(__dirname, '../src'),
+    },
+  },
   server: {
     host: pkg.env.HOST,
     port: pkg.env.PORT,
