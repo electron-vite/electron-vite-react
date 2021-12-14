@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { Button } from 'antd'
-import vite from './assets/vite.svg'
-import react from './assets/react.svg'
-import electron from './assets/electron.png'
+import vite from '@/assets/vite.svg'
+import react from '@/assets/react.svg'
+import electron from '@/assets/electron.png'
 import './App.less'
 
 function App() {
