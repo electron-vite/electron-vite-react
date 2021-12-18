@@ -7,6 +7,16 @@
 
 **[English](README.md) | 简体中文**
 
+## 概述
+
+- 主进程(main-process)、渲染进程(renderer-process)、预加载脚本(preload-script) 全部在 `configs/xxx.ts` 中配置 -- 全量级的 `Vite` 编译还是相当快的
+
+- `scripts/build.mjs` 只是调用了 `Vite` 的 API 并使用 `configs/xxx.ts` 配置文件进行构建
+
+- `scripts/watch.mjs` 与 `build.mjs` 区别是 主进程(main-process)、预加载脚本(preload-script) 配置了 `watch` 选项；渲染进程则是使用了 `require('vite').createServer`
+
+- 项目整体趋于 配置化 而不是大量的脚本让人眼花缭乱 -- **上手简单**
+
 ## 运行
 
   ```bash
@@ -61,17 +71,6 @@
 |   ├── renderer
 |
 ```
-
-## 原理
-
-- 主进程(main-process)、渲染进程(renderer-process)、预加载脚本(preload-script) 全部在 `configs/xxx.ts` 中配置 -- 全量级的 `Vite` 编译还是相当快的
-
-- `scripts/build.mjs` 只是调用了 `Vite` 的 API 并使用 `configs/xxx.ts` 配置文件进行构建
-
-- `scripts/watch.mjs` 与 `build.mjs` 区别是 主进程(main-process)、预加载脚本(preload-script) 配置了 `watch` 选项；渲染进程则是使用了 `require('vite').createServer`
-
-- 项目整体趋于 配置化 而不是大量的脚本让人眼花缭乱 -- **上手简单**
-
 
 ## 效果
 

@@ -6,6 +6,19 @@
 [![Required Node.JS >= v14.17.0](https://img.shields.io/static/v1?label=node&message=%3E=14.17.0&logo=node.js&color=3f893e&style=flat)](https://nodejs.org/about/releases)
 
 **English | [简体中文](README.zh-CN.md)**
+
+## Overview
+
+- All config files `Main-process`, `Renderer-process` and `Preload-script` they are in `configs/*.ts`.
+
+- All files are built using `Vite`, is supper fast.
+
+- `scripts/build.mjs` just calls the `Vite` API and uses the `configs/*.ts` config file to build.
+
+- The difference between `scripts/watch.mjs` and `build.mjs` is that the watch option is configured for the Main-process and Preload-script. The Renderer-process uses `require ('vite').createServer`
+
+- Manage projects more through configuration other than scripts. -- **🥳 Simple and clearly**
+
 ## Run Setup
 
   ```bash
@@ -61,19 +74,7 @@
 |
 ```
 
-## How to work
-
-- The `Main-process`, `Renderer-process` and `Preload-script` are all config in `configs/xxx.ts`.
-
-- All files are built using `Vite`, is supper fast.
-
-- `scripts/build.mjs` only calls the `Vite` API and uses the `configs/xxx.ts` config file to build.
-
-- The difference between `scripts/watch.mjs` and `build.mjs` is that the watch option is configured for the Main-process and Preload-script. The Renderer-process uses `require ('vite').createServer`
-
-- Manage projects more through configuration other than scripts. -- **🥳 Simple and clearly**
-
-## Demo
+## Shown
 
 <img width="400px" src="https://raw.githubusercontent.com/caoxiemeihao/blog/main/vite-react-electron/react-win.png" />
 
