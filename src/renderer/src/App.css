@@ -55,12 +55,12 @@ button {
 .static-public {
   display: flex;
   align-items: center;
+}
 
-  code {
-    padding: 4px 7px;
-    margin: 0 4px;
-    border-radius: 4px;
-    background-color: rgb(30, 30, 30, .7);
-    font-size: 13px;
-  }
+.static-public code {
+  padding: 4px 7px;
+  margin: 0 4px;
+  border-radius: 4px;
+  background-color: rgb(30, 30, 30, .7);
+  font-size: 13px;
 }
