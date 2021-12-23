@@ -44,7 +44,6 @@
 ├
 ├── scripts
 ├   ├── build.mjs                    项目构建脚本，对应 npm run build
-├   ├── electron-builder.config.mjs
 ├   ├── watch.mjs                    项目开发脚本，对应 npm run dev
 ├
 ├── src
