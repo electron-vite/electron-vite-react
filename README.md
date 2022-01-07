@@ -68,6 +68,39 @@ Once `dev` or `build` npm-script executed will be generate named `dist` folder. 
 
 #### All Electron, NodeJs API invoke passed `Preload-script`
 
+* **src/preload/index.ts**
+
+  ```typescript
+  import fs from 'fs'
+  import { contextBridge, ipcRenderer } from 'electron'
+
+  // Expose Electron, NodeJs API to Renderer-process
+  contextBridge.exposeInMainWorld('bridge', {
+    fs,
+    ipcRenderer: withPrototype(ipcRenderer),
+  })
+  ```
+
+* **src/renderer/src/global.d.ts**
+
+  ```typescript
+  // Defined on the window
+  interface Window {
+    bridge: {
+      fs: typeof import('fs')
+      ipcRenderer: import('electron').IpcRenderer
+    }
+  }
+  ```
+
+* **src/renderer/src/main.tsx**
+
+  ```typescript
+  // Use Electron, NodeJs API in Renderer-process
+  console.log('fs', window.bridge.fs)
+  console.log('ipcRenderer', window.bridge.ipcRenderer)
+  ```
+
 ## Shown
 
 <img width="400px" src="https://raw.githubusercontent.com/caoxiemeihao/blog/main/vite-react-electron/react-win.png" />
