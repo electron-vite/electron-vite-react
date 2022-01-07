@@ -1,14 +1,12 @@
 process.env.NODE_ENV = 'development'
 
-import { readFileSync } from 'fs'
-import { resolve, join } from 'path'
 import electron from 'electron'
 import { spawn } from 'child_process'
+import { createRequire } from 'module'
 import { createServer, build as viteBuild } from 'vite'
 
-const pkg = JSON.parse(
-  readFileSync(join(process.cwd(), 'package.json'), 'utf8')
-)
+const require = createRequire(import.meta.url)
+const pkg = require('../package.json')
 
 /**
  * @param {{ name: string; configFile: string; writeBundle: import('rollup').OutputPlugin['writeBundle'] }} param0
