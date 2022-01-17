@@ -1,5 +1,6 @@
 import { join } from 'path'
-import { defineConfig } from 'vite'
+import { builtinModules } from 'module'
+import { defineConfig, Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import resolve from 'vite-plugin-resolve'
 import pkg from '../package.json'
@@ -10,9 +11,7 @@ export default defineConfig({
   root: join(__dirname, '../src/renderer'),
   plugins: [
     react(),
-    resolve({
-      electron: 'export default require("electron");',
-    }),
+    resolveElectron(),
   ],
   base: './',
   build: {
@@ -33,3 +32,81 @@ export default defineConfig({
     exclude: ['electron'],
   }
 })
+
+// ----------------- For use Electron, NodeJs in Renderer-process -----------------
+export function resolveElectron(): Plugin[] {
+  const builtins = builtinModules.filter(t => !t.startsWith('_'))
+
+  return [
+    {
+      name: 'vite-plugin-electron-config',
+      config(config) {
+        if (!config.optimizeDeps) config.optimizeDeps = {}
+        if (!config.optimizeDeps.exclude) config.optimizeDeps.exclude = []
+
+        config.optimizeDeps.exclude.push('electron', ...builtins)
+
+        console.log(config.optimizeDeps.exclude)
+      },
+    },
+    // https://github.com/caoxiemeihao/vite-plugins/tree/main/packages/resolve#readme
+    resolve({
+      electron: electronExport(),
+      ...builtinModulesExport(builtins),
+      // you can custom other module in here, need to make sure it's in `dependencies`
+      // 'electron-store': 'const Store = require("electron-store"); export defalut Store;'
+    })
+  ]
+
+  function electronExport() {
+    return `
+  /**
+   * All exports module see https://www.electronjs.org -> API -> Renderer Process Modules
+   */
+  const electron = require("electron");
+  const {
+    clipboard,
+    nativeImage,
+    shell,
+    contextBridge,
+    crashReporter,
+    ipcRenderer,
+    webFrame,
+    desktopCapturer,
+    deprecate,
+  } = electron;
+  
+  export {
+    electron as default,
+    clipboard,
+    nativeImage,
+    shell,
+    contextBridge,
+    crashReporter,
+    ipcRenderer,
+    webFrame,
+    desktopCapturer,
+    deprecate,
+  }
+  `
+  }
+
+  function builtinModulesExport(modules: string[]) {
+    return modules.map((moduleId) => {
+      const nodeModule = require(moduleId)
+      const attrs = Object.keys(nodeModule)
+      const requireTpl = `const __builtinModule = require("${moduleId}");`
+      const exportDefault = `export default __builtinModule`
+      const exportTpl = attrs.map(attr => `export const ${attr} = __builtinModule.${attr}`).join(';\n') + ';'
+      const nodeModuleCode = `
+${requireTpl}
+
+${exportDefault}
+
+${exportTpl}
+  `
+
+      return { [moduleId]: nodeModuleCode }
+    }).reduce((memo, item) => Object.assign(memo, item), {})
+  }
+}
