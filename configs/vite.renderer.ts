@@ -42,8 +42,6 @@ export function resolveElectron(): Plugin[] {
         if (!config.optimizeDeps.exclude) config.optimizeDeps.exclude = []
 
         config.optimizeDeps.exclude.push('electron', ...builtins)
-
-        console.log(config.optimizeDeps.exclude)
       },
     },
     // https://github.com/caoxiemeihao/vite-plugins/tree/main/packages/resolve#readme
