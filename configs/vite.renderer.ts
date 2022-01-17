@@ -28,9 +28,6 @@ export default defineConfig({
     host: pkg.env.HOST,
     port: pkg.env.PORT,
   },
-  optimizeDeps: {
-    exclude: ['electron'],
-  }
 })
 
 // ----------------- For use Electron, NodeJs in Renderer-process -----------------
