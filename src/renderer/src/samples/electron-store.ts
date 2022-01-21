@@ -1,7 +1,7 @@
 // Use 'electron-store'
 const store = {
   async get(key: string) {
-    const { invoke } = window.bridge.ipcRenderer
+    const { invoke } = window.ipcRenderer
     let value = await invoke('electron-store', 'get', key)
     try {
       value = JSON.parse(value)
@@ -10,7 +10,7 @@ const store = {
     }
   },
   async set(key: string, value: any) {
-    const { invoke } = window.bridge.ipcRenderer
+    const { invoke } = window.ipcRenderer
     let val = value
     try {
       if (value && typeof value === 'object') {
@@ -25,7 +25,7 @@ const store = {
 (async () => {
   await store.set('Date.now', Date.now())
   console.log('electron-store ->', 'Date.now:', await store.get('Date.now'))
-  console.log('electron-store ->', 'path:', await window.bridge.ipcRenderer.invoke('electron-store', 'path'))
+  console.log('electron-store ->', 'path:', await window.ipcRenderer.invoke('electron-store', 'path'))
 })();
 
 export { }

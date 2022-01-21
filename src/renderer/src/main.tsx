@@ -10,16 +10,13 @@ ReactDOM.render(
     <App />
   </React.StrictMode>,
   document.getElementById('root'),
-  () => {
-    window.bridge.removeLoading()
-  },
+  window.removeLoading,
 )
 
-// -----------------------------------------------------------
-
-console.log('contextBridge ->', window.bridge)
+console.log('fs', window.fs)
+console.log('ipcRenderer', window.ipcRenderer)
 
 // Use ipcRenderer.on
-window.bridge.ipcRenderer.on('main-process-message', (_event, ...args) => {
+window.ipcRenderer.on('main-process-message', (_event, ...args) => {
   console.log('[Receive Main-process message]:', ...args)
 })

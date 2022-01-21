@@ -1,5 +1,4 @@
 import fs from 'fs'
-import path from 'path'
 import { contextBridge, ipcRenderer } from 'electron'
 import { domReady } from './utils'
 import { useLoading } from './loading'
@@ -13,16 +12,10 @@ const { appendLoading, removeLoading } = useLoading()
   appendLoading()
 })();
 
-// ---------------------------------------------------
-
-contextBridge.exposeInMainWorld('bridge', {
-  __dirname,
-  __filename,
-  fs,
-  path,
-  ipcRenderer: withPrototype(ipcRenderer),
-  removeLoading,
-})
+// --------- Expose some API to Renderer process. ---------
+contextBridge.exposeInMainWorld('fs', fs)
+contextBridge.exposeInMainWorld('removeLoading', removeLoading)
+contextBridge.exposeInMainWorld('ipcRenderer', withPrototype(ipcRenderer))
 
 // `exposeInMainWorld` can not detect `prototype` attribute and methods, manually patch it.
 function withPrototype(obj: Record<string, any>) {
