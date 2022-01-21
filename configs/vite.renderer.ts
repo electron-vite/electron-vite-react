@@ -11,7 +11,16 @@ export default defineConfig({
   root: join(__dirname, '../src/renderer'),
   plugins: [
     react(),
-    resolveElectron(),
+    resolveElectron(
+      /**
+       * you can custom other module in here
+       * 🚧 need to make sure custom-resolve-module in `dependencies`, that will ensure that the electron-builder can package them correctly
+       * @example
+       * {
+       *   'electron-store': 'const Store = require("electron-store"); export defalut Store;',
+       * }
+       */
+    ),
   ],
   base: './',
   build: {
@@ -32,7 +41,7 @@ export default defineConfig({
 
 // ------- For use Electron, NodeJs in Renderer-process -------
 // https://github.com/caoxiemeihao/electron-vue-vite/issues/52
-export function resolveElectron(): Plugin[] {
+export function resolveElectron(dict: Parameters<typeof resolve>[0] = {}): Plugin[] {
   const builtins = builtinModules.filter(t => !t.startsWith('_'))
 
   return [
@@ -49,8 +58,7 @@ export function resolveElectron(): Plugin[] {
     resolve({
       electron: electronExport(),
       ...builtinModulesExport(builtins),
-      // you can custom other module in here, need to make sure it's in `dependencies`
-      // 'electron-store': 'const Store = require("electron-store"); export defalut Store;'
+      ...dict,
     })
   ]
 
