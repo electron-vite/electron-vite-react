@@ -64,7 +64,7 @@
 
 > 🚧 因为安全的原因 Electron 默认不支持在 渲染进程 中使用 NodeJs API，但是有些小沙雕就是想这么干，拦都拦不住；实在想那么干的话，这里有个 👉 npm 包 **[vitejs-plugin-electron](https://www.npmjs.com/package/vitejs-plugin-electron)** 或者使用另一个模板 **[electron-vite-boilerplate](https://github.com/caoxiemeihao/electron-vite-boilerplate)**
 
-#### 推荐所有的 NodeJs、Electron API 通过 `Preload-script` 注入到 渲染进程中
+**推荐所有的 NodeJs、Electron API 通过 `Preload-script` 注入到 渲染进程中，例如：**
 
 * **src/preload/index.ts**
 
@@ -72,11 +72,9 @@
   import fs from 'fs'
   import { contextBridge, ipcRenderer } from 'electron'
 
-  // Expose Electron, NodeJs API to Renderer-process
-  contextBridge.exposeInMainWorld('bridge', {
-    fs,
-    ipcRenderer: withPrototype(ipcRenderer),
-  })
+  // --------- Expose some API to Renderer-process. ---------
+  contextBridge.exposeInMainWorld('fs', fs)
+  contextBridge.exposeInMainWorld('ipcRenderer', ipcRenderer)
   ```
 
 * **src/renderer/src/global.d.ts**
@@ -84,19 +82,17 @@
   ```typescript
   // Defined on the window
   interface Window {
-    bridge: {
-      fs: typeof import('fs')
-      ipcRenderer: import('electron').IpcRenderer
-    }
+    fs: typeof import('fs')
+    ipcRenderer: import('electron').IpcRenderer
   }
   ```
 
-* **src/renderer/src/main.tsx**
+* **src/renderer/main.ts**
 
   ```typescript
   // Use Electron, NodeJs API in Renderer-process
-  console.log('fs', window.bridge.fs)
-  console.log('ipcRenderer', window.bridge.ipcRenderer)
+  console.log('fs', window.fs)
+  console.log('ipcRenderer', window.ipcRenderer)
   ```
 
 ## 效果

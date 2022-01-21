@@ -74,11 +74,9 @@ Once `dev` or `build` npm-script executed will be generate named `dist` folder. 
   import fs from 'fs'
   import { contextBridge, ipcRenderer } from 'electron'
 
-  // Expose Electron, NodeJs API to Renderer-process
-  contextBridge.exposeInMainWorld('bridge', {
-    fs,
-    ipcRenderer: withPrototype(ipcRenderer),
-  })
+  // --------- Expose some API to Renderer-process. ---------
+  contextBridge.exposeInMainWorld('fs', fs)
+  contextBridge.exposeInMainWorld('ipcRenderer', ipcRenderer)
   ```
 
 * **src/renderer/src/global.d.ts**
@@ -86,19 +84,17 @@ Once `dev` or `build` npm-script executed will be generate named `dist` folder. 
   ```typescript
   // Defined on the window
   interface Window {
-    bridge: {
-      fs: typeof import('fs')
-      ipcRenderer: import('electron').IpcRenderer
-    }
+    fs: typeof import('fs')
+    ipcRenderer: import('electron').IpcRenderer
   }
   ```
 
-* **src/renderer/src/main.tsx**
+* **src/renderer/src/main.ts**
 
   ```typescript
   // Use Electron, NodeJs API in Renderer-process
-  console.log('fs', window.bridge.fs)
-  console.log('ipcRenderer', window.bridge.ipcRenderer)
+  console.log('fs', window.fs)
+  console.log('ipcRenderer', window.ipcRenderer)
   ```
 
 ## Shown
