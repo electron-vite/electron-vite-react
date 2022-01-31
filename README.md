@@ -9,15 +9,11 @@
 
 ## Overview
 
-- All config files `Main-process`, `Renderer-process` and `Preload-script` they are in `configs/*.ts`.
+- Very simple Vite, React, Electron integration template.
 
-- All files are built using `Vite`, is supper fast.
+- Contains only the basic dependencies.
 
-- `scripts/build.mjs` just calls the `Vite` API and uses the `configs/*.ts` config file to build.
-
-- The difference between `scripts/watch.mjs` and `build.mjs` is that the watch option is configured for the Main-process and Preload-script. The Renderer-process uses `require ('vite').createServer`
-
-- Manage projects more through configuration other than scripts. -- **🥳 Simple and clearly**
+- The extend is very flexible.
 
 ## Run Setup
 
@@ -61,7 +57,7 @@ Once `dev` or `build` npm-script executed will be generate named `dist` folder. 
 
 ## Use Electron, NodeJs API
 
-> 🚧 By default, Electron don't support the use of API related to Electron and NoeJs in the Renderer-process, but someone still need to use it. If so, you can see the 👉 npm-package **[vitejs-plugin-electron](https://www.npmjs.com/package/vitejs-plugin-electron)** or another template **[electron-vite-boilerplate](https://github.com/caoxiemeihao/electron-vite-boilerplate)**
+> 🚧 By default, Electron don't support the use of API related to Electron and NodeJs in the Renderer-process, but someone still need to use it. If so, you can see the template 👉 **[electron-vite-boilerplate](https://github.com/caoxiemeihao/electron-vite-boilerplate)**
 
 #### All Electron, NodeJs API invoke passed `Preload-script`
 
@@ -93,6 +89,43 @@ Once `dev` or `build` npm-script executed will be generate named `dist` folder. 
   console.log('fs', window.fs)
   console.log('ipcRenderer', window.ipcRenderer)
   ```
+
+## Use SerialPort, SQLite3 or other node-native addons in Main-process
+
+- First, yout need to make sure the deps in "dependencies". Because the project still needs it after packaged.
+
+- Main-process, Preload-script are also built with Vite, and they are just built as [build.lib](https://vitejs.dev/config/#build-lib).  
+So they just need to configure Rollup.
+
+**Click to view more** 👉 [scripts/vite.config.mjs](https://github.com/caoxiemeihao/electron-vue-vite/blob/main/scripts/vite.config.mjs)
+
+```js
+export default {
+  build: {
+    // built lib for Main-process, Preload-script
+    lib: {
+      entry: 'index.ts',
+      formats: ['cjs'],
+      fileName: () => '[name].js',
+    },
+    rollupOptions: {
+      // configuration here
+      external: [
+        'serialport',
+        'sqlite3',
+      ],
+    },
+  },
+}
+```
+
+## `dependencies` vs `devDependencies`
+
+- First, you need to know if deps(npm package) are still needed after packaged.
+
+- Like [serialport](https://www.npmjs.com/package/serialport), [sqlite3](https://www.npmjs.com/package/sqlite3) they are node-native module and should be placed in `dependencies`. In addition, Vite will not build them, but treat them as external modules.
+
+- Like [vue](https://www.npmjs.com/package/vue), [react](https://www.npmjs.com/package/react) they are pure javascript module and can be built with Vite, so they can be placed in `devDependencies`. This reduces the volume of the built project.
 
 ## Shown
 
