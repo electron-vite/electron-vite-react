@@ -3,10 +3,8 @@ process.env.NODE_ENV = 'production'
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
 import { build } from 'vite'
-import chalk from 'chalk'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
-const TAG = chalk.bgBlue(' build.mjs ')
 
 /**
  * @type {Record<string, import('vite').InlineConfig>}
