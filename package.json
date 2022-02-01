@@ -10,11 +10,12 @@
     "build": "tsc --project src/renderer/tsconfig.json && node scripts/build.mjs && electron-builder"
   },
   "engines": {
-    "node": ">=16.9.1"
+    "node": ">=14.17.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "electron-store": "^8.0.1"
+  },
   "devDependencies": {
-    "electron-store": "^8.0.1",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
     "@vitejs/plugin-react": "^1.1.4",
