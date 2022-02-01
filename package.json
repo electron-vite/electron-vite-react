@@ -19,7 +19,6 @@
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
     "@vitejs/plugin-react": "^1.1.4",
-    "antd": "^4.18.5",
     "electron": "16.0.8",
     "electron-builder": "^22.14.5",
     "react": "^17.0.2",
