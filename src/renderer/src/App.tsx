@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Button } from 'antd'
 import vite from '@/assets/vite.svg'
 import react from '@/assets/react.svg'
 import electron from '@/assets/electron.png'
@@ -24,9 +23,9 @@ function App() {
         </div>
         <p>Hello Electron + Vite + React!</p>
         <p>
-          <Button type="primary" onClick={() => setCount((count) => count + 1)}>
+          <button onClick={() => setCount((count) => count + 1)}>
             count is: {count}
-          </Button>
+          </button>
         </p>
         <p>
           Edit <code>App.tsx</code> and save to test HMR updates.
