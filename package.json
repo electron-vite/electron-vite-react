@@ -7,7 +7,7 @@
   "main": "dist/main/index.cjs",
   "scripts": {
     "dev": "node scripts/watch.mjs",
-    "build": "tsc --project src/renderer/tsconfig.json && node scripts/build.mjs && electron-builder"
+    "build": "tsc --project src/renderer/tsconfig.json && node scripts/build.mjs && electron-builder --config .electron-builder.config.js"
   },
   "engines": {
     "node": ">=14.17.0"
