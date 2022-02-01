@@ -9,38 +9,52 @@
 
 ## Overview
 
-- Very simple Vite, React, Electron integration template.
+-   Very simple Vite, React, Electron integration template.
 
-- Contains only the basic dependencies.
+-   Contains only the basic dependencies.
 
-- The extend is very flexible.
+-   The extension is very flexible.
 
-## Run Setup
+## Installation
 
-  ```bash
-  # clone the project
-  git clone git@github.com:caoxiemeihao/vite-react-electron.git
+```bash
+# clone the project
+git clone git@github.com:caoxiemeihao/vite-react-electron.git
 
-  # enter the project directory
-  cd vite-react-electron
+# open the project directory
+cd vite-react-electron
 
-  # install dependency
-  npm install
+# install dependencies
+npm install
 
-  # develop
-  npm run dev
-  ```
+# start the application
+npm run dev
 
-## Directory
+# make a production build
+npm run build
+```
 
-Once `dev` or `build` npm-script executed will be generate named `dist` folder. It has children dir of same as `src` folder, the purpose of this design can ensure the correct path calculation.
+## Directory structure
+
+Once `dev` or `build` npm-script is executed, the `dist` folder will be generated. It has the same structure as the `src` folder, the purpose of this design is to ensure the correct path calculation.
 
 ```tree
 ├
-├── dist                      After build, it's generated according to the "src" directory
+├── build                     Resources for the production build
+├   ├── icon.icns             Icon for the application on macOS
+├   ├── icon.ico              Icon for the application
+├   ├── installerIcon.ico     Icon for the application installer
+├   ├── uninstallerIcon.ico   Icon for the application uninstaller
+├
+├── dist                      Generated after build according to the "src" directory
 ├   ├── main
 ├   ├── preload
 ├   ├── renderer
+├
+├── release                   Generated after production build, contains executables
+├   ├── {version}
+├       ├── win-unpacked      Contains unpacked application executable
+├       ├── Setup.exe         Installer for the application
 ├
 ├── scripts
 ├   ├── build.mjs             Build script, for -> npm run build
@@ -55,82 +69,79 @@ Once `dev` or `build` npm-script executed will be generate named `dist` folder. 
 ├
 ```
 
-## Use Electron, NodeJs API
+## Use Electron and NodeJS API
 
-> 🚧 By default, Electron don't support the use of API related to Electron and NodeJs in the Renderer-process, but someone still need to use it. If so, you can see the template 👉 **[electron-vite-boilerplate](https://github.com/caoxiemeihao/electron-vite-boilerplate)**
+> 🚧 By default, Electron doesn't support the use of API related to Electron and NodeJS in the Renderer process, but someone might need to use it. If so, you can see the template 👉 **[electron-vite-boilerplate](https://github.com/caoxiemeihao/electron-vite-boilerplate)**
 
-#### All Electron, NodeJs API invoke passed `Preload-script`
+#### Invoke Electron and NodeJS API in `Preload-script`
 
-* **src/preload/index.ts**
+-   **src/preload/index.ts**
 
-  ```typescript
-  import fs from 'fs'
-  import { contextBridge, ipcRenderer } from 'electron'
+    ```typescript
+    import fs from "fs"
+    import { contextBridge, ipcRenderer } from "electron"
 
-  // --------- Expose some API to Renderer-process. ---------
-  contextBridge.exposeInMainWorld('fs', fs)
-  contextBridge.exposeInMainWorld('ipcRenderer', ipcRenderer)
-  ```
+    // --------- Expose some API to Renderer-process. ---------
+    contextBridge.exposeInMainWorld("fs", fs)
+    contextBridge.exposeInMainWorld("ipcRenderer", ipcRenderer)
+    ```
 
-* **src/renderer/src/global.d.ts**
+-   **src/renderer/src/global.d.ts**
 
-  ```typescript
-  // Defined on the window
-  interface Window {
-    fs: typeof import('fs')
-    ipcRenderer: import('electron').IpcRenderer
-  }
-  ```
+    ```typescript
+    // Defined in the window
+    interface Window {
+    	fs: typeof import("fs")
+    	ipcRenderer: import("electron").IpcRenderer
+    }
+    ```
 
-* **src/renderer/src/main.ts**
+-   **src/renderer/src/main.ts**
 
-  ```typescript
-  // Use Electron, NodeJs API in Renderer-process
-  console.log('fs', window.fs)
-  console.log('ipcRenderer', window.ipcRenderer)
-  ```
+    ```typescript
+    // Use Electron and NodeJS API in the Renderer-process
+    console.log("fs", window.fs)
+    console.log("ipcRenderer", window.ipcRenderer)
+    ```
 
-## Use SerialPort, SQLite3 or other node-native addons in Main-process
+## Use SerialPort, SQLite3, or other node-native addons in the Main-process
 
-- First, yout need to make sure the deps in "dependencies". Because the project still needs it after packaged.
+-   First, you need to make sure that the dependencies in the `package.json` are NOT in the "devDependencies". Because the project will need them after packaged.
 
-- Main-process, Preload-script are also built with Vite, and they are just built as [build.lib](https://vitejs.dev/config/#build-lib).  
-So they just need to configure Rollup.
+-   Main-process, Preload-script are also built with Vite, and they're built as [build.lib](https://vitejs.dev/config/#build-lib).  
+    So they just need to configure Rollup.
 
-**Click to view more** 👉 [scripts/vite.config.mjs](https://github.com/caoxiemeihao/electron-vue-vite/blob/main/scripts/vite.config.mjs)
+**Click to see more** 👉 [scripts/vite.config.mjs](https://github.com/caoxiemeihao/electron-vue-vite/blob/main/scripts/vite.config.mjs)
 
 ```js
 export default {
-  build: {
-    // built lib for Main-process, Preload-script
-    lib: {
-      entry: 'index.ts',
-      formats: ['cjs'],
-      fileName: () => '[name].js',
-    },
-    rollupOptions: {
-      // configuration here
-      external: [
-        'serialport',
-        'sqlite3',
-      ],
-    },
-  },
+	build: {
+		// built lib for Main-process, Preload-script
+		lib: {
+			entry: "index.ts",
+			formats: ["cjs"],
+			fileName: () => "[name].js",
+		},
+		rollupOptions: {
+			// configuration here
+			external: ["serialport", "sqlite3"],
+		},
+	},
 }
 ```
 
 ## `dependencies` vs `devDependencies`
 
-- First, you need to know if deps(npm package) are still needed after packaged.
+-   First, you need to know if your dependencies are needed after the application is packaged.
 
-- Like [serialport](https://www.npmjs.com/package/serialport), [sqlite3](https://www.npmjs.com/package/sqlite3) they are node-native module and should be placed in `dependencies`. In addition, Vite will not build them, but treat them as external modules.
+-   Like [serialport](https://www.npmjs.com/package/serialport), [sqlite3](https://www.npmjs.com/package/sqlite3) they are node-native modules and should be placed in `dependencies`. In addition, Vite will not build them, but treat them as external modules.
 
-- Like [vue](https://www.npmjs.com/package/vue), [react](https://www.npmjs.com/package/react) they are pure javascript module and can be built with Vite, so they can be placed in `devDependencies`. This reduces the volume of the built project.
+-   Dependencies like [Vue](https://www.npmjs.com/package/vue) and [React](https://www.npmjs.com/package/react), which are pure javascript modules that can be built with Vite, can be placed in `devDependencies`. This reduces the size of the application.
 
-## Shown
+## Result
 
 <img width="400px" src="https://raw.githubusercontent.com/caoxiemeihao/blog/main/vite-react-electron/react-win.png" />
 
-## Wechat group
+## WeChat group
 
 <img width="244px" src="https://raw.githubusercontent.com/caoxiemeihao/blog/main/assets/wechat/group/qrcode.jpg" />
