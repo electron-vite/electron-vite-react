@@ -30,8 +30,7 @@ const viteConfigs = {
 }
 
 async function buildElectron() {
-  for (const [name, config] of Object.entries(viteConfigs)) {
-    console.log(TAG, name)
+  for (const [, config] of Object.entries(viteConfigs)) {
     await build(config)
     console.log() // for beautiful log.
   }
