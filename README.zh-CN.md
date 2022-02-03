@@ -118,11 +118,3 @@ electron-builder 打包时候会将 dependencies 中的包打包到 app.asar 里
 ## 效果
 
 <img width="400px" src="https://raw.githubusercontent.com/caoxiemeihao/blog/main/vite-react-electron/react-win.png" />
-
-## 微信讨论群 | | 请我喝杯下午茶 🥳
-
-<div style="display:flex;">
-  <img width="244px" src="https://raw.githubusercontent.com/caoxiemeihao/blog/main/assets/wechat/group/qrcode.jpg" />
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <img width="244px" src="https://raw.githubusercontent.com/caoxiemeihao/blog/main/assets/wechat/%24qrcode/%24.png" />
-</div>
