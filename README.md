@@ -91,8 +91,8 @@ Once `dev` or `build` npm-script is executed, the `dist` folder will be generate
     ```typescript
     // Defined in the window
     interface Window {
-    	fs: typeof import("fs")
-    	ipcRenderer: import("electron").IpcRenderer
+      fs: typeof import("fs")
+      ipcRenderer: import("electron").IpcRenderer
     }
     ```
 
@@ -115,18 +115,18 @@ Once `dev` or `build` npm-script is executed, the `dist` folder will be generate
 
 ```js
 export default {
-	build: {
-		// built lib for Main-process, Preload-script
-		lib: {
-			entry: "index.ts",
-			formats: ["cjs"],
-			fileName: () => "[name].js",
-		},
-		rollupOptions: {
-			// configuration here
-			external: ["serialport", "sqlite3"],
-		},
-	},
+  build: {
+    // built lib for Main-process, Preload-script
+    lib: {
+      entry: "index.ts",
+      formats: ["cjs"],
+      fileName: () => "[name].js",
+    },
+    rollupOptions: {
+      // configuration here
+      external: ["serialport", "sqlite3"],
+    },
+  },
 }
 ```
 

@@ -5,11 +5,11 @@ import './samples/electron-store'
 import './styles/index.css'
 
 render(
-	<StrictMode>
-		<App />
-	</StrictMode>,
-	document.getElementById('root'),
-	window.removeLoading
+  <StrictMode>
+    <App />
+  </StrictMode>,
+  document.getElementById('root'),
+  window.removeLoading
 )
 
 console.log('fs', window.fs)
@@ -17,5 +17,5 @@ console.log('ipcRenderer', window.ipcRenderer)
 
 // Use ipcRenderer.on
 window.ipcRenderer.on('main-process-message', (_event, ...args) => {
-	console.log('[Receive Main-process message]:', ...args)
+  console.log('[Receive Main-process message]:', ...args)
 })
