@@ -1,6 +1,6 @@
 import os from 'os'
 import { join } from 'path'
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, shell } from 'electron'
 import './samples/electron-store'
 
 const isWin7 = os.release().startsWith('6.1')
@@ -35,6 +35,12 @@ async function createWindow() {
   win.webContents.on('did-finish-load', () => {
     win?.webContents.send('main-process-message', (new Date).toLocaleString())
   })
+
+  // Make all links open with the browser, not with the application
+  win.webContents.setWindowOpenHandler(({ url }) => {
+		if (url.startsWith('https:')) shell.openExternal(url)
+		return { action: 'deny' }
+	})
 }
 
 app.whenReady().then(createWindow)

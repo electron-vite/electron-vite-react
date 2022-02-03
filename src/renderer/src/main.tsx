@@ -1,15 +1,15 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import { StrictMode } from 'react'
+import { render } from 'react-dom'
 import App from './App'
 import './samples/electron-store'
-import './index.css'
+import './styles/index.css'
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root'),
-  window.removeLoading,
+render(
+	<StrictMode>
+		<App />
+	</StrictMode>,
+	document.getElementById('root'),
+	window.removeLoading
 )
 
 console.log('fs', window.fs)
@@ -17,5 +17,5 @@ console.log('ipcRenderer', window.ipcRenderer)
 
 // Use ipcRenderer.on
 window.ipcRenderer.on('main-process-message', (_event, ...args) => {
-  console.log('[Receive Main-process message]:', ...args)
+	console.log('[Receive Main-process message]:', ...args)
 })
