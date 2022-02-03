@@ -19,7 +19,7 @@
 
 ```bash
 # clone the project
-git clone git@github.com:caoxiemeihao/vite-react-electron.git
+git clone https://github.com/caoxiemeihao/vite-react-electron.git
 
 # open the project directory
 cd vite-react-electron
