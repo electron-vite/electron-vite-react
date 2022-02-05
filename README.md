@@ -9,11 +9,11 @@
 
 ## Overview
 
--   Very simple Vite, React, Electron integration template.
+- Very simple Vite, React, Electron integration template.
 
--   Contains only the basic dependencies.
+- Contains only the basic dependencies.
 
--   The extension is very flexible.
+- The extension is very flexible.
 
 ## Installation
 
@@ -75,7 +75,7 @@ Once `dev` or `build` npm-script is executed, the `dist` folder will be generate
 
 #### Invoke Electron and NodeJS API in `Preload-script`
 
--   **src/preload/index.ts**
+- **src/preload/index.ts**
 
     ```typescript
     import fs from "fs"
@@ -86,7 +86,7 @@ Once `dev` or `build` npm-script is executed, the `dist` folder will be generate
     contextBridge.exposeInMainWorld("ipcRenderer", ipcRenderer)
     ```
 
--   **src/renderer/src/global.d.ts**
+- **src/renderer/src/global.d.ts**
 
     ```typescript
     // Defined in the window
@@ -96,7 +96,7 @@ Once `dev` or `build` npm-script is executed, the `dist` folder will be generate
     }
     ```
 
--   **src/renderer/src/main.ts**
+- **src/renderer/src/main.ts**
 
     ```typescript
     // Use Electron and NodeJS API in the Renderer-process
@@ -106,9 +106,9 @@ Once `dev` or `build` npm-script is executed, the `dist` folder will be generate
 
 ## Use SerialPort, SQLite3, or other node-native addons in the Main-process
 
--   First, you need to make sure that the dependencies in the `package.json` are NOT in the "devDependencies". Because the project will need them after packaged.
+- First, you need to make sure that the dependencies in the `package.json` are NOT in the "devDependencies". Because the project will need them after packaged.
 
--   Main-process, Preload-script are also built with Vite, and they're built as [build.lib](https://vitejs.dev/config/#build-lib).  
+- Main-process, Preload-script are also built with Vite, and they're built as [build.lib](https://vitejs.dev/config/#build-lib).  
     So they just need to configure Rollup.
 
 **Click to see more** 👉 [scripts/vite.config.mjs](https://github.com/caoxiemeihao/electron-vue-vite/blob/main/scripts/vite.config.mjs)
@@ -132,11 +132,11 @@ export default {
 
 ## `dependencies` vs `devDependencies`
 
--   First, you need to know if your dependencies are needed after the application is packaged.
+- First, you need to know if your dependencies are needed after the application is packaged.
 
--   Like [serialport](https://www.npmjs.com/package/serialport), [sqlite3](https://www.npmjs.com/package/sqlite3) they are node-native modules and should be placed in `dependencies`. In addition, Vite will not build them, but treat them as external modules.
+- Like [serialport](https://www.npmjs.com/package/serialport), [sqlite3](https://www.npmjs.com/package/sqlite3) they are node-native modules and should be placed in `dependencies`. In addition, Vite will not build them, but treat them as external modules.
 
--   Dependencies like [Vue](https://www.npmjs.com/package/vue) and [React](https://www.npmjs.com/package/react), which are pure javascript modules that can be built with Vite, can be placed in `devDependencies`. This reduces the size of the application.
+- Dependencies like [Vue](https://www.npmjs.com/package/vue) and [React](https://www.npmjs.com/package/react), which are pure javascript modules that can be built with Vite, can be placed in `devDependencies`. This reduces the size of the application.
 
 ## Result
 
