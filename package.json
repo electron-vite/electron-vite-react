@@ -9,7 +9,8 @@
   "main": "dist/main/index.cjs",
   "scripts": {
     "dev": "node scripts/watch.mjs",
-    "build": "tsc --project src/renderer/tsconfig.json && node scripts/build.mjs && electron-builder --config .electron-builder.config.js"
+    "build": "npm run typecheck && node scripts/build.mjs && electron-builder --config .electron-builder.config.js",
+    "typecheck": "tsc --noEmit --project src/renderer/tsconfig.json"
   },
   "engines": {
     "node": ">=14.17.0"
@@ -22,7 +23,7 @@
     "@types/react-dom": "^17.0.11",
     "@vitejs/plugin-react": "^1.1.4",
     "electron": "^17.0.0",
-    "electron-builder": "^22.14.5",
+    "electron-builder": "^22.14.13",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "sass": "^1.49.7",
