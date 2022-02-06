@@ -1,4 +1,4 @@
-// Use 'electron-store'
+// Usage of 'electron-store'
 const store = {
   async get(key: string) {
     const { invoke } = window.ipcRenderer
