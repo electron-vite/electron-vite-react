@@ -1,10 +1,10 @@
-import os from 'os'
-import { join } from 'path'
 import { app, BrowserWindow, shell } from 'electron'
+import { release } from 'os'
+import { join } from 'path'
 import './samples/electron-store'
 
-const isWin7 = os.release().startsWith('6.1')
-if (isWin7) app.disableHardwareAcceleration()
+if (release().startsWith('6.1')) app.disableHardwareAcceleration()
+if (process.platform === 'win32') app.setAppUserModelId(app.getName())
 
 if (!app.requestSingleInstanceLock()) {
   app.quit()
