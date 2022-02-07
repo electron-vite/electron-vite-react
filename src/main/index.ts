@@ -3,7 +3,10 @@ import { release } from 'os'
 import { join } from 'path'
 import './samples/electron-store'
 
+// Disable GPU Acceleration for Windows 7
 if (release().startsWith('6.1')) app.disableHardwareAcceleration()
+
+// Set application name for Windows 10+ notifications
 if (process.platform === 'win32') app.setAppUserModelId(app.getName())
 
 if (!app.requestSingleInstanceLock()) {
@@ -47,14 +50,12 @@ app.whenReady().then(createWindow)
 
 app.on('window-all-closed', () => {
   win = null
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
+  if (process.platform !== 'darwin') app.quit()
 })
 
 app.on('second-instance', () => {
   if (win) {
-    // Someone tried to run a second instance, we should focus our window.
+    // Focus on the main window if the user tried to open another
     if (win.isMinimized()) win.restore()
     win.focus()
   }
