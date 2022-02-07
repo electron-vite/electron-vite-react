@@ -1,4 +1,4 @@
-process.env.NODE_ENV = 'development'
+process.env.MODE = 'development'
 
 import { fileURLToPath } from 'url'
 import { join, dirname } from 'path'
@@ -27,16 +27,18 @@ function watchMain() {
       outDir: '../../dist/main',
       watch: true,
     },
-    plugins: [{
-      name: 'electron-main-watcher',
-      writeBundle() {
-        electronProcess && electronProcess.kill()
-        electronProcess = spawn(electron, ['.'], {
-          stdio: 'inherit',
-          env: Object.assign(process.env, pkg.env),
-        })
+    plugins: [
+      {
+        name: 'electron-main-watcher',
+        writeBundle() {
+          electronProcess && electronProcess.kill()
+          electronProcess = spawn(electron, ['.'], {
+            stdio: 'inherit',
+            env: Object.assign(process.env, pkg.env),
+          })
+        },
       },
-    }],
+    ],
   })
 }
 
@@ -51,12 +53,14 @@ function watchPreload(server) {
       outDir: '../../dist/preload',
       watch: true,
     },
-    plugins: [{
-      name: 'electron-preload-watcher',
-      writeBundle() {
-        server.ws.send({ type: 'full-reload' })
+    plugins: [
+      {
+        name: 'electron-preload-watcher',
+        writeBundle() {
+          server.ws.send({ type: 'full-reload' })
+        },
       },
-    }],
+    ],
   })
 }
 

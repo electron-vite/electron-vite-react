@@ -1,4 +1,4 @@
-process.env.NODE_ENV = 'production'
+process.env.MODE = 'production'
 
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
