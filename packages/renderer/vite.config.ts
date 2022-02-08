@@ -36,7 +36,6 @@ export default defineConfig({
     },
   },
   server: {
-    host: pkg.env.HOST,
     port: pkg.env.PORT,
   },
 })
