@@ -14,15 +14,15 @@ export default defineConfig({
   plugins: [
     react(),
     resolveElectron(
-    /**
-     * Here you can specify other modules
-     * 🚧 You have to make sure that your module is in `dependencies` and not in the` devDependencies`,
-     *    which will ensure that the electron-builder can package it correctly
-     * @example
-     * {
-     *   'electron-store': 'const Store = require("electron-store"); export default Store;',
-     * }
-     */
+      /**
+       * Here you can specify other modules
+       * 🚧 You have to make sure that your module is in `dependencies` and not in the` devDependencies`,
+       *    which will ensure that the electron-builder can package it correctly
+       * @example
+       * {
+       *   'electron-store': 'const Store = require("electron-store"); export default Store;',
+       * }
+       */
     ),
   ],
   base: './',
@@ -44,7 +44,7 @@ export default defineConfig({
  * For usage of Electron and NodeJS APIs in the Renderer process
  * @see https://github.com/caoxiemeihao/electron-vue-vite/issues/52
  */
-export function resolveElectron(
+ export function resolveElectron(
   resolves: Parameters<typeof resolve>[0] = {}
 ): Plugin {
   const builtins = builtinModules.filter((t) => !t.startsWith('_'))
@@ -60,35 +60,35 @@ export function resolveElectron(
 
   function electronExport() {
     return `
-      /**
-       * For all exported modules see https://www.electronjs.org/docs/latest/api/clipboard -> Renderer Process Modules
-       */
-      const electron = require("electron");
-      const {
-        clipboard,
-        nativeImage,
-        shell,
-        contextBridge,
-        crashReporter,
-        ipcRenderer,
-        webFrame,
-        desktopCapturer,
-        deprecate,
-      } = electron;
+/**
+ * For all exported modules see https://www.electronjs.org/docs/latest/api/clipboard -> Renderer Process Modules
+ */
+const electron = require("electron");
+const {
+  clipboard,
+  nativeImage,
+  shell,
+  contextBridge,
+  crashReporter,
+  ipcRenderer,
+  webFrame,
+  desktopCapturer,
+  deprecate,
+} = electron;
 
-      export {
-        electron as default,
-        clipboard,
-        nativeImage,
-        shell,
-        contextBridge,
-        crashReporter,
-        ipcRenderer,
-        webFrame,
-        desktopCapturer,
-        deprecate,
-      }
-    `
+export {
+  electron as default,
+  clipboard,
+  nativeImage,
+  shell,
+  contextBridge,
+  crashReporter,
+  ipcRenderer,
+  webFrame,
+  desktopCapturer,
+  deprecate,
+}
+`
   }
 
   function builtinModulesExport(modules: string[]) {
@@ -102,12 +102,12 @@ export function resolveElectron(
             .map((attr) => `export const ${attr} = M.${attr}`)
             .join(';\n') + ';'
         const nodeModuleCode = `
-          ${requireModule}
+${requireModule}
 
-          ${exportDefault}
+${exportDefault}
 
-          ${exportMembers}
-        `
+${exportMembers}
+`
 
         return { [moduleId]: nodeModuleCode }
       })
