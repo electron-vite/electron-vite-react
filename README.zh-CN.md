@@ -33,25 +33,37 @@
 
 ## 目录
 
-一旦启动或打包脚本执行过，会在根目录产生 **`dist` 文件夹，里面的文件夹同 `src` 一模一样**；在使用一些路径计算时，尤其是相对路径计算；`dist` 与 `src` 里面保持相同的目录结构能避开好多问题
+一旦启动或打包脚本执行过，会在根目录产生 **`dist` 文件夹，里面的文件夹同 `packages` 一模一样**；在使用一些路径计算时，尤其是相对路径计算；`dist` 与 `packages` 里面保持相同的目录结构能避开好多问题
 
 ```tree
 ├
-├── dist                      构建后，根据 src 目录生成
+├── build                     用于生产构建的资源
+├   ├── icon.icns             应用图标(macOS)
+├   ├── icon.ico              应用图标
+├   ├── installerIcon.ico     安装图标
+├   ├── uninstallerIcon.ico   卸载图标
+├
+├── dist                      构建后，根据 packages 目录生成
 ├   ├── main
 ├   ├── preload
 ├   ├── renderer
 ├
-├── scripts
-├   ├── build.mjs             项目构建脚本，对应 npm run build
-├   ├── vite.config.mjs       主进程, 预加载脚本源码 vite 配置
-├   ├── watch.mjs             项目开发脚本，对应 npm run dev
+├── release                   在生产构建后生成，包含可执行文件
+├   ├── {version}
+├       ├── win-unpacked      包含未打包的应用程序可执行文件
+├       ├── Setup.exe         应用程序的安装程序
 ├
-├── src
+├── scripts
+├   ├── build.mjs             项目开发脚本 npm run build
+├   ├── watch.mjs             项目开发脚本 npm run dev
+├
+├── packages
 ├   ├── main                  主进程源码
+├       ├── vite.config.ts
 ├   ├── preload               预加载脚本源码
+├       ├── vite.config.ts
 ├   ├── renderer              渲染进程源码
-├       ├── vite.config.ts    渲染进程 vite 配置
+├       ├── vite.config.ts
 ├
 ```
 
@@ -73,7 +85,7 @@ electron-builder 打包时候会将 dependencies 中的包打包到 app.asar 里
 
 **推荐所有的 NodeJs、Electron API 通过 `Preload-script` 注入到 渲染进程中，例如：**
 
-* **src/preload/index.ts**
+* **packages/preload/index.ts**
 
   ```typescript
   import fs from 'fs'
@@ -84,7 +96,7 @@ electron-builder 打包时候会将 dependencies 中的包打包到 app.asar 里
   contextBridge.exposeInMainWorld('ipcRenderer', ipcRenderer)
   ```
 
-* **src/renderer/src/global.d.ts**
+* **packages/renderer/src/global.d.ts**
 
   ```typescript
   // Defined on the window
@@ -94,7 +106,7 @@ electron-builder 打包时候会将 dependencies 中的包打包到 app.asar 里
   }
   ```
 
-* **src/renderer/main.ts**
+* **packages/renderer/main.ts**
 
   ```typescript
   // Use Electron, NodeJs API in Renderer-process

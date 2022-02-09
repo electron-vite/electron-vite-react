@@ -36,7 +36,7 @@ npm run build
 
 ## Directory structure
 
-Once `dev` or `build` npm-script is executed, the `dist` folder will be generated. It has the same structure as the `src` folder, the purpose of this design is to ensure the correct path calculation.
+Once `dev` or `build` npm-script is executed, the `dist` folder will be generated. It has the same structure as the `packages` folder, the purpose of this design is to ensure the correct path calculation.
 
 ```tree
 ├
@@ -46,7 +46,7 @@ Once `dev` or `build` npm-script is executed, the `dist` folder will be generate
 ├   ├── installerIcon.ico     Icon for the application installer
 ├   ├── uninstallerIcon.ico   Icon for the application uninstaller
 ├
-├── dist                      Generated after build according to the "src" directory
+├── dist                      Generated after build according to the "packages" directory
 ├   ├── main
 ├   ├── preload
 ├   ├── renderer
@@ -57,15 +57,16 @@ Once `dev` or `build` npm-script is executed, the `dist` folder will be generate
 ├       ├── Setup.exe         Installer for the application
 ├
 ├── scripts
-├   ├── build.mjs             Build script, for -> npm run build
-├   ├── vite.config.mjs       Marin-process, Preload-script vite-config
-├   ├── watch.mjs             Develop script, for -> npm run dev
+├   ├── build.mjs             Develop script -> npm run build
+├   ├── watch.mjs             Develop script -> npm run dev
 ├
-├── src
+├── packages
 ├   ├── main                  Main-process source code
+├       ├── vite.config.ts
 ├   ├── preload               Preload-script source code
+├       ├── vite.config.ts
 ├   ├── renderer              Renderer-process source code
-├       ├── vite.config.ts    Renderer-process vite-config
+├       ├── vite.config.ts
 ├
 ```
 
@@ -75,7 +76,7 @@ Once `dev` or `build` npm-script is executed, the `dist` folder will be generate
 
 #### Invoke Electron and NodeJS API in `Preload-script`
 
-- **src/preload/index.ts**
+- **packages/preload/index.ts**
 
     ```typescript
     import fs from "fs"
@@ -86,7 +87,7 @@ Once `dev` or `build` npm-script is executed, the `dist` folder will be generate
     contextBridge.exposeInMainWorld("ipcRenderer", ipcRenderer)
     ```
 
-- **src/renderer/src/global.d.ts**
+- **packages/renderer/src/global.d.ts**
 
     ```typescript
     // Defined in the window
@@ -96,7 +97,7 @@ Once `dev` or `build` npm-script is executed, the `dist` folder will be generate
     }
     ```
 
-- **src/renderer/src/main.ts**
+- **packages/renderer/src/main.ts**
 
     ```typescript
     // Use Electron and NodeJS API in the Renderer-process
@@ -111,7 +112,7 @@ Once `dev` or `build` npm-script is executed, the `dist` folder will be generate
 - Main-process, Preload-script are also built with Vite, and they're built as [build.lib](https://vitejs.dev/config/#build-lib).  
     So they just need to configure Rollup.
 
-**Click to see more** 👉 [scripts/vite.config.mjs](https://github.com/caoxiemeihao/electron-vue-vite/blob/main/scripts/vite.config.mjs)
+**Click to see more** 👉 [packages/main/vite.config.ts](https://github.com/caoxiemeihao/vite-react-electron/blob/main/packages/main/vite.config.ts)
 
 ```js
 export default {
