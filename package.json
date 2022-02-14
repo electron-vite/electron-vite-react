@@ -29,7 +29,7 @@
     "sass": "^1.49.7",
     "typescript": "^4.5.5",
     "vite": "^2.8.0",
-    "vite-plugin-resolve": "^1.4.3"
+    "vite-plugin-resolve": "^1.4.4"
   },
   "env": {
     "//": "Used in build scripts",
