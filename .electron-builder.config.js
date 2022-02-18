@@ -3,7 +3,7 @@
  * @see https://www.electron.build/configuration/configuration
  */
 module.exports = {
-  appId: "YourAppID@qq.com",
+  appId: "YourAppID",
   productName: "YourAppName",
   copyright: "Copyright © 2022 ${author}",
   asar: true,
