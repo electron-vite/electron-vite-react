@@ -28,6 +28,7 @@ export default defineConfig({
   base: './',
   build: {
     emptyOutDir: true,
+    sourcemap: process.env.NODE_ENV === 'debug',
     outDir: '../../dist/renderer',
   },
   resolve: {

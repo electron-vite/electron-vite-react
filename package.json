@@ -10,7 +10,8 @@
   "scripts": {
     "dev": "node scripts/watch.mjs",
     "build": "npm run typecheck && node scripts/build.mjs && electron-builder --config .electron-builder.config.js",
-    "typecheck": "tsc --noEmit --project packages/renderer/tsconfig.json"
+    "typecheck": "tsc --noEmit --project packages/renderer/tsconfig.json",
+    "debug": "cross-env-shell NODE_ENV=debug \"npm run typecheck && node scripts/build.mjs && vite ./packages/renderer\""
   },
   "engines": {
     "node": ">=14.17.0"
@@ -22,6 +23,7 @@
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.11",
     "@vitejs/plugin-react": "^1.2.0",
+    "cross-env": "^7.0.3",
     "electron": "^17.0.0",
     "electron-builder": "^22.14.13",
     "react": "^17.0.2",
