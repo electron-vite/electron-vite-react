@@ -14,7 +14,7 @@
     "debug": "cross-env-shell NODE_ENV=debug \"npm run typecheck && node scripts/build.mjs && vite ./packages/renderer\""
   },
   "engines": {
-    "node": ">=14.17.0"
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
   },
   "dependencies": {
     "electron-store": "^8.0.1"
