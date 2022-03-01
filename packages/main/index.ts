@@ -2,6 +2,8 @@ import { app, BrowserWindow, shell } from 'electron'
 import { release } from 'os'
 import { join } from 'path'
 import './samples/electron-store'
+import './samples/node-fetch'
+import './samples/execa'
 
 // Disable GPU Acceleration for Windows 7
 if (release().startsWith('6.1')) app.disableHardwareAcceleration()
