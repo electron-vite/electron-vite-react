@@ -12,7 +12,6 @@ export default defineConfig({
       fileName: () => '[name].cjs',
     },
     minify: process.env./* from mode option */NODE_ENV === 'production',
-    emptyOutDir: true,
     rollupOptions: {
       external: [
         'electron',
