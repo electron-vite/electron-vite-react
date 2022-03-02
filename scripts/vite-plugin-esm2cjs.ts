@@ -36,5 +36,5 @@ export default function esm2cjs(modules: string[]): Plugin {
         })
       },
     } as Parameters<typeof resolve>[0]), {}),
-  })
+  }, { dir: '.vite-plugin-resolve-main' })
 }
