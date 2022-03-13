@@ -15,9 +15,17 @@
 
 - The extension is very flexible.
 
-## Installation
+## Usage
 
-```bash
+- The first way is to use scaffolding
+
+```sh
+npm create electron-vite
+```
+
+- The second way is to clone the repository manually
+
+```sh
 # clone the project
 git clone https://github.com/caoxiemeihao/vite-react-electron.git
 

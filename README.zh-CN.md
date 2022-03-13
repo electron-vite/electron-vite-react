@@ -17,19 +17,27 @@
 
 ## 运行
 
-  ```bash
-  # clone the project
-  git clone https://github.com/caoxiemeihao/vite-react-electron.git
+- 第一种方式是通过脚手架
 
-  # enter the project directory
-  cd vite-react-electron
+```sh
+npm create electron-vite
+```
 
-  # install dependency
-  npm install
+- 第二种方式是通过 clone 该仓库
 
-  # develop
-  npm run dev
-  ```
+```sh
+# clone the project
+git clone https://github.com/caoxiemeihao/vite-react-electron.git
+
+# enter the project directory
+cd vite-react-electron
+
+# install dependency
+npm install
+
+# develop
+npm run dev
+```
 
 ## 目录
 
