@@ -9,7 +9,7 @@ module.exports = {
   asar: true,
   directories: {
     output: "release/${version}",
-    buildResources: "build",
+    buildResources: "resources",
   },
   files: ["dist"],
   win: {
