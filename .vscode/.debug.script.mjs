@@ -7,7 +7,7 @@ import { build, createServer } from 'vite'
 const pkg = createRequire(import.meta.url)('../package.json')
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-async function startDebug() {
+async function buildDebugApp() {
   const server = await createServer({ configFile: 'packages/renderer/vite.config.ts' })
 
   await server.listen()
@@ -39,9 +39,9 @@ async function startDebug() {
 
 function writeEnvLocal() {
   const envContent = Object.entries(pkg.env).map(([key, val]) => `${key}=${val}`)
-  fs.writeFileSync(path.join(__dirname, '.env'), envContent.join('\n'))
+  fs.writeFileSync(path.join(__dirname, '.debug.env'), envContent.join('\n'))
 }
 
 // bootstrap
 writeEnvLocal()
-startDebug()
+buildDebugApp()

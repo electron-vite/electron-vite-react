@@ -4,10 +4,10 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "start debug.script.mjs",
+      "label": "start .debug.script.mjs",
       "command": "node",
       "args": [
-        ".vscode/debug.script.mjs"
+        ".vscode/.debug.script.mjs"
       ],
       "isBackground": true,
       "problemMatcher": []
