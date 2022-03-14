@@ -1,12 +1,12 @@
 import { builtinModules } from 'module'
 import { defineConfig } from 'vite'
-import esm2cjs from '../../scripts/vite-plugin-esm2cjs'
+import esmodule from 'vite-plugin-esmodule'
 import pkg from '../../package.json'
 
 export default defineConfig({
   root: __dirname,
   plugins: [
-    esm2cjs([
+    esmodule([
       'execa',
       'node-fetch',
     ]),
