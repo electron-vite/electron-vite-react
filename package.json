@@ -9,9 +9,7 @@
   "main": "dist/main/index.cjs",
   "scripts": {
     "dev": "node scripts/watch.mjs",
-    "build": "npm run typecheck && node scripts/build.mjs && electron-builder --config .electron-builder.config.js",
-    "typecheck": "tsc --noEmit --project packages/renderer/tsconfig.json",
-    "debug": "cross-env-shell NODE_ENV=debug \"npm run typecheck && node scripts/build.mjs && vite ./packages/renderer\""
+    "build": "tsc --noEmit -p packages/renderer/tsconfig.json && node scripts/build.mjs && electron-builder"
   },
   "engines": {
     "node": ">=14.17.0"
@@ -23,7 +21,6 @@
     "@types/react": "^17.0.40",
     "@types/react-dom": "^17.0.13",
     "@vitejs/plugin-react": "^1.2.0",
-    "cross-env": "^7.0.3",
     "electron": "^17.1.2",
     "electron-builder": "^22.14.13",
     "execa": "^6.1.0",
@@ -36,7 +33,7 @@
     "vite-plugin-resolve": "^1.8.0"
   },
   "env": {
-    "//": "Used in build scripts",
-    "PORT": 7777
+    "VITE_DEV_SERVER_HOST": "127.0.0.1",
+    "VITE_DEV_SERVER_PORT": 7777
   }
 }
