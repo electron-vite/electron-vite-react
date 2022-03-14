@@ -27,7 +27,7 @@ export default defineConfig({
   ],
   base: './',
   build: {
-    sourcemap: process.env.NODE_ENV === 'debug',
+    sourcemap: true,
     outDir: '../../dist/renderer',
   },
   resolve: {
@@ -36,7 +36,8 @@ export default defineConfig({
     },
   },
   server: {
-    port: pkg.env.PORT,
+    host: pkg.env.VITE_DEV_SERVER_HOST,
+    port: pkg.env.VITE_DEV_SERVER_PORT,
   },
 })
 

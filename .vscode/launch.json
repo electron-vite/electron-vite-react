@@ -1,39 +1,44 @@
 {
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
+  "compounds": [
+    {
+      "name": "Debug App",
+      "preLaunchTask": "start debug.script.mjs",
+      "configurations": [
+        "Debug Main Process",
+        "Debug Renderer Process"
+      ],
+      "presentation": {
+        "hidden": false,
+        "group": "",
+        "order": 1
+      },
+      "stopAll": true
+    }
+  ],
   "configurations": [
     {
-      "type": "node",
+      "name": "Debug Main Process",
+      "type": "pwa-node",
       "request": "launch",
-      "name": "Main(inspector)",
-      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
-      "runtimeArgs": [
-        "--remote-debugging-port=9222",
-        "${workspaceFolder}/dist/main/index.cjs",
-      ],
-      "env": {
-        "DEBUG": "true",
-      },
+      "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron",
       "windows": {
-        "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
+        "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron.cmd"
       },
-      "sourceMaps": true
+      "runtimeArgs": [
+        "--remote-debugging-port=9229",
+        "${workspaceRoot}/dist/main/index.cjs"
+      ],
+      "envFile": "${workspaceFolder}/.vscode/.env"
     },
     {
-      "type": "node",
-      "request": "launch",
-      "name": "Main(vite)",
-      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
-      "runtimeArgs": [
-        "${workspaceFolder}/dist/main/index.cjs",
-      ],
-      "env": {
-        "VITE_DEV_SERVER_HOST": "127.0.0.1",
-        "VITE_DEV_SERVER_PORT": "3344",
-      },
-      "windows": {
-        "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
-      },
-      "sourceMaps": true
+      "name": "Debug Renderer Process",
+      "port": 9229,
+      "request": "attach",
+      "type": "pwa-chrome"
     },
   ]
 }
