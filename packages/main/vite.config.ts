@@ -8,7 +8,6 @@ export default defineConfig({
   plugins: [
     esmodule([
       'execa',
-      'node-fetch',
     ]),
   ],
   build: {
