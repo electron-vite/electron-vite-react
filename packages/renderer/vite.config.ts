@@ -2,7 +2,7 @@ import { join } from 'path'
 import { builtinModules } from 'module'
 import { defineConfig, Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
-import resolve from 'vite-plugin-resolve'
+import optimizer from 'vite-plugin-optimizer'
 import pkg from '../../package.json'
 
 /**
@@ -46,17 +46,17 @@ export default defineConfig({
  * @see https://github.com/caoxiemeihao/electron-vue-vite/issues/52
  */
  export function resolveElectron(
-  resolves: Parameters<typeof resolve>[0] = {}
+  entries: Parameters<typeof optimizer>[0] = {}
 ): Plugin {
   const builtins = builtinModules.filter((t) => !t.startsWith('_'))
 
   /**
    * @see https://github.com/caoxiemeihao/vite-plugins/tree/main/packages/resolve#readme
    */
-  return resolve({
+  return optimizer({
     electron: electronExport(),
     ...builtinModulesExport(builtins),
-    ...resolves,
+    ...entries,
   })
 
   function electronExport() {
