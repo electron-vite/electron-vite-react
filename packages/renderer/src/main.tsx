@@ -1,16 +1,18 @@
 import { StrictMode } from 'react'
-import { render } from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import App from './App'
 import './samples/electron-store'
 import './styles/index.css'
 
-render(
+const root = createRoot(document.getElementById('root')!)
+
+root.render(
   <StrictMode>
     <App />
-  </StrictMode>,
-  document.getElementById('root'),
-  window.removeLoading
+  </StrictMode>
 )
+
+window.removeLoading()
 
 console.log('fs', window.fs)
 console.log('ipcRenderer', window.ipcRenderer)
