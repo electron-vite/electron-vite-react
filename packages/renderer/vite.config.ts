@@ -3,6 +3,7 @@ import { builtinModules } from 'module'
 import { defineConfig, Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import optimizer from 'vite-plugin-optimizer'
+import resolve from 'vite-plugin-resolve'
 import pkg from '../../package.json'
 
 /**
@@ -13,17 +14,21 @@ export default defineConfig({
   root: __dirname,
   plugins: [
     react(),
-    resolveElectron(
+    electron(),
+    resolve({
       /**
-       * Here you can specify other modules
-       * 🚧 You have to make sure that your module is in `dependencies` and not in the` devDependencies`,
-       *    which will ensure that the electron-builder can package it correctly
-       * @example
-       * {
-       *   'electron-store': 'const Store = require("electron-store"); export default Store;',
-       * }
+       * Here you resolve some CommonJs module.
+       * Or some Node.js native modules they may not be built correctly by vite.
+       * At the same time, these modules should be put in `dependencies`,
+       * because they will not be built by vite, but will be packaged into `app.asar` by electron-builder
        */
-    ),
+      'electron-store': 'export default require("electron-store");',
+      // Node.js native module
+      serialport: `
+        const { SerialPort } = require("serialport");
+        export { SerialPort }
+      `,
+    }),
   ],
   base: './',
   build: {
@@ -46,7 +51,7 @@ export default defineConfig({
  * For usage of Electron and NodeJS APIs in the Renderer process
  * @see https://github.com/caoxiemeihao/electron-vue-vite/issues/52
  */
- export function resolveElectron(
+export function electron(
   entries: Parameters<typeof optimizer>[0] = {}
 ): Plugin {
   const builtins = builtinModules.filter((t) => !t.startsWith('_'))
