@@ -9,22 +9,25 @@
 
 ## Overview
 
-- Very simple Vite, React, Electron integration template.
+- Real simple Vite, React, Electron integration template.
 
 - Contains only the basic dependencies.
 
-- The extension is very flexible.
+- The extension is real flexible.
 
-## Usage
-
-- The first way is to use scaffolding
+## Quick start
 
 ```sh
 npm create electron-vite
 ```
 
-- The second way is to clone the repository manually
+![electron-vite-react.gif](https://github.com/electron-vite/electron-vite-react/blob/main/packages/renderer/public/electron-vite-react.gif?raw=true)
 
+## Debug
+
+![electron-vite-react-debug.gif](https://github.com/electron-vite/electron-vite-react/blob/main/packages/renderer/public/electron-vite-react-debug.gif?raw=true)
+
+<!--
 ```sh
 # clone the project
 git clone https://github.com/caoxiemeihao/vite-react-electron.git
@@ -41,41 +44,40 @@ npm run dev
 # make a production build
 npm run build
 ```
+-->
 
 ## Directory structure
 
 Once `dev` or `build` npm-script is executed, the `dist` folder will be generated. It has the same structure as the `packages` folder, the purpose of this design is to ensure the correct path calculation.
 
 ```tree
-├
 ├── build                     Resources for the production build
-├   ├── icon.icns             Icon for the application on macOS
-├   ├── icon.ico              Icon for the application
-├   ├── installerIcon.ico     Icon for the application installer
-├   ├── uninstallerIcon.ico   Icon for the application uninstaller
-├
+|   ├── icon.icns             Icon for the application on macOS
+|   ├── icon.ico              Icon for the application
+|   ├── installerIcon.ico     Icon for the application installer
+|   └── uninstallerIcon.ico   Icon for the application uninstaller
+|
 ├── dist                      Generated after build according to the "packages" directory
-├   ├── main
-├   ├── preload
-├   ├── renderer
-├
+|   ├── main
+|   ├── preload
+|   └── renderer
+|
 ├── release                   Generated after production build, contains executables
-├   ├── {version}
-├       ├── win-unpacked      Contains unpacked application executable
-├       ├── Setup.exe         Installer for the application
-├
+|   └──{version}
+|       ├── win-unpacked      Contains unpacked application executable
+|       └── Setup.exe         Installer for the application
+|
 ├── scripts
-├   ├── build.mjs             Develop script -> npm run build
-├   ├── watch.mjs             Develop script -> npm run dev
-├
+|   ├── build.mjs             Develop script -> npm run build
+|   └── watch.mjs             Develop script -> npm run dev
+|
 ├── packages
-├   ├── main                  Main-process source code
-├       ├── vite.config.ts
-├   ├── preload               Preload-script source code
-├       ├── vite.config.ts
-├   ├── renderer              Renderer-process source code
-├       ├── vite.config.ts
-├
+|   ├── main                  Main-process source code
+|   |   └── vite.config.ts
+|   ├── preload               Preload-script source code
+|   |   └── vite.config.ts
+|   └── renderer              Renderer-process source code
+|       └── vite.config.ts
 ```
 
 ## Use Electron and NodeJS API
@@ -147,6 +149,8 @@ export default {
 
 - Dependencies like [Vue](https://www.npmjs.com/package/vue) and [React](https://www.npmjs.com/package/react), which are pure javascript modules that can be built with Vite, can be placed in `devDependencies`. This reduces the size of the application.
 
+<!--
 ## Result
 
 <img width="400px" src="https://raw.githubusercontent.com/caoxiemeihao/blog/main/vite-react-electron/react-win.png" />
+-->

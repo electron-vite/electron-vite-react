@@ -15,15 +15,20 @@
 
 - 扩展十分灵活
 
-## 运行
-
-- 第一种方式是通过脚手架
+## 快速开始
 
 ```sh
 npm create electron-vite
 ```
 
-- 第二种方式是通过 clone 该仓库
+![electron-vite-react.gif](https://github.com/electron-vite/electron-vite-react/blob/main/packages/renderer/public/electron-vite-react.gif?raw=true)
+
+## 调试
+
+![electron-vite-react-debug.gif](https://github.com/electron-vite/electron-vite-react/blob/main/packages/renderer/public/electron-vite-react-debug.gif?raw=true)
+
+<!--
+clone 该仓库
 
 ```sh
 # clone the project
@@ -38,41 +43,40 @@ npm install
 # develop
 npm run dev
 ```
+-->
 
 ## 目录
 
 一旦启动或打包脚本执行过，会在根目录产生 **`dist` 文件夹，里面的文件夹同 `packages` 一模一样**；在使用一些路径计算时，尤其是相对路径计算；`dist` 与 `packages` 里面保持相同的目录结构能避开好多问题
 
 ```tree
-├
 ├── build                     用于生产构建的资源
-├   ├── icon.icns             应用图标(macOS)
-├   ├── icon.ico              应用图标
-├   ├── installerIcon.ico     安装图标
-├   ├── uninstallerIcon.ico   卸载图标
-├
+|   ├── icon.icns             应用图标(macOS)
+|   ├── icon.ico              应用图标
+|   ├── installerIcon.ico     安装图标
+|   └── uninstallerIcon.ico   卸载图标
+|
 ├── dist                      构建后，根据 packages 目录生成
-├   ├── main
-├   ├── preload
-├   ├── renderer
-├
+|   ├── main
+|   ├── preload
+|   └── renderer
+|
 ├── release                   在生产构建后生成，包含可执行文件
-├   ├── {version}
-├       ├── win-unpacked      包含未打包的应用程序可执行文件
-├       ├── Setup.exe         应用程序的安装程序
-├
+|   └── {version}
+|       ├── win-unpacked      包含未打包的应用程序可执行文件
+|       └── Setup.exe         应用程序的安装程序
+|
 ├── scripts
-├   ├── build.mjs             项目开发脚本 npm run build
-├   ├── watch.mjs             项目开发脚本 npm run dev
-├
+|   ├── build.mjs             项目开发脚本 npm run build
+|   └── watch.mjs             项目开发脚本 npm run dev
+|
 ├── packages
-├   ├── main                  主进程源码
-├       ├── vite.config.ts
-├   ├── preload               预加载脚本源码
-├       ├── vite.config.ts
-├   ├── renderer              渲染进程源码
-├       ├── vite.config.ts
-├
+|   ├── main                  主进程源码
+|   |   └── vite.config.ts
+|   ├── preload               预加载脚本源码
+|   |   └── vite.config.ts
+|   └── renderer              渲染进程源码
+|       └── vite.config.ts
 ```
 
 ## 依赖放到 dependencies 还是 devDependencies
@@ -135,6 +139,8 @@ electron-builder 打包时候会将 dependencies 中的包打包到 app.asar 里
 2. `configs/vite-renderer.config` 中有个 `resolveElectron` **最好了解下**  
 👉 这里有个 `issues` [请教一下vite-renderer.config中的resolveElectron函数](https://github.com/caoxiemeihao/electron-vue-vite/issues/52)
 
+<!--
 ## 效果
 
 <img width="400px" src="https://raw.githubusercontent.com/caoxiemeihao/blog/main/vite-react-electron/react-win.png" />
+-->
