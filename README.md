@@ -9,11 +9,11 @@
 
 ## Overview
 
-- Real simple Vite, React, Electron integration template.
+This is a `Vite`-integrated `Electron` template built with simplification in mind.
 
-- Contains only the basic dependencies.
+The repo contains only the most basic files, dependencies and functionalities to ensure flexibility for various scenarios. 
 
-- The extension is real flexible.
+You need a basic understanding of `Electron` and `Vite` to get started. But that's not mandatory - you can learn almost all the details by reading through the source code. Trust me, this repo is not that complex. 😋
 
 ## Quick start
 
