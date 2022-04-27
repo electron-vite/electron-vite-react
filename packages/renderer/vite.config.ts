@@ -22,6 +22,7 @@ export default defineConfig({
        * At the same time, these modules should be put in `dependencies`,
        * because they will not be built by vite, but will be packaged into `app.asar` by electron-builder
        */
+      // ESM format code snippets
       'electron-store': 'export default require("electron-store");',
       // Node.js native module
       serialport: `
