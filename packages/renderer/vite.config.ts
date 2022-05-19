@@ -3,7 +3,7 @@ import { builtinModules } from 'module'
 import { defineConfig, Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import optimizer from 'vite-plugin-optimizer'
-import resolve from 'vite-plugin-resolve'
+import resolve, { lib2esm } from 'vite-plugin-resolve'
 import pkg from '../../package.json'
 
 /**
@@ -17,18 +17,38 @@ export default defineConfig({
     electron(),
     resolve({
       /**
-       * Here you resolve some CommonJs module.
+       * Here you can resolve some CommonJs module.
        * Or some Node.js native modules they may not be built correctly by vite.
        * At the same time, these modules should be put in `dependencies`,
        * because they will not be built by vite, but will be packaged into `app.asar` by electron-builder
        */
+
       // ESM format code snippets
       'electron-store': 'export default require("electron-store");',
-      // Node.js native module
-      serialport: `
-        const { SerialPort } = require("serialport");
-        export { SerialPort }
-      `,
+      /**
+       * Node.js native module
+       * Use lib2esm() to easy to convert ESM
+       * Equivalent to
+       * 
+       * ```js
+       * sqlite3: () => `
+       * const _M_ = require('sqlite3');
+       * const _D_ = _M_.default || _M_;
+       * export { _D_ as default }
+       * `
+       * ```
+       */
+      sqlite3: lib2esm('sqlite3', { format: 'cjs' }),
+      serialport: lib2esm(
+        // CJS lib name
+        'serialport',
+        // export memebers
+        [
+          'SerialPort',
+          'SerialPortMock',
+        ],
+        { format: 'cjs' },
+      ),
     }),
   ],
   base: './',
