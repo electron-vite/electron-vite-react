@@ -8,7 +8,7 @@
   "asar": true,
   "directories": {
     "output": "release/${version}",
-    "buildResources": "resources"
+    "buildResources": "electron/resources"
   },
   "files": ["dist"],
   "win": {
