@@ -31,7 +31,7 @@ async function createWindow() {
   })
 
   if (app.isPackaged) {
-    win.loadFile(join(__dirname, '../index.html'))
+    win.loadFile(join(__dirname, '../../index.html'))
   } else {
     win.loadURL(url)
     // win.webContents.openDevTools()
