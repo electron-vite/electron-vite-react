@@ -5,10 +5,16 @@ import react from '@vitejs/plugin-react'
 import electron from 'vite-plugin-electron'
 import renderer from 'vite-plugin-electron/renderer'
 
-rmSync('dist', { recursive: true, force: true }) // v14.14.0
+rmSync(join(__dirname, 'dist'), { recursive: true, force: true }) // v14.14.0
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  resolve: {
+    alias: {
+      '@': join(__dirname, 'src'),
+      'styles': join(__dirname, 'src/assets/styles'),
+    },
+  },
   plugins: [
     react(),
     electron({
@@ -22,7 +28,7 @@ export default defineConfig({
       },
       preload: {
         input: {
-          // You can configure multiple preload here
+          // You can configure multiple preload scripts here
           splash: join(__dirname, 'electron/preload/splash.ts'),
         },
         vite: {
@@ -33,7 +39,7 @@ export default defineConfig({
         },
       },
     }),
-    // Enable use Electron, Node.js API in Renderer-process
+    // Enables use of Node.js API in the Renderer-process
     renderer(),
   ]
 })

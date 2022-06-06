@@ -2,36 +2,36 @@
  * @see https://www.electron.build/configuration/configuration
  */
 {
-  "appId": "YourAppID",
-  "productName": "YourAppName",
-  "copyright": "Copyright © 2022 ${author}",
-  "asar": true,
-  "directories": {
-    "output": "release/${version}",
-    "buildResources": "electron/resources"
+  appId: "YourAppID",
+  productName: "YourAppName",
+  copyright: "Copyright © 2022 ${author}",
+  asar: true,
+  directories: {
+    output: "release/${version}",
+    buildResources: "electron/resources",
   },
-  "files": ["dist"],
-  "win": {
-    "target": [
+  files: ["dist"],
+  win: {
+    target: [
       {
-        "target": "nsis",
-        "arch": ["x64"]
-      }
+        target: "nsis",
+        arch: ["x64"],
+      },
     ],
-    "artifactName": "${productName}-${version}-Setup.${ext}"
+    artifactName: "${productName}-${version}-Setup.${ext}",
   },
-  "nsis": {
-    "oneClick": false,
-    "perMachine": false,
-    "allowToChangeInstallationDirectory": true,
-    "deleteAppDataOnUninstall": false
+  nsis: {
+    oneClick: false,
+    perMachine: false,
+    allowToChangeInstallationDirectory: true,
+    deleteAppDataOnUninstall: false,
   },
-  "mac": {
-    "target": ["dmg"],
-    "artifactName": "${productName}-${version}-Installer.${ext}"
+  mac: {
+    target: ["dmg"],
+    artifactName: "${productName}-${version}-Installer.${ext}",
   },
-  "linux": {
-    "target": ["AppImage"],
-    "artifactName": "${productName}-${version}-Installer.${ext}"
-  }
+  linux: {
+    target: ["AppImage"],
+    artifactName: "${productName}-${version}-Installer.${ext}",
+  },
 }
