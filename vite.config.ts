@@ -13,7 +13,7 @@ export default defineConfig({
     react(),
     electron({
       main: {
-        entry: 'electron-main/index.ts',
+        entry: 'electron/main/index.ts',
         vite: {
           build: {
             sourcemap: false,
@@ -23,7 +23,7 @@ export default defineConfig({
       preload: {
         input: {
           // You can configure multiple preload here
-          splash: join(__dirname, 'electron-preload/splash.ts'),
+          splash: join(__dirname, 'electron/preload/splash.ts'),
         },
         vite: {
           build: {
