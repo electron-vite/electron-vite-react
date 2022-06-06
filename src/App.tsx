@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import electron from './assets/electron.png'
-import react from './assets/react.svg'
-import vite from './assets/vite.svg'
+import electron from '/electron.png'
+import react from '/react.svg'
+import vite from '/vite.svg'
 import styles from './styles/app.module.scss'
 
 const App = () => {
