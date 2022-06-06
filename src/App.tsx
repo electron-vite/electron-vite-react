@@ -60,7 +60,7 @@ const App = () => {
           </a>
           <div className={styles.staticPublic}>
             Place static files into the{' '}
-            <code>src/renderer/public</code> folder
+            <code>/public</code> folder
             <img style={{ width: 77 }} src="./node.png" />
           </div>
         </div>
