@@ -6,7 +6,7 @@
   "description": "Vite React Electron boilerplate.",
   "author": "草鞋没号 <308487730@qq.com>",
   "license": "MIT",
-  "main": "dist/electron-main/index.js",
+  "main": "dist/electron/main/index.js",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build && electron-builder"
@@ -28,7 +28,7 @@
     "sass": "^1.52.2",
     "typescript": "^4.7.3",
     "vite": "^2.9.9",
-    "vite-plugin-electron": "^0.4.6"
+    "vite-plugin-electron": "^0.4.7"
   },
   "env": {
     "VITE_DEV_SERVER_HOST": "127.0.0.1",
