@@ -1,15 +1,15 @@
 {
-  "name": "vite-react-electron",
+  "name": "electron-vite-react",
   "productName": "Electron",
   "private": true,
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Vite React Electron boilerplate.",
   "author": "草鞋没号 <308487730@qq.com>",
   "license": "MIT",
-  "main": "dist/main/index.cjs",
+  "main": "dist/electron/main/index.js",
   "scripts": {
-    "dev": "node scripts/watch.mjs",
-    "build": "tsc --noEmit -p packages/renderer/tsconfig.json && node scripts/build.mjs && electron-builder"
+    "dev": "vite",
+    "build": "tsc && vite build && electron-builder"
   },
   "engines": {
     "node": ">=14.17.0"
@@ -18,20 +18,17 @@
     "electron-store": "^8.0.1"
   },
   "devDependencies": {
-    "@types/react": "^18.0.9",
-    "@types/react-dom": "^18.0.4",
+    "@types/react": "^18.0.12",
+    "@types/react-dom": "^18.0.5",
     "@vitejs/plugin-react": "^1.3.2",
-    "electron": "^18.2.4",
+    "electron": "^19.0.3",
     "electron-builder": "^23.0.3",
-    "execa": "^6.1.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
-    "sass": "^1.51.0",
-    "typescript": "^4.6.4",
-    "vite": "^2.9.9",
-    "vite-plugin-esmodule": "^1.2.5",
-    "vite-plugin-optimizer": "^1.3.3",
-    "vite-plugin-resolve": "^2.1.1"
+    "sass": "^1.52.2",
+    "typescript": "^4.7.3",
+    "vite": "^2.9.10",
+    "vite-plugin-electron": "^0.4.7"
   },
   "env": {
     "VITE_DEV_SERVER_HOST": "127.0.0.1",

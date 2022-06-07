@@ -1,10 +1,10 @@
-import electron from '@/assets/electron.png'
-import react from '@/assets/react.svg'
-import vite from '@/assets/vite.svg'
-import styles from '@/styles/app.module.scss'
 import { useState } from 'react'
+import electron from '/electron.png'
+import react from '/react.svg'
+import vite from '/vite.svg'
+import styles from 'styles/app.module.scss'
 
-const App = () => {
+const App: React.FC = () => {
   const [count, setCount] = useState(0)
 
   return (
@@ -60,8 +60,8 @@ const App = () => {
           </a>
           <div className={styles.staticPublic}>
             Place static files into the{' '}
-            <code>src/renderer/public</code> folder
-            <img style={{ width: 90 }} src="./images/node.png" />
+            <code>/public</code> folder
+            <img style={{ width: 77 }} src="./node.png" />
           </div>
         </div>
       </header>

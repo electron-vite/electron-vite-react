@@ -1,15 +1,27 @@
 {
-  "extends": "./paths.json",
   "compilerOptions": {
+		"baseUrl": ".",
     "target": "ESNext",
-    "module": "ESNext",
-    "allowJs": true,
+    "useDefineForClassFields": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+		"paths": {
+			"@/*": ["src/*"],
+      "styles/*": ["src/assets/styles/*"]
+		},
+    "allowJs": false,
     "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "esModuleInterop": true,
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
     "moduleResolution": "Node",
     "resolveJsonModule": true,
-    "strict": true,
+    "isolatedModules": true,
+    "noEmit": true,
     "jsx": "react-jsx"
-  }
+  },
+  "include": ["src", "types.d.ts"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
+

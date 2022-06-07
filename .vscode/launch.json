@@ -30,7 +30,7 @@
       },
       "runtimeArgs": [
         "--remote-debugging-port=9229",
-        "${workspaceRoot}/dist/main/index.cjs"
+        "${workspaceRoot}/dist/electron/main/index.js"
       ],
       "envFile": "${workspaceFolder}/.vscode/.debug.env"
     },
