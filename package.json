@@ -27,7 +27,7 @@
     "react-dom": "^18.1.0",
     "sass": "^1.52.2",
     "typescript": "^4.7.3",
-    "vite": "^2.9.9",
+    "vite": "^2.9.10",
     "vite-plugin-electron": "^0.4.7"
   },
   "env": {
