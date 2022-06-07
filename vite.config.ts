@@ -24,6 +24,7 @@ export default defineConfig({
         vite: {
           build: {
             sourcemap: false,
+            outDir: 'dist/electron/main',
           },
         },
       },
@@ -36,6 +37,7 @@ export default defineConfig({
           build: {
             // For debug
             sourcemap: 'inline',
+            outDir: 'dist/electron/preload',
           }
         },
       },
