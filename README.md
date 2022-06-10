@@ -1,19 +1,20 @@
 # electron-vite-react
 
+[![awesome-vite](https://awesome.re/mentioned-badge.svg)](https://github.com/vitejs/awesome-vite)
 ![GitHub stars](https://img.shields.io/github/stars/caoxiemeihao/vite-react-electron?color=fa6470&style=flat)
 ![GitHub issues](https://img.shields.io/github/issues/caoxiemeihao/vite-react-electron?color=d8b22d&style=flat)
 ![GitHub license](https://img.shields.io/github/license/caoxiemeihao/vite-react-electron?style=flat)
 [![Required Node.JS >= v14.17.0](https://img.shields.io/static/v1?label=node&message=%3E=14.17.0&logo=node.js&color=3f893e&style=flat)](https://nodejs.org/about/releases)
 
-**English | [简体中文](README.zh-CN.md)**
+English | [简体中文](README.zh-CN.md)
 
 ## Overview
 
-This is a `Vite`-integrated `Electron` template built with simplification in mind.
-
-The repo contains only the most basic files, dependencies and functionalities to ensure flexibility for various scenarios.
-
-You need a basic understanding of `Electron` and `Vite` to get started. But that's not mandatory - you can learn almost all the details by reading through the source code. Trust me, this repo is not that complex. 😋
+📦 Out of the box  
+💪 Support C/C++ addons  
+🔩 Support Use Electron、Node.js API in Renderer-process  
+🌱 Simple directory structure，real flexible  
+🖥 It's easy to implement multiple windows  
 
 ## Quick start
 
@@ -29,7 +30,7 @@ npm create electron-vite
 
 ## Directory structure
 
-Once `dev` or `build` npm-script is executed, the `dist` folder will be generated. It has the same structure as the project, the purpose of this design is to ensure the correct path calculation.
+*🚨 By default, the files in `electron` folder will be built into the `dist/electron`*
 
 ```tree
 ├── electron                  Electron-related code
@@ -48,65 +49,6 @@ Once `dev` or `build` npm-script is executed, the `dist` folder will be generate
 |
 ├── public                    Static assets
 └── src                       Renderer source code, your React application
-```
-
-## Use Electron and NodeJS API
-
-> 🚧 By default, Electron doesn't support the use of API related to Electron and NodeJS in the Renderer process, but someone might need to use it. If so, you can see the template 👉 **[electron-vite-boilerplate](https://github.com/electron-vite/electron-vite-boilerplate)**
-
-#### Invoke Electron and NodeJS API in `Preload-script`
-
-- **electron/preload/index.ts**
-
-  ```typescript
-  import fs from "fs";
-  import { contextBridge, ipcRenderer } from "electron";
-
-  // --------- Expose some API to Renderer-process. ---------
-  contextBridge.exposeInMainWorld("fs", fs);
-  contextBridge.exposeInMainWorld("ipcRenderer", ipcRenderer);
-  ```
-
-- **src/global.d.ts**
-
-  ```typescript
-  // Defined in the window
-  interface Window {
-    fs: typeof import("fs");
-    ipcRenderer: import("electron").IpcRenderer;
-  }
-  ```
-
-- **src/main.ts**
-
-  ```typescript
-  // Use Electron and NodeJS API in the Renderer-process
-  console.log("fs", window.fs);
-  console.log("ipcRenderer", window.ipcRenderer);
-  ```
-
-## Use SerialPort, SQLite3, or other node-native addons in the Main-process
-
-- First, you need to make sure that the dependencies in the `package.json` are NOT in the "devDependencies". Because the project will need them after packaged.
-
-- Main-process, Preload-script are also built with Vite, and they're built as [build.lib](https://vitejs.dev/config/#build-lib).  
-  So they just need to configure Rollup.
-
-```js
-export default {
-  build: {
-    // built lib for Main-process, Preload-script
-    lib: {
-      entry: "index.ts",
-      formats: ["cjs"],
-      fileName: () => "[name].js",
-    },
-    rollupOptions: {
-      // configuration here
-      external: ["serialport", "sqlite3"],
-    },
-  },
-};
 ```
 
 ## `dependencies` vs `devDependencies`
