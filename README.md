@@ -11,9 +11,10 @@ English | [简体中文](README.zh-CN.md)
 ## Overview
 
 📦 Out of the box  
-💪 Support C/C++ addons  
-🔩 Support Use Electron、Node.js API in Renderer-process  
+🎯 Based on [react-ts](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) template, less invasive  
 🌱 Simple directory structure，real flexible  
+💪 Support Use Electron、Node.js API and in Renderer-process  
+🔩 Support C/C++ native addons  
 🖥 It's easy to implement multiple windows  
 
 ## Quick start
