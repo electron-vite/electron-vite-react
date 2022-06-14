@@ -28,7 +28,7 @@
     "sass": "^1.52.2",
     "typescript": "^4.7.3",
     "vite": "^2.9.10",
-    "vite-plugin-electron": "^0.4.7"
+    "vite-plugin-electron": "^0.4.9"
   },
   "env": {
     "VITE_DEV_SERVER_HOST": "127.0.0.1",
