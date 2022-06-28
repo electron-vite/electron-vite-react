@@ -1,4 +1,4 @@
-import { app, BrowserWindow, shell } from 'electron'
+import { app, BrowserWindow, shell, ipcMain } from 'electron'
 import { release } from 'os'
 import { join } from 'path'
 
@@ -12,34 +12,44 @@ if (!app.requestSingleInstanceLock()) {
   app.quit()
   process.exit(0)
 }
+
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
 
+export const ROOT_PATH = {
+  // /dist
+  dist: join(__dirname, '../..'),
+  // /dist or /public
+  public: join(__dirname, app.isPackaged ? '../..' : '../../../public'),
+}
+
 let win: BrowserWindow | null = null
-// Here you can add more preload scripts
-const splash = join(__dirname, '../preload/splash.js')
-// 🚧 Use ['ENV_NAME'] to avoid vite:define plugin
+// Here, you can also use other preload
+const preload = join(__dirname, '../preload/index.js')
+// 🚧 Use ['ENV_NAME'] avoid vite:define plugin
 const url = `http://${process.env['VITE_DEV_SERVER_HOST']}:${process.env['VITE_DEV_SERVER_PORT']}`
+const indexHtml = join(ROOT_PATH.dist, 'index.html')
 
 async function createWindow() {
   win = new BrowserWindow({
     title: 'Main window',
+    icon: join(ROOT_PATH.public, 'favicon.svg'),
     webPreferences: {
-      preload: splash,
+      preload,
       nodeIntegration: true,
       contextIsolation: false,
     },
   })
 
   if (app.isPackaged) {
-    win.loadFile(join(__dirname, '../../index.html'))
+    win.loadFile(indexHtml)
   } else {
     win.loadURL(url)
     // win.webContents.openDevTools()
   }
 
-  // Test active push message to Renderer-process
+  // Test actively push message to the Electron-Renderer
   win.webContents.on('did-finish-load', () => {
-    win?.webContents.send('main-process-message', (new Date).toLocaleString())
+    win?.webContents.send('main-process-message', new Date().toLocaleString())
   })
 
   // Make all links open with the browser, not with the application
@@ -70,5 +80,21 @@ app.on('activate', () => {
     allWindows[0].focus()
   } else {
     createWindow()
+  }
+})
+
+// new window example arg: new windows url
+ipcMain.handle('open-win', (event, arg) => {
+  const childWindow = new BrowserWindow({
+    webPreferences: {
+      preload,
+    },
+  })
+
+  if (app.isPackaged) {
+    childWindow.loadFile(indexHtml, { hash: arg })
+  } else {
+    childWindow.loadURL(`${url}/#${arg}`)
+    // childWindow.webContents.openDevTools({ mode: "undocked", activate: true })
   }
 })
