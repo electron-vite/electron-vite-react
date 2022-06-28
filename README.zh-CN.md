@@ -70,6 +70,7 @@ npm create electron-vite
 
 - `react`
 - `react-dom`
+- `react-router`
 - `mobx`
 - `zustand`
 - `antd`
