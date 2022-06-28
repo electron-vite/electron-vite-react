@@ -30,7 +30,7 @@ export default defineConfig({
       preload: {
         input: {
           // You can configure multiple preload scripts here
-          splash: join(__dirname, 'electron/preload/splash.ts'),
+          index: join(__dirname, 'electron/preload/index.ts'),
         },
         vite: {
           build: {
@@ -40,7 +40,7 @@ export default defineConfig({
           }
         },
       },
-      // Enables use of Node.js API in the Renderer-process
+      // Enables use of Node.js API in the Electron-Renderer
       renderer: {},
     }),
   ],
