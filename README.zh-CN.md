@@ -35,19 +35,19 @@ npm create electron-vite
 
 ```tree
 ├── electron                  Electron 源码文件夹
-|   ├── main                  Main-process 源码
-|   ├── preload               Preload-script 源码
-|   └── resources             应用打包的资源文件夹
-|       ├── icon.icns             应用图标(macOS)
-|       ├── icon.ico              应用图标
-|       ├── installerIcon.ico     安装图标
-|       └── uninstallerIcon.ico   卸载图标
-|
+│   ├── main                  Main-process 源码
+│   ├── preload               Preload-script 源码
+│   └── resources             应用打包的资源文件夹
+│       ├── icon.icns             应用图标(macOS)
+│       ├── icon.ico              应用图标
+│       ├── installerIcon.ico     安装图标
+│       └── uninstallerIcon.ico   卸载图标
+│
 ├── release                   构建后生成程序目录
-|   └──{version}
-|       ├── {os}-unpacked     未打包的程序(绿色运行版)
-|       └── Setup.{ext}       应用安装文件
-|
+│   └──{version}
+│       ├── {os}-unpacked     未打包的程序(绿色运行版)
+│       └── Setup.{ext}       应用安装文件
+│
 ├── public                    同 Vite 模板的 public
 └── src                       渲染进程源码、React代码
 ```
