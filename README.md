@@ -52,14 +52,37 @@ npm create electron-vite
 └── src                       Renderer source code, your React application
 ```
 
-## `dependencies` vs `devDependencies`
+## 🚨 `dependencies` vs `devDependencies`
 
-The easiest way
+**Put Node.js packages in `dependencies`**
 
-- Put Node.js packages in `dependencies`
-- Put web packages in `devDependencies`
+🚨 e.g.
 
-see more 👉 [dependencies vs devDependencies](https://github.com/electron-vite/vite-plugin-electron-renderer#dependencies-vs-devdependencies)
+- `electron-store`
+- `sqlite3`
+- `serilaport`
+- `mongodb`
+- ...others Node.js packages
+
+**Put Web packages in `devDependencies`**
+
+🚨 e.g.
+
+- `react`
+- `react-dom`
+- `mobx`
+- `zustand`
+- `antd`
+- `axios`
+- ...others Web packages
+
+**TODO: ESM packages**
+
+- `node-fetch`
+- `execa`
+- ...others ESM packages
+
+See more 👉 [dependencies vs devDependencies](https://github.com/electron-vite/vite-plugin-electron-renderer#dependencies-vs-devdependencies)
 
 <!--
 - First, you need to know if your dependencies are needed after the application is packaged.

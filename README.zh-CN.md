@@ -52,14 +52,38 @@ npm create electron-vite
 └── src                       渲染进程源码、React代码
 ```
 
-## 依赖放到 dependencies 还是 devDependencies
+## 🚨 依赖放到 dependencies 还是 devDependencies
 
-最简单的方式
+**Node.js 包放到 `dependencies` 中**
 
-- Node.js 包放到 `dependencies` 中
-- Web 包放到 in `devDependencies` 中
+🚨 e.g.
+
+- `electron-store`
+- `sqlite3`
+- `serilaport`
+- `mongodb`
+- ...others Node.js packages
+
+**Web 包放到 in `devDependencies` 中**
+
+🚨 e.g.
+
+- `react`
+- `react-dom`
+- `mobx`
+- `zustand`
+- `antd`
+- `axios`
+- ...others Web packages
+
+**TODO: ESM packages**
+
+- `node-fetch`
+- `execa`
+- ...others ESM packages
 
 看看这 👉 [dependencies vs devDependencies](https://github.com/electron-vite/vite-plugin-electron-renderer#dependencies-vs-devdependencies)
+
 
 <!--
 &emsp;&emsp;对待 **Electron-Main、Preload-Script** 时 vite 会以 lib 形式打包 commonjs 格式代码；
