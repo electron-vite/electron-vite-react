@@ -56,35 +56,29 @@ npm create electron-vite
 
 **Node.js 包放到 `dependencies` 中**
 
-🚨 e.g.
-
-- `electron-store`
-- `sqlite3`
-- `serilaport`
-- `mongodb`
-- ...others Node.js packages
+**e.g.** `electron-store` `sqlite3` `serilaport` `mongodb` ...others
 
 **Web 包放到 in `devDependencies` 中**
 
-🚨 e.g.
-
-- `react`
-- `react-dom`
-- `react-router`
-- `mobx`
-- `zustand`
-- `antd`
-- `axios`
-- ...others Web packages
-
-**TODO: ESM packages**
-
-- `node-fetch`
-- `execa`
-- ...others ESM packages
+**e.g.** `react` `react-dom` `react-router` `mobx` `zustand` `antd` `axios` ...others
 
 看看这 👉 [dependencies vs devDependencies](https://github.com/electron-vite/vite-plugin-electron-renderer#dependencies-vs-devdependencies)
 
+## 🚨 ESM packages
+
+**e.g.** `node-fetch` `execa` `got` ...others
+
+1. `npm i vite-plugin-esmodule -D`
+2. Configure in vite.config.ts
+
+```ts
+import esmodule from 'vite-plugin-esmodule'
+export default {
+  plugins: [
+    esmodule(['got', 'execa', 'node-fetch']),
+  ],
+}
+```
 
 <!--
 &emsp;&emsp;对待 **Electron-Main、Preload-Script** 时 vite 会以 lib 形式打包 commonjs 格式代码；

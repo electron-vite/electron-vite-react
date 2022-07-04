@@ -56,34 +56,29 @@ npm create electron-vite
 
 **Put Node.js packages in `dependencies`**
 
-🚨 e.g.
-
-- `electron-store`
-- `sqlite3`
-- `serilaport`
-- `mongodb`
-- ...others Node.js packages
+**e.g.** `electron-store` `sqlite3` `serilaport` `mongodb` ...others
 
 **Put Web packages in `devDependencies`**
 
-🚨 e.g.
-
-- `react`
-- `react-dom`
-- `react-router`
-- `mobx`
-- `zustand`
-- `antd`
-- `axios`
-- ...others Web packages
-
-**TODO: ESM packages**
-
-- `node-fetch`
-- `execa`
-- ...others ESM packages
+**e.g.** `react` `react-dom` `react-router` `mobx` `zustand` `antd` `axios` ...others
 
 See more 👉 [dependencies vs devDependencies](https://github.com/electron-vite/vite-plugin-electron-renderer#dependencies-vs-devdependencies)
+
+## 🚨 ESM packages
+
+**e.g.** `node-fetch` `execa` `got` ...others
+
+1. `npm i vite-plugin-esmodule -D`
+2. Configure in vite.config.ts
+
+```ts
+import esmodule from 'vite-plugin-esmodule'
+export default {
+  plugins: [
+    esmodule(['got', 'execa', 'node-fetch']),
+  ],
+}
+```
 
 <!--
 - First, you need to know if your dependencies are needed after the application is packaged.
