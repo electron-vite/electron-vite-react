@@ -44,7 +44,7 @@ npm create electron-vite
 │       └── uninstallerIcon.ico   卸载图标
 │
 ├── release                   构建后生成程序目录
-│   └──{version}
+│   └── {version}
 │       ├── {os}-unpacked     未打包的程序(绿色运行版)
 │       └── Setup.{ext}       应用安装文件
 │
@@ -64,21 +64,12 @@ npm create electron-vite
 
 看看这 👉 [dependencies vs devDependencies](https://github.com/electron-vite/vite-plugin-electron-renderer#dependencies-vs-devdependencies)
 
-## 🚨 ESM packages
 
-**e.g.** `node-fetch` `execa` `got` ...others
+## 🚨 Node.js ESM packages
 
-1. `npm i vite-plugin-esmodule -D`
-2. Configure in vite.config.ts
+**e.g.** `node-fetch` `execa` `got` ...
 
-```ts
-import esmodule from 'vite-plugin-esmodule'
-export default {
-  plugins: [
-    esmodule(['got', 'execa', 'node-fetch']),
-  ],
-}
-```
+[👉 在 Electron-Renderer 中使用 Node.js ESM 包](https://github.com/electron-vite/vite-plugin-electron-renderer#-nodejs-esm-packages)
 
 <!--
 &emsp;&emsp;对待 **Electron-Main、Preload-Script** 时 vite 会以 lib 形式打包 commonjs 格式代码；

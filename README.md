@@ -12,8 +12,8 @@ English | [简体中文](README.zh-CN.md)
 
 📦 Out of the box  
 🎯 Based on the official [react-ts](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) template, less invasive  
-🌱 Simple directory structure，real flexible  
-💪 Support Use Electron、Node.js API and in Electron-Renderer  
+🌱 Extensible, really simple directory structure  
+💪 Support using Node.js API in Electron-Renderer  
 🔩 Support C/C++ native addons  
 🖥 It's easy to implement multiple windows  
 
@@ -44,7 +44,7 @@ npm create electron-vite
 │       └── uninstallerIcon.ico   Icon for the application uninstaller
 │
 ├── release                   Generated after production build, contains executables
-│   └──{version}
+│   └── {version}
 │       ├── {os}-unpacked     Contains unpacked application executable
 │       └── Setup.{ext}       Installer for the application
 │
@@ -64,21 +64,11 @@ npm create electron-vite
 
 See more 👉 [dependencies vs devDependencies](https://github.com/electron-vite/vite-plugin-electron-renderer#dependencies-vs-devdependencies)
 
-## 🚨 ESM packages
+## 🚨 Node.js ESM packages
 
-**e.g.** `node-fetch` `execa` `got` ...others
+**e.g.** `node-fetch` `execa` `got` ...
 
-1. `npm i vite-plugin-esmodule -D`
-2. Configure in vite.config.ts
-
-```ts
-import esmodule from 'vite-plugin-esmodule'
-export default {
-  plugins: [
-    esmodule(['got', 'execa', 'node-fetch']),
-  ],
-}
-```
+[👉 Using Node.js ESM packages in Electron-Renderer](https://github.com/electron-vite/vite-plugin-electron-renderer#-nodejs-esm-packages)
 
 <!--
 - First, you need to know if your dependencies are needed after the application is packaged.
