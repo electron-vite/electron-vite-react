@@ -36,7 +36,7 @@ npm create electron-vite
 ```tree
 ├── electron                  Electron-related code
 │   ├── main                  Main-process source code
-│   ├── preload               Preload-script source code
+│   ├── preload               Preload-scripts source code
 │   └── resources             Resources for the production build
 │       ├── icon.icns             Icon for the application on macOS
 │       ├── icon.ico              Icon for the application
@@ -52,28 +52,20 @@ npm create electron-vite
 └── src                       Renderer source code, your React application
 ```
 
-## 🚨 `dependencies` vs `devDependencies`
+## 🚨
 
-**Put Node.js packages in `dependencies`**
+By default, this template integrates Node.js in the Renderer process. If you don't need it, you just remove the option below. [Because it will modify the default config of Vite](https://github.com/electron-vite/vite-plugin-electron/tree/main/packages/electron-renderer#config-presets-opinionated).
 
-**e.g.** `electron-store` `sqlite3` `serilaport` `mongodb` ...others
+```diff
+# vite.config.ts
 
-**Put Web packages in `devDependencies`**
+electron({
+- renderer: {}
+})
+```
 
-**e.g.** `react` `react-dom` `react-router` `mobx` `zustand` `antd` `axios` ...others
+## FAQ
 
-See more 👉 [dependencies vs devDependencies](https://github.com/electron-vite/vite-plugin-electron-renderer#dependencies-vs-devdependencies)
-
-## 🚨 Node.js ESM packages
-
-**e.g.** `node-fetch` `execa` `got` ...
-
-[👉 Using Node.js ESM packages in Electron-Renderer](https://github.com/electron-vite/vite-plugin-electron-renderer#-nodejs-esm-packages)
-
-<!--
-- First, you need to know if your dependencies are needed after the application is packaged.
-
-- Like [serialport](https://www.npmjs.com/package/serialport), [sqlite3](https://www.npmjs.com/package/sqlite3) they are node-native modules and should be placed in `dependencies`. In addition, Vite will not build them, but treat them as external modules.
-
-- Dependencies like [Vue](https://www.npmjs.com/package/vue) and [React](https://www.npmjs.com/package/react), which are pure javascript modules that can be built with Vite, can be placed in `devDependencies`. This reduces the size of the application.
--->
+- [dependencies vs devDependencies](https://github.com/electron-vite/vite-plugin-electron/tree/main/packages/electron-renderer#dependencies-vs-devdependencies)
+- [Using C/C++ native addons in Electron-Renderer](https://github.com/electron-vite/vite-plugin-electron/tree/main/packages/electron-renderer#load-nodejs-cc-native-modules)
+- [Node.js ESM packages](https://github.com/electron-vite/vite-plugin-electron/tree/main/packages/electron-renderer#nodejs-esm-packages) (e.g. `execa` `node-fetch`)

@@ -11,7 +11,7 @@
 ## 概述
 
 📦 开箱即用  
-🎯 基于 [react-ts](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) 模板, 低侵入性  
+🎯 基于官方的 [react-ts](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) 模板, 低侵入性  
 🌱 结构清晰，可塑性强  
 💪 支持在渲染进程中使用 Electron、Node.js API  
 🔩 支持 C/C++ 模块  
@@ -36,7 +36,7 @@ npm create electron-vite
 ```tree
 ├── electron                  Electron 源码文件夹
 │   ├── main                  Main-process 源码
-│   ├── preload               Preload-script 源码
+│   ├── preload               Preload-scripts 源码
 │   └── resources             应用打包的资源文件夹
 │       ├── icon.icns             应用图标(macOS)
 │       ├── icon.ico              应用图标
@@ -52,33 +52,21 @@ npm create electron-vite
 └── src                       渲染进程源码、React代码
 ```
 
-## 🚨 依赖放到 dependencies 还是 devDependencies
 
-**Node.js 包放到 `dependencies` 中**
+## 🚨
 
-**e.g.** `electron-store` `sqlite3` `serilaport` `mongodb` ...others
+默认情况下，该模板在渲染进程中集成了 Node.js，如果你不需要它，你只需要删除下面的选项. [因为它会修改 Vite 默认的配置](https://github.com/electron-vite/vite-plugin-electron/tree/main/packages/electron-renderer#config-presets-opinionated).
 
-**Web 包放到 in `devDependencies` 中**
+```diff
+# vite.config.ts
 
-**e.g.** `react` `react-dom` `react-router` `mobx` `zustand` `antd` `axios` ...others
+electron({
+- renderer: {}
+})
+```
 
-看看这 👉 [dependencies vs devDependencies](https://github.com/electron-vite/vite-plugin-electron-renderer#dependencies-vs-devdependencies)
+## FAQ
 
-
-## 🚨 Node.js ESM packages
-
-**e.g.** `node-fetch` `execa` `got` ...
-
-[👉 在 Electron-Renderer 中使用 Node.js ESM 包](https://github.com/electron-vite/vite-plugin-electron-renderer#-nodejs-esm-packages)
-
-<!--
-&emsp;&emsp;对待 **Electron-Main、Preload-Script** 时 vite 会以 lib 形式打包 commonjs 格式代码；
-如果碰 node 环境的包可以直接放到 dependencies 中，vite 会解析为 require('xxxx')；
-electron-builder 打包时候会将 dependencies 中的包打包到 app.asar 里面
-
-&emsp;&emsp;对待 **Electron-Renderer** 时 vite 会以 ESM 格式解析代码；
-像 vue、react 这种前端用的包可以直接被 vite 构建，所以不需要 vue、react 源码；
-现实情况 vue、react 放到 dependencies 或 devDependencies 中都可以被正确构建；
-但是放到 dependencies 会被 electron-builder 打包到 app.asar 里面导致包体变大；
-所以放到 devDependencies 既能被正确构建还可以减小 app.asar 体积，一举两得
--->
+- [dependencies vs devDependencies](https://github.com/electron-vite/vite-plugin-electron/tree/main/packages/electron-renderer#dependencies-vs-devdependencies)
+- [Using C/C++ native addons in Electron-Renderer](https://github.com/electron-vite/vite-plugin-electron/tree/main/packages/electron-renderer#load-nodejs-cc-native-modules)
+- [Node.js ESM packages](https://github.com/electron-vite/vite-plugin-electron/tree/main/packages/electron-renderer#nodejs-esm-packages) (e.g. `execa` `node-fetch`)
