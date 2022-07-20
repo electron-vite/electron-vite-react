@@ -53,7 +53,7 @@ npm create electron-vite
 ```
 
 
-## 🚨
+## 🚨 这需要留神
 
 默认情况下，该模板在渲染进程中集成了 Node.js，如果你不需要它，你只需要删除下面的选项. [因为它会修改 Vite 默认的配置](https://github.com/electron-vite/vite-plugin-electron/tree/main/packages/electron-renderer#config-presets-opinionated).
 
