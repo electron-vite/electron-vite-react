@@ -8,16 +8,17 @@
 
 English | [简体中文](README.zh-CN.md)
 
-## Overview
+## 👀 Overview
 
-📦 Out of the box  
-🎯 Based on the official [react-ts](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) template, less invasive  
-🌱 Extensible, really simple directory structure  
-💪 Support using Node.js API in Electron-Renderer  
-🔩 Support C/C++ native addons  
-🖥 It's easy to implement multiple windows  
+📦 Ready out of the box  
+🎯 Based on the official [react-ts](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) template, project structure will be familiar to you  
+🌱 Easily extendable and customizable  
+💪 Supports Node.js API in the renderer process  
+🔩 Supports C/C++ native addons  
+🪲 Debugger configuration included  
+🖥 Easy to implement multiple windows  
 
-## Quick start
+## 🛫 Quick start
 
 ```sh
 npm create electron-vite
@@ -25,13 +26,14 @@ npm create electron-vite
 
 ![electron-vite-react.gif](https://github.com/electron-vite/electron-vite-react/blob/main/public/electron-vite-react.gif?raw=true)
 
-## Debug
+## 🪲 Debug
 
 ![electron-vite-react-debug.gif](https://github.com/electron-vite/electron-vite-react/blob/main/public/electron-vite-react-debug.gif?raw=true)
 
-## Directory structure
+## 📂 Directory structure
 
-*🚨 By default, the files in `electron` folder will be built into the `dist/electron`*
+Familiar React application structure, just with `electron` folder on the top :wink:  
+*Files in this folder will be separated from your React application and built into `dist/electron`*  
 
 ```tree
 ├── electron                  Electron-related code
@@ -54,7 +56,9 @@ npm create electron-vite
 
 ## 🚨 Be aware
 
-By default, this template integrates Node.js in the Renderer process. If you don't need it, you just remove the option below. [Because it will modify the default config of Vite](https://github.com/electron-vite/vite-plugin-electron/tree/main/packages/electron-renderer#config-presets-opinionated).
+This template integrates Node.js API to the renderer process by default. If you want to follow **Electron Security Concerns** you might want to disable this feauture. You will need to expose needed API by yourself.  
+
+To get started, remove the option as shown below. This will [modify the Vite configuration and disable this feature](https://github.com/electron-vite/vite-plugin-electron/tree/main/packages/electron-renderer#config-presets-opinionated).
 
 ```diff
 # vite.config.ts
@@ -64,7 +68,7 @@ electron({
 })
 ```
 
-## FAQ
+## ❔ FAQ
 
 - [dependencies vs devDependencies](https://github.com/electron-vite/vite-plugin-electron/tree/main/packages/electron-renderer#dependencies-vs-devdependencies)
 - [Using C/C++ native addons in Electron-Renderer](https://github.com/electron-vite/vite-plugin-electron/tree/main/packages/electron-renderer#load-nodejs-cc-native-modules)
