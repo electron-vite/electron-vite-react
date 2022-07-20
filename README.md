@@ -52,7 +52,7 @@ npm create electron-vite
 └── src                       Renderer source code, your React application
 ```
 
-## 🚨
+## 🚨 Be aware
 
 By default, this template integrates Node.js in the Renderer process. If you don't need it, you just remove the option below. [Because it will modify the default config of Vite](https://github.com/electron-vite/vite-plugin-electron/tree/main/packages/electron-renderer#config-presets-opinionated).
 
