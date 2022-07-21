@@ -15,7 +15,7 @@ English | [简体中文](README.zh-CN.md)
 🌱 Easily extendable and customizable  
 💪 Supports Node.js API in the renderer process  
 🔩 Supports C/C++ native addons  
-🪲 Debugger configuration included  
+🐞 Debugger configuration included  
 🖥 Easy to implement multiple windows  
 
 ## 🛫 Quick start
@@ -26,7 +26,7 @@ npm create electron-vite
 
 ![electron-vite-react.gif](https://github.com/electron-vite/electron-vite-react/blob/main/public/electron-vite-react.gif?raw=true)
 
-## 🪲 Debug
+## 🐞 Debug
 
 ![electron-vite-react-debug.gif](https://github.com/electron-vite/electron-vite-react/blob/main/public/electron-vite-react-debug.gif?raw=true)
 
