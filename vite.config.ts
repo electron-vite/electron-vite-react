@@ -1,6 +1,6 @@
-import { rmSync } from 'fs'
+import { existsSync, rmSync } from 'fs'
 import { join } from 'path'
-import { defineConfig } from 'vite'
+import { defineConfig, UserConfig, Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import electron from 'vite-plugin-electron'
 import pkg from './package.json'
@@ -20,12 +20,11 @@ export default defineConfig({
     electron({
       main: {
         entry: 'electron/main/index.ts',
-        vite: {
+        vite: withDebug({
           build: {
-            sourcemap: false,
             outDir: 'dist/electron/main',
           },
-        },
+        }),
       },
       preload: {
         input: {
@@ -49,3 +48,23 @@ export default defineConfig({
     port: pkg.env.VITE_DEV_SERVER_PORT,
   },
 })
+
+function withDebug(config: UserConfig): UserConfig {
+  const debugFile = join(__dirname, 'node_modules/.electron-vite-debug')
+  const isDebug = existsSync(debugFile)
+
+  if (isDebug) {
+    config.build.sourcemap = true
+    config.plugins = (config.plugins || []).concat({
+      name: 'electron-vite-debug',
+      configResolved(config) {
+        // TODO: when the next version of `vite-plugine-electron` is released, use the config hook.
+        const index = config.plugins.findIndex(p => p.name === 'electron-main-watcher');
+        (config.plugins as Plugin[]).splice(index, 1)
+        rmSync(debugFile)
+      },
+    })
+  }
+
+  return config
+}
