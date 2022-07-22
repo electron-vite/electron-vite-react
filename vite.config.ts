@@ -1,4 +1,4 @@
-import { existsSync, rmSync } from 'fs'
+import { rmSync } from 'fs'
 import { join } from 'path'
 import { defineConfig, UserConfig, Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
@@ -50,10 +50,7 @@ export default defineConfig({
 })
 
 function withDebug(config: UserConfig): UserConfig {
-  const debugFile = join(__dirname, 'node_modules/.electron-vite-debug')
-  const isDebug = existsSync(debugFile)
-
-  if (isDebug) {
+  if (process.env.VSCODE_DEBUG) {
     config.build.sourcemap = true
     config.plugins = (config.plugins || []).concat({
       name: 'electron-vite-debug',
@@ -61,10 +58,8 @@ function withDebug(config: UserConfig): UserConfig {
         // TODO: when the next version of `vite-plugine-electron` is released, use the config hook.
         const index = config.plugins.findIndex(p => p.name === 'electron-main-watcher');
         (config.plugins as Plugin[]).splice(index, 1)
-        rmSync(debugFile)
       },
     })
   }
-
   return config
 }

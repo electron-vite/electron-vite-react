@@ -12,13 +12,13 @@ const pkg = require('../package.json')
 const envContent = Object.entries(pkg.env).map(([key, val]) => `${key}=${val}`)
 fs.writeFileSync(path.join(__dirname, '.debug.env'), envContent.join('\n'))
 
-// for debug
-fs.writeFileSync(path.join(__dirname, '../node_modules/.electron-vite-debug'), '')
-
 // bootstrap
 spawn(
   // TODO: terminate `npm run dev` when Debug exits.
   process.platform === 'win32' ? 'npm.cmd' : 'npm',
   ['run', 'dev'],
-  { stdio: 'inherit' },
+  {
+    stdio: 'inherit',
+    env: Object.assign(process.env, { VSCODE_DEBUG: 'true' }),
+  },
 )
