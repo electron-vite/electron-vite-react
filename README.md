@@ -11,7 +11,7 @@ English | [简体中文](README.zh-CN.md)
 ## 👀 Overview
 
 📦 Ready out of the box  
-🎯 Based on the official [react-ts](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) template, project structure will be familiar to you  
+🎯 Based on the official [template-react-ts](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts), project structure will be familiar to you  
 🌱 Easily extendable and customizable  
 💪 Supports Node.js API in the renderer process  
 🔩 Supports C/C++ native addons  
