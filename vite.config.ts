@@ -1,18 +1,22 @@
 import { rmSync } from 'fs'
-import { join } from 'path'
-import { defineConfig, UserConfig, Plugin } from 'vite'
+import path from 'path'
+import {
+  type Plugin,
+  type UserConfig,
+  defineConfig,
+} from 'vite'
 import react from '@vitejs/plugin-react'
 import electron from 'vite-plugin-electron'
 import pkg from './package.json'
 
-rmSync(join(__dirname, 'dist'), { recursive: true, force: true }) // v14.14.0
+rmSync(path.join(__dirname, 'dist'), { recursive: true, force: true }) // v14.14.0
 
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
     alias: {
-      '@': join(__dirname, 'src'),
-      'styles': join(__dirname, 'src/assets/styles'),
+      '@': path.join(__dirname, 'src'),
+      'styles': path.join(__dirname, 'src/assets/styles'),
     },
   },
   plugins: [
@@ -29,7 +33,7 @@ export default defineConfig({
       preload: {
         input: {
           // You can configure multiple preload scripts here
-          index: join(__dirname, 'electron/preload/index.ts'),
+          index: path.join(__dirname, 'electron/preload/index.ts'),
         },
         vite: {
           build: {
@@ -42,11 +46,15 @@ export default defineConfig({
       // Enables use of Node.js API in the Electron-Renderer
       renderer: {},
     }),
+    renderBuiltUrl(),
   ],
   server: {
     host: pkg.env.VITE_DEV_SERVER_HOST,
     port: pkg.env.VITE_DEV_SERVER_PORT,
   },
+  build: {
+    minify: false
+  }
 })
 
 function withDebug(config: UserConfig): UserConfig {
@@ -62,4 +70,60 @@ function withDebug(config: UserConfig): UserConfig {
     })
   }
   return config
+}
+
+// Only worked Vite@3.x #52
+function renderBuiltUrl(): Plugin {
+  // https://github.com/vitejs/vite/blob/main/packages/vite/src/node/constants.ts#L84-L124
+  const KNOWN_ASSET_TYPES = [
+    // images
+    'png',
+    'jpe?g',
+    'jfif',
+    'pjpeg',
+    'pjp',
+    'gif',
+    'svg',
+    'ico',
+    'webp',
+    'avif',
+
+    // media
+    'mp4',
+    'webm',
+    'ogg',
+    'mp3',
+    'wav',
+    'flac',
+    'aac',
+
+    // fonts
+    'woff2?',
+    'eot',
+    'ttf',
+    'otf',
+
+    // other
+    'webmanifest',
+    'pdf',
+    'txt'
+  ]
+
+  return {
+    name: 'render-built-url',
+    config(config) {
+      config.experimental = {
+        renderBuiltUrl(filename, type) {
+          if (
+            KNOWN_ASSET_TYPES.includes(path.extname(filename).slice(1)) &&
+            type.hostType === 'js'
+          ) {
+            // Avoid Vite relative-path assets handling
+            // https://github.com/vitejs/vite/blob/89dd31cfe228caee358f4032b31fdf943599c842/packages/vite/src/node/build.ts#L838-L875
+            return { runtime: JSON.stringify(filename) }
+          }
+        },
+      }
+    },
+  }
 }
