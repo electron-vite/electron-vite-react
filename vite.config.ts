@@ -1,12 +1,8 @@
 import { rmSync } from 'fs'
 import path from 'path'
-import {
-  type Plugin,
-  type UserConfig,
-  defineConfig,
-} from 'vite'
+import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import electron from 'vite-plugin-electron'
+import electron, { onstart } from 'vite-plugin-electron'
 import pkg from './package.json'
 
 rmSync(path.join(__dirname, 'dist'), { recursive: true, force: true }) // v14.14.0
@@ -24,11 +20,14 @@ export default defineConfig({
     electron({
       main: {
         entry: 'electron/main/index.ts',
-        vite: withDebug({
+        vite: {
           build: {
+            // For debug
+            sourcemap: true,
             outDir: 'dist/electron/main',
           },
-        }),
+          plugins: [process.env.VSCODE_DEBUG ? onstart() : null],
+        },
       },
       preload: {
         input: {
@@ -56,18 +55,3 @@ export default defineConfig({
     minify: false
   }
 })
-
-function withDebug(config: UserConfig): UserConfig {
-  if (process.env.VSCODE_DEBUG) {
-    config.build.sourcemap = true
-    config.plugins = (config.plugins || []).concat({
-      name: 'electron-vite-debug',
-      configResolved(config) {
-        const index = config.plugins.findIndex(p => p.name === 'electron-main-watcher');
-        // At present, Vite can only modify plugins in configResolved hook.
-        (config.plugins as Plugin[]).splice(index, 1)
-      },
-    })
-  }
-  return config
-}
