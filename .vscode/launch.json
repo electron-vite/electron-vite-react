@@ -29,8 +29,9 @@
         "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron.cmd"
       },
       "runtimeArgs": [
+        "--no-sandbox",
         "--remote-debugging-port=9229",
-        "${workspaceRoot}/dist/electron/main/index.js"
+        "."
       ],
       "envFile": "${workspaceFolder}/.vscode/.debug.env"
     },
