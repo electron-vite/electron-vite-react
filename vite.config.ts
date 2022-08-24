@@ -22,10 +22,11 @@ export default defineConfig({
         entry: 'electron/main/index.ts',
         vite: {
           build: {
-            // For debug
+            // For Debug
             sourcemap: true,
             outDir: 'dist/electron/main',
           },
+          // Will start Electron via VSCode Debug
           plugins: [process.env.VSCODE_DEBUG ? onstart() : null],
         },
       },
@@ -36,7 +37,7 @@ export default defineConfig({
         },
         vite: {
           build: {
-            // For debug
+            // For Debug
             sourcemap: 'inline',
             outDir: 'dist/electron/preload',
           }
