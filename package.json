@@ -28,9 +28,11 @@
     "vite": "^3.0.7",
     "vite-plugin-electron": "^0.9.1"
   },
-  "env": {
-    "VITE_DEV_SERVER_HOST": "127.0.0.1",
-    "VITE_DEV_SERVER_PORT": 7777,
-    "VITE_DEV_SERVER_URL": "http://127.0.0.1:7777"
+  "debug": {
+    "env": {
+      "VITE_DEV_SERVER_HOST": "127.0.0.1",
+      "VITE_DEV_SERVER_PORT": 7777,
+      "VITE_DEV_SERVER_URL": "http://127.0.0.1:7777"
+    }
   }
 }

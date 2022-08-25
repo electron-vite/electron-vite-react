@@ -25,8 +25,7 @@ export const ROOT_PATH = {
 let win: BrowserWindow | null = null
 // Here, you can also use other preload
 const preload = join(__dirname, '../preload/index.js')
-// 🚧 Use ['ENV_NAME'] avoid vite:define plugin
-const url = process.env.VITE_DEV_SERVER_URL as string;
+const url = process.env.VITE_DEV_SERVER_URL
 const indexHtml = join(ROOT_PATH.dist, 'index.html')
 
 async function createWindow() {

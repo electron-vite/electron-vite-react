@@ -9,7 +9,7 @@ const require = createRequire(import.meta.url)
 const pkg = require('../package.json')
 
 // write .debug.env
-const envContent = Object.entries(pkg.env).map(([key, val]) => `${key}=${val}`)
+const envContent = Object.entries(pkg.debug.env).map(([key, val]) => `${key}=${val}`)
 fs.writeFileSync(path.join(__dirname, '.debug.env'), envContent.join('\n'))
 
 // bootstrap
