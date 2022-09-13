@@ -14,24 +14,19 @@ if (!app.requestSingleInstanceLock()) {
 }
 
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
-
-export const ROOT_PATH = {
-  // /dist
-  dist: join(__dirname, '../..'),
-  // /dist or /public
-  public: join(__dirname, app.isPackaged ? '../..' : '../../../public'),
-}
+process.env.DIST = join(__dirname, '../..')
+process.env.PUBLIC = app.isPackaged ? process.env.DIST : join(process.env.DIST, '../public')
 
 let win: BrowserWindow | null = null
 // Here, you can also use other preload
 const preload = join(__dirname, '../preload/index.js')
 const url = process.env.VITE_DEV_SERVER_URL
-const indexHtml = join(ROOT_PATH.dist, 'index.html')
+const indexHtml = join(process.env.DIST, 'index.html')
 
 async function createWindow() {
   win = new BrowserWindow({
     title: 'Main window',
-    icon: join(ROOT_PATH.public, 'favicon.svg'),
+    icon: join(process.env.PUBLIC, 'favicon.svg'),
     webPreferences: {
       preload,
       nodeIntegration: true,
