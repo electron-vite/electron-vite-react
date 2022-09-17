@@ -1,3 +1,18 @@
+// The built directory structure
+//
+// ├─┬ dist
+// │ ├─┬ electron
+// │ │ ├─┬ main
+// │ │ │ └── index.js
+// │ │ └─┬ preload
+// │ │   └── index.js
+// │ ├── index.html
+// │ ├── ...other-static-files-from-public
+// │
+process.env.DIST = join(__dirname, '../..')
+process.env.PUBLIC = app.isPackaged ? process.env.DIST : join(process.env.DIST, '../public')
+process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
+
 import { app, BrowserWindow, shell, ipcMain } from 'electron'
 import { release } from 'os'
 import { join } from 'path'
@@ -12,10 +27,6 @@ if (!app.requestSingleInstanceLock()) {
   app.quit()
   process.exit(0)
 }
-
-process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
-process.env.DIST = join(__dirname, '../..')
-process.env.PUBLIC = app.isPackaged ? process.env.DIST : join(process.env.DIST, '../public')
 
 let win: BrowserWindow | null = null
 // Here, you can also use other preload
