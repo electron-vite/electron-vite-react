@@ -31,7 +31,8 @@
     artifactName: "${productName}-Mac-${version}-Installer.${ext}",
   },
   linux: {
-    target: ["AppImage"],
+    icon: "electron/resources/iconset",
+    target: ["AppImage", "deb"],
     artifactName: "${productName}-Linux-${version}.${ext}",
   },
 }
