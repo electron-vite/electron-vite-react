@@ -43,7 +43,9 @@ Familiar React application structure, just with `electron` folder on the top :wi
 │       ├── icon.icns             Icon for the application on macOS
 │       ├── icon.ico              Icon for the application
 │       ├── installerIcon.ico     Icon for the application installer
-│       └── uninstallerIcon.ico   Icon for the application uninstaller
+│       ├── uninstallerIcon.ico   Icon for the application uninstaller
+|       └── iconset               
+|           └── 256x256.png       Icon for the application on Linux
 │
 ├── release                   Generated after production build, contains executables
 │   └── {version}
