@@ -10,7 +10,10 @@
     output: "release/${version}",
     buildResources: "electron/resources",
   },
-  files: ["dist"],
+  files: [
+    "dist-electron",
+    "dist"
+  ],
   win: {
     target: [
       {
