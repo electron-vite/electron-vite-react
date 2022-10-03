@@ -1,17 +1,16 @@
 // The built directory structure
 //
+// ├─┬ dist-electron
+// │ ├─┬ main
+// │ │ └── index.js    > Electron-Main
+// │ └─┬ preload
+// │   └── index.js    > Preload-Scripts
 // ├─┬ dist
-// │ ├─┬ electron
-// │ │ ├─┬ main
-// │ │ │ └── index.js
-// │ │ └─┬ preload
-// │ │   └── index.js
-// │ ├── index.html
-// │ ├── ...other-static-files-from-public
-// │
-process.env.DIST = join(__dirname, '../..')
-process.env.PUBLIC = app.isPackaged ? process.env.DIST : join(process.env.DIST, '../public')
-process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
+// │ └── index.html    > Electron-Renderer
+//
+process.env.DIST_ELECTRON = join(__dirname, '..')
+process.env.DIST = join(process.env.DIST_ELECTRON, '../dist')
+process.env.PUBLIC = app.isPackaged ? process.env.DIST : join(process.env.DIST_ELECTRON, '../public')
 
 import { app, BrowserWindow, shell, ipcMain } from 'electron'
 import { release } from 'os'
