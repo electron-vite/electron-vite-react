@@ -65,9 +65,14 @@ To get started, remove the option as shown below. This will [modify the Vite con
 ```diff
 # vite.config.ts
 
-electron({
-- renderer: {}
-})
+export default {
+  plugins: [
+-   // Use Node.js API in the Renderer-process
+-   renderer({
+-     nodeIntegration: true,
+-   }),
+  ],
+}
 ```
 
 ## ❔ FAQ

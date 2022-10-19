@@ -4,6 +4,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import electron from 'vite-electron-plugin'
 import { customStart } from 'vite-electron-plugin/plugin'
+import renderer from 'vite-plugin-electron-renderer'
 import pkg from './package.json'
 
 rmSync(path.join(__dirname, 'dist-electron'), { recursive: true, force: true })
@@ -30,6 +31,9 @@ export default defineConfig({
       plugins: process.env.VSCODE_DEBUG
         ? [customStart(debounce(() => console.log(/* For `.vscode/.debug.script.mjs` */'[startup] Electron App')))]
         : undefined,
+    }),
+    renderer({
+      nodeIntegration: true,
     }),
   ],
   server: process.env.VSCODE_DEBUG ? (() => {
