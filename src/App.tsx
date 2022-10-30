@@ -1,7 +1,4 @@
 import { useState } from 'react'
-import electron from '/electron.png'
-import react from '/react.svg'
-import vite from '/vite.svg'
 import styles from 'styles/app.module.scss'
 
 const App: React.FC = () => {
@@ -13,18 +10,22 @@ const App: React.FC = () => {
         <div className={styles.logos}>
           <div className={styles.imgBox}>
             <img
-              src={electron}
+              src='./electron.png'
               style={{ height: '24vw' }}
               className={styles.appLogo}
               alt="electron"
             />
           </div>
           <div className={styles.imgBox}>
-            <img src={vite} style={{ height: '19vw' }} alt="vite" />
+            <img
+              src='./vite.svg'
+              style={{ height: '19vw' }}
+              alt="vite"
+            />
           </div>
           <div className={styles.imgBox}>
             <img
-              src={react}
+              src='./react.svg'
               style={{ maxWidth: '100%' }}
               className={styles.appLogo}
               alt="logo"
