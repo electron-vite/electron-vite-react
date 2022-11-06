@@ -44,11 +44,12 @@ async function createWindow() {
     },
   })
 
-  if (app.isPackaged) {
-    win.loadFile(indexHtml)
-  } else {
+  if (process.env.VITE_DEV_SERVER_URL) { // electron-vite-vue#298
     win.loadURL(url)
-    // win.webContents.openDevTools()
+    // Open devTool if the app is not packaged
+    win.webContents.openDevTools()
+  } else {
+    win.loadFile(indexHtml)
   }
 
   // Test actively push message to the Electron-Renderer
