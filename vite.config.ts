@@ -38,6 +38,7 @@ export default defineConfig({
         loadViteEnv(),
       ],
     }),
+    // Use Node.js API in the Renderer-process
     renderer({
       nodeIntegration: true,
     }),
