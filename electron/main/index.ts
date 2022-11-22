@@ -98,10 +98,9 @@ ipcMain.handle('open-win', (event, arg) => {
     },
   })
 
-  if (app.isPackaged) {
-    childWindow.loadFile(indexHtml, { hash: arg })
-  } else {
+  if (process.env.VITE_DEV_SERVER_URL) {
     childWindow.loadURL(`${url}#${arg}`)
-    // childWindow.webContents.openDevTools({ mode: "undocked", activate: true })
+  } else {
+    childWindow.loadFile(indexHtml, { hash: arg })
   }
 })
