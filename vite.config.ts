@@ -1,5 +1,5 @@
-import { rmSync } from 'fs'
-import path from 'path'
+import { rmSync } from 'node:fs'
+import path from 'node:path'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import electron from 'vite-electron-plugin'
@@ -9,12 +9,14 @@ import pkg from './package.json'
 
 rmSync(path.join(__dirname, 'dist-electron'), { recursive: true, force: true })
 
+const isDevelopment = process.env.NODE_ENV === "development" || !!process.env.VSCODE_DEBUG
+const isProduction = process.env.NODE_ENV === "production"
+
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
     alias: {
-      '@': path.join(__dirname, 'src'),
-      'styles': path.join(__dirname, 'src/assets/styles'),
+      '@': path.join(__dirname, 'src')
     },
   },
   plugins: [
@@ -25,13 +27,13 @@ export default defineConfig({
         'preload',
       ],
       transformOptions: {
-        sourcemap: !!process.env.VSCODE_DEBUG,
+        sourcemap: isDevelopment
       },
       plugins: [
-        ...(process.env.VSCODE_DEBUG
+        ...(!!process.env.VSCODE_DEBUG
           ? [
             // Will start Electron via VSCode Debug
-            customStart(debounce(() => console.log(/* For `.vscode/.debug.script.mjs` */'[startup] Electron App'))),
+            customStart(() => debounce(() => console.log(/* For `.vscode/.debug.script.mjs` */'[startup] Electron App'))),
           ]
           : []),
         // Allow use `import.meta.env.VITE_SOME_KEY` in Electron-Main
@@ -43,7 +45,7 @@ export default defineConfig({
       nodeIntegration: true,
     }),
   ],
-  server: process.env.VSCODE_DEBUG ? (() => {
+  server: !!process.env.VSCODE_DEBUG ? (() => {
     const url = new URL(pkg.debug.env.VITE_DEV_SERVER_URL)
     return {
       host: url.hostname,
@@ -53,9 +55,9 @@ export default defineConfig({
   clearScreen: false,
 })
 
-function debounce<Fn extends (...args: any[]) => void>(fn: Fn, delay = 299) {
+function debounce<Fn extends (...args: any[]) => void>(fn: Fn, delay = 299): Fn {
   let t: NodeJS.Timeout
-  return ((...args) => {
+  return ((...args: Parameters<Fn>) => {
     clearTimeout(t)
     t = setTimeout(() => fn(...args), delay)
   }) as Fn

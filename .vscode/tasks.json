@@ -4,7 +4,7 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "start .debug.script.mjs",
+      "label": "Before Debug",
       "type": "shell",
       "command": "node .vscode/.debug.script.mjs",
       "isBackground": true,
@@ -29,7 +29,3 @@
     }
   ]
 }
-
-// https://code.visualstudio.com/docs/editor/tasks#_operating-system-specific-properties
-// https://code.visualstudio.com/docs/editor/tasks#_background-watching-tasks
-// https://code.visualstudio.com/docs/editor/tasks#_can-a-background-task-be-used-as-a-prelaunchtask-in-launchjson

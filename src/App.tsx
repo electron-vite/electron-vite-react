@@ -1,71 +1,41 @@
 import { useState } from 'react'
-import styles from 'styles/app.module.scss'
+import reactLogo from './assets/react.svg'
+import electronLogo from './assets/electron.svg'
+import './App.scss'
 
-const App: React.FC = () => {
+console.log('[App.tsx]', `Hello world from Electron ${process.versions.electron}!`)
+
+function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div className={styles.app}>
-      <header className={styles.appHeader}>
-        <div className={styles.logos}>
-          <div className={styles.imgBox}>
-            <img
-              src='./electron.png'
-              style={{ height: '24vw' }}
-              className={styles.appLogo}
-              alt="electron"
-            />
-          </div>
-          <div className={styles.imgBox}>
-            <img
-              src='./vite.svg'
-              style={{ height: '19vw' }}
-              alt="vite"
-            />
-          </div>
-          <div className={styles.imgBox}>
-            <img
-              src='./react.svg'
-              style={{ maxWidth: '100%' }}
-              className={styles.appLogo}
-              alt="logo"
-            />
-          </div>
-        </div>
-        <p>Hello Electron + Vite + React!</p>
+    <div className="App">
+      <div>
+        <a href="https://www.electronjs.org/" target="_blank">
+          <img src={electronLogo} className="logo" alt="Electron logo" />
+        </a>
+        <a href="https://vitejs.dev" target="_blank">
+          <img src="/vite.svg" className="logo" alt="Vite logo" />
+        </a>
+        <a href="https://reactjs.org" target="_blank">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
+      </div>
+      <h1>Electron + Vite + React</h1>
+      <div className="card">
+        <button onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button>
         <p>
-          <button onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
+          Edit <code>src/App.tsx</code> and save to test HMR
         </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <div>
-          <a
-            className={styles.appLink}
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className={styles.appLink}
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-          <div className={styles.staticPublic}>
-            Place static files into the{' '}
-            <code>/public</code> folder
-            <img style={{ width: 77 }} src="./node.png" />
-          </div>
-        </div>
-      </header>
+      </div>
+      <p className="read-the-docs">
+        Click on the Electron, Vite and React logos to learn more
+      </p>
+      <div className="flex-center">
+        Place static files into the<code>/public</code> folder <img style={{ width: "5em" }} src="/node.svg" alt="Node logo" />
+      </div>
     </div>
   )
 }
