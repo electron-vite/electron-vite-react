@@ -23,8 +23,8 @@ export default defineConfig({
     react(),
     electron({
       include: [
-        'electron',
-        'preload',
+        'electron/main',
+        'electron/preload',
       ],
       transformOptions: {
         sourcemap: isDevelopment
