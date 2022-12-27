@@ -12,7 +12,7 @@ import { join } from 'node:path'
 // ├─┬ dist
 // │ └── index.html    > Electron-Renderer
 //
-process.env.DIST_ELECTRON = join(__dirname, '..')
+process.env.DIST_ELECTRON = join(__dirname, '../')
 process.env.DIST = join(process.env.DIST_ELECTRON, '../dist')
 process.env.PUBLIC = process.env.VITE_DEV_SERVER_URL
   ? join(process.env.DIST_ELECTRON, '../public')
@@ -38,7 +38,7 @@ let win: BrowserWindow | null = null
 // Here, you can also use other preload
 const preload = join(__dirname, '../preload/index.js')
 const url = process.env.VITE_DEV_SERVER_URL
-const indexHtml = join('dist/', 'index.html')
+const indexHtml = join(process.env.DIST, 'index.html')
 
 async function createWindow() {
   win = new BrowserWindow({
@@ -54,11 +54,10 @@ async function createWindow() {
     },
   })
 
-      // Open devTool if the app is not packaged
-      win.webContents.openDevTools()
-
   if (process.env.VITE_DEV_SERVER_URL) { // electron-vite-vue#298
     win.loadURL(url)
+    // Open devTool if the app is not packaged
+    win.webContents.openDevTools()
   } else {
     win.loadFile(indexHtml)
   }
