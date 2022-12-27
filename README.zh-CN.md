@@ -23,33 +23,28 @@
 npm create electron-vite
 ```
 
-![electron-vite-react.gif](https://github.com/electron-vite/electron-vite-react/blob/main/public/electron-vite-react.gif?raw=true)
+![electron-vite-react.gif](/public/electron-vite-react.gif)
 
 ## 调试
 
-![electron-vite-react-debug.gif](https://github.com/electron-vite/electron-vite-react/blob/main/public/electron-vite-react-debug.gif?raw=true)
+![electron-vite-react-debug.gif](/public/electron-vite-react-debug.gif)
 
 ## 目录
 
-*🚨 默认情况下, `electron` 文件夹下的文件将会被构建到 `dist/electron`*
+*🚨 默认情况下, `electron` 文件夹下的文件将会被构建到 `dist-electron`*
 
 ```tree
-├── electron                  Electron 源码文件夹
-│   ├── main                  Main-process 源码
-│   ├── preload               Preload-scripts 源码
-│   └── resources             应用打包的资源文件夹
-│       ├── icon.icns             应用图标(macOS)
-│       ├── icon.ico              应用图标
-│       ├── installerIcon.ico     安装图标
-│       └── uninstallerIcon.ico   卸载图标
+├── electron                                 Electron 源码文件夹
+│   ├── main                                 Main-process 源码
+│   └── preload                              Preload-scripts 源码
 │
-├── release                   构建后生成程序目录
+├── release                                  构建后生成程序目录
 │   └── {version}
-│       ├── {os}-unpacked     未打包的程序(绿色运行版)
-│       └── Setup.{ext}       应用安装文件
+│       ├── {os}-{os_arch}                   未打包的程序(绿色运行版)
+│       └── {app_name}_{version}.{ext}       应用安装文件
 │
-├── public                    同 Vite 模板的 public
-└── src                       渲染进程源码、React代码
+├── public                                   同 Vite 模板的 public
+└── src                                      渲染进程源码、React代码
 ```
 
 
@@ -60,9 +55,16 @@ npm create electron-vite
 ```diff
 # vite.config.ts
 
-electron({
-- renderer: {}
-})
+export default {
+  plugins: [
+    ...
+-   // Use Node.js API in the Renderer-process
+-   renderer({
+-     nodeIntegration: true,
+-   }),
+    ...
+  ],
+}
 ```
 
 ## FAQ

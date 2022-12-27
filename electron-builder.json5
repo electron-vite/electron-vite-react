@@ -2,40 +2,37 @@
  * @see https://www.electron.build/configuration/configuration
  */
 {
-  appId: "YourAppID",
-  productName: "YourAppName",
-  copyright: "Copyright © 2022 ${author}",
-  asar: true,
-  directories: {
-    output: "release/${version}",
-    buildResources: "electron/resources",
+  "appId": "YourAppID",
+  "asar": true,
+  "icon": "public/favicon.ico",
+  "directories": {
+    "output": "release/${version}"
   },
-  files: [
+  "files": [
     "dist-electron",
     "dist"
   ],
-  win: {
-    target: [
+  "mac": {
+    "artifactName": "${productName}_${version}.${ext}",
+    "target": [
+      "dmg"
+    ]
+  },
+  "win": {
+    "target": [
       {
-        target: "nsis",
-        arch: ["x64"],
-      },
+        "target": "nsis",
+        "arch": [
+          "x64"
+        ]
+      }
     ],
-    artifactName: "${productName}-Windows-${version}-Setup.${ext}",
+    "artifactName": "${productName}_${version}.${ext}"
   },
-  nsis: {
-    oneClick: false,
-    perMachine: false,
-    allowToChangeInstallationDirectory: true,
-    deleteAppDataOnUninstall: false,
-  },
-  mac: {
-    target: ["dmg"],
-    artifactName: "${productName}-Mac-${version}-Installer.${ext}",
-  },
-  linux: {
-    icon: "electron/resources/iconset",
-    target: ["AppImage", "deb"],
-    artifactName: "${productName}-Linux-${version}.${ext}",
-  },
+  "nsis": {
+    "oneClick": false,
+    "perMachine": false,
+    "allowToChangeInstallationDirectory": true,
+    "deleteAppDataOnUninstall": false
+  }
 }

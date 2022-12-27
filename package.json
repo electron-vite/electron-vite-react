@@ -1,37 +1,36 @@
 {
   "name": "electron-vite-react",
-  "productName": "Electron",
-  "private": true,
   "version": "2.1.0",
-  "description": "Vite React Electron boilerplate.",
+  "main": "dist-electron/electron/main/index.js",
+  "description": "Electron Vite React boilerplate.",
   "author": "草鞋没号 <308487730@qq.com>",
   "license": "MIT",
-  "main": "dist-electron/electron/main/index.js",
+  "private": true,
+  "debug": {
+    "env": {
+      "VITE_DEV_SERVER_URL": "http://127.0.0.1:7777/"
+    }
+  },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && electron-builder"
+    "build": "tsc && vite build && electron-builder",
+    "preview": "vite preview"
   },
-  "engines": {
-    "node": "^14.18.0 || >=16.0.0"
-  },
-  "dependencies": {},
   "devDependencies": {
-    "@types/react": "^18.0.25",
+    "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
     "@vitejs/plugin-react": "^3.0.0",
-    "electron": "^21.3.1",
+    "electron": "^22.0.0",
     "electron-builder": "^23.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "sass": "^1.56.1",
-    "typescript": "^4.9.3",
-    "vite": "^4.0.0",
-    "vite-electron-plugin": "^0.5.2",
+    "sass": "^1.57.1",
+    "typescript": "^4.9.4",
+    "vite": "^4.0.3",
+    "vite-electron-plugin": "^0.6.0",
     "vite-plugin-electron-renderer": "^0.11.3"
   },
-  "debug": {
-    "env": {
-      "VITE_DEV_SERVER_URL": "http://127.0.0.1:7777"
-    }
+  "engines": {
+    "node": "^14.18.0 || >=16.0.0"
   }
 }
