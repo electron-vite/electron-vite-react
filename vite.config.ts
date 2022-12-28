@@ -10,7 +10,6 @@ import pkg from './package.json'
 rmSync(path.join(__dirname, 'dist-electron'), { recursive: true, force: true })
 
 const isDevelopment = process.env.NODE_ENV === "development" || !!process.env.VSCODE_DEBUG
-const isProduction = process.env.NODE_ENV === "production"
 
 // https://vitejs.dev/config/
 export default defineConfig({

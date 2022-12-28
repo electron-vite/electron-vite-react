@@ -28,7 +28,7 @@ npm create electron-vite
 
 ## 🐞 Debug
 
-![electron-vite-react-debug.gif](/electron-vite-react-debug.gif)
+![electron-vite-react-debug.gif](/public/electron-vite-react-debug.gif)
 
 ## 📂 Directory structure
 

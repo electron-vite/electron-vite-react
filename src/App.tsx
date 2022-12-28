@@ -1,3 +1,4 @@
+import nodeLogo from "./assets/node.svg"
 import { useState } from 'react'
 import './App.scss'
 
@@ -9,7 +10,9 @@ function App() {
   return (
     <div className="App">
       <div>
-        <img src="./logo.svg" className="logo" alt="Vite logo" />
+        <a href="https://github.com/electron-vite/electron-vite-react" target="_blank">
+          <img src="/electron-vite.svg" className="logo" alt="Electron + Vite logo" />
+        </a>
       </div>
       <h1>Electron + Vite + React</h1>
       <div className="card">
@@ -21,10 +24,10 @@ function App() {
         </p>
       </div>
       <p className="read-the-docs">
-        Click on the Electron, Vite and React logos to learn more
+        Click on the Electron + Vite logo to learn more
       </p>
       <div className="flex-center">
-        Place static files into the<code>/public</code> folder <img style={{ width: "5em" }} src="/node.svg" alt="Node logo" />
+        Place static files into the<code>/public</code> folder <img style={{ width: "5em" }} src={nodeLogo} alt="Node logo" />
       </div>
     </div>
   )
