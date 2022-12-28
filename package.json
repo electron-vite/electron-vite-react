@@ -27,7 +27,7 @@
     "sass": "^1.57.1",
     "typescript": "^4.9.4",
     "vite": "^4.0.3",
-    "vite-electron-plugin": "^0.6.3",
+    "vite-electron-plugin": "^0.6.4",
     "vite-plugin-electron-renderer": "^0.11.3"
   },
   "engines": {
