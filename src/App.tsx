@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import electronLogo from './assets/electron.svg'
 import './App.scss'
 
 console.log('[App.tsx]', `Hello world from Electron ${process.versions.electron}!`)
@@ -11,15 +9,7 @@ function App() {
   return (
     <div className="App">
       <div>
-        <a href="https://www.electronjs.org/" target="_blank">
-          <img src={electronLogo} className="logo" alt="Electron logo" />
-        </a>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <img src="./logo.svg" className="logo" alt="Vite logo" />
       </div>
       <h1>Electron + Vite + React</h1>
       <div className="card">
