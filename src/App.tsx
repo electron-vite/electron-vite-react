@@ -11,7 +11,7 @@ function App() {
     <div className="App">
       <div>
         <a href="https://github.com/electron-vite/electron-vite-react" target="_blank">
-          <img src="/electron-vite.svg" className="logo" alt="Electron + Vite logo" />
+          <img src="./electron-vite.svg" className="logo" alt="Electron + Vite logo" />
         </a>
       </div>
       <h1>Electron + Vite + React</h1>
