@@ -14,9 +14,11 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build && electron-builder",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "e2e": "npx playwright test"
   },
   "devDependencies": {
+    "@playwright/test": "^1.29.1",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",
     "@vitejs/plugin-react": "^3.0.0",
@@ -26,9 +28,9 @@
     "react-dom": "^18.2.0",
     "sass": "^1.57.1",
     "typescript": "^4.9.4",
-    "vite": "^4.0.3",
-    "vite-electron-plugin": "^0.6.4",
-    "vite-plugin-electron-renderer": "^0.11.3"
+    "vite": "^4.0.4",
+    "vite-electron-plugin": "^0.7.3",
+    "vite-plugin-electron-renderer": "^0.11.4"
   },
   "engines": {
     "node": "^14.18.0 || >=16.0.0"
