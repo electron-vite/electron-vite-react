@@ -18,18 +18,18 @@
     "e2e": "npx playwright test"
   },
   "devDependencies": {
-    "@playwright/test": "^1.29.1",
-    "@types/react": "^18.0.26",
+    "@playwright/test": "^1.29.2",
+    "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
-    "@vitejs/plugin-react": "^3.0.0",
-    "electron": "^22.0.0",
+    "@vitejs/plugin-react": "^3.0.1",
+    "electron": "^22.0.3",
     "electron-builder": "^23.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sass": "^1.57.1",
     "typescript": "^4.9.4",
     "vite": "^4.0.4",
-    "vite-electron-plugin": "^0.7.3",
+    "vite-electron-plugin": "^0.7.4",
     "vite-plugin-electron-renderer": "^0.11.4"
   },
   "engines": {
