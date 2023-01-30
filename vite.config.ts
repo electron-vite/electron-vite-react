@@ -32,7 +32,7 @@ export default defineConfig(({ command }) => {
           ...(!!process.env.VSCODE_DEBUG
             ? [
               // Will start Electron via VSCode Debug
-              customStart(() => debounce(() => console.log(/* For `.vscode/.debug.script.mjs` */'[startup] Electron App'))),
+              customStart(debounce(() => console.log(/* For `.vscode/.debug.script.mjs` */'[startup] Electron App'))),
             ]
             : []),
           // Allow use `import.meta.env.VITE_SOME_KEY` in Electron-Main
