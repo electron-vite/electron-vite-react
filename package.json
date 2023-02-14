@@ -15,7 +15,8 @@
     "dev": "vite",
     "build": "tsc && vite build && electron-builder",
     "preview": "vite preview",
-    "e2e": "npx playwright test"
+    "pree2e": "vite build --mode=test",
+    "e2e": "playwright test"
   },
   "devDependencies": {
     "@playwright/test": "^1.29.2",
