@@ -32,7 +32,7 @@ export default defineConfig(({ command }) => {
           ...(!!process.env.VSCODE_DEBUG
             ? [
               // Will start Electron via VSCode Debug
-              customStart(debounce(() => console.log(/* For `.vscode/.debug.script.mjs` */'[startup] Electron App'))),
+              customStart(() => console.log(/* For `.vscode/.debug.script.mjs` */'[startup] Electron App')),
             ]
             : []),
           // Allow use `import.meta.env.VITE_SOME_KEY` in Electron-Main
@@ -54,11 +54,3 @@ export default defineConfig(({ command }) => {
     clearScreen: false,
   }
 })
-
-function debounce<Fn extends (...args: any[]) => void>(fn: Fn, delay = 299): Fn {
-  let t: NodeJS.Timeout
-  return ((...args: Parameters<Fn>) => {
-    clearTimeout(t)
-    t = setTimeout(() => fn(...args), delay)
-  }) as Fn
-}
