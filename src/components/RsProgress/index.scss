@@ -1,0 +1,16 @@
+.rs-progress{
+  display: flex;
+  align-items: center;
+  .rs-progress-pr{
+     border: 1px solid #000000;
+     border-radius: 3px;
+     height: 6px;
+  }
+  .rs-progress-rate{
+     height: 6px;
+     border-radius: 3px;
+  }
+  .rs-progress-num{
+    margin: 0 10px;
+  }
+}

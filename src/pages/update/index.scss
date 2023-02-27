@@ -1,0 +1,13 @@
+.modal-body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  .progress-title{
+    width: 150px;
+  }
+
+  .update-progress{
+    display: flex;
+  }
+}

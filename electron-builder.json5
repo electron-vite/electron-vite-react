@@ -33,5 +33,10 @@
     "perMachine": false,
     "allowToChangeInstallationDirectory": true,
     "deleteAppDataOnUninstall": false
+  },
+  publish:{
+    provider: 'generic', 
+    channel: 'latest',
+    url: 'https://github.com/RSS1101/electron-vite-react/releases/download/v9.9.9/',
   }
 }
