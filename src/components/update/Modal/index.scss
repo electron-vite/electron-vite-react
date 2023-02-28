@@ -1,4 +1,4 @@
-.rs-modal-bg{
+.up-modal-bg{
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -7,30 +7,30 @@
   z-index: 9999;
   background: rgba(0, 0, 0, 0.3);
 }
-.rs-modal {
+.up-modal {
   position: absolute;
   top: 20vh;
   left: 30vw;
   z-index: 10000;
-  .rs-modal-panel {
+  .up-modal-panel {
     border: 1px solid #000000;
     border-radius: 5px;
-    .rs-modal-header {
+    .up-modal-header {
       $titleheight: 38px;
       width: 530px;
       height: $titleheight;
       line-height: $titleheight;
       background-color: rgb(99, 153, 255);
       display: flex;
-      .rs-modal-header-text {
+      .up-modal-header-text {
         text-align: center;
         width: 480px;
       }
     }
-    .rs-modal-body{
+    .up-modal-body{
       background-color: #ffffff;
     }
-    .rs-modal-footer {
+    .up-modal-footer {
       background-color: #ffffff;
       display: flex;
       justify-content: end;

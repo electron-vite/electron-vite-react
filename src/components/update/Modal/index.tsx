@@ -4,12 +4,12 @@ import './index.scss';
 const ModalTemplate = (child: ModalChildType) => {
   return (
     <>
-      <div className="rs-modal-bg" onClick={child.onCanCel} />
-      <div className="rs-modal">
-        <div className="rs-modal-panel">
+      <div className="up-modal-bg" onClick={child.onCanCel} />
+      <div className="up-modal">
+        <div className="up-modal-panel">
           {child.isHeaderShow ? (
-            <div className="rs-modal-header">
-              <div className="rs-modal-header-text">{child.titleText}</div>
+            <div className="up-modal-header">
+              <div className="up-modal-header-text">{child.titleText}</div>
               <svg
                 onClick={child.onCanCel}
                 className="icon"
@@ -28,11 +28,11 @@ const ModalTemplate = (child: ModalChildType) => {
             </div>
           ) : null}
 
-          <div className="rs-modal-body">{child.body}</div>
+          <div className="up-modal-body">{child.body}</div>
           {child.isFooterShow ? (
-            <div className="rs-modal-footer">
-              <button onClick={child.onSubmit}>{child.submitText ?? '确认'}</button>
-              <button onClick={child.onCanCel}>{child.canCelText ?? '取消'}</button>
+            <div className="up-modal-footer">
+              {(child.isSubmitShow ?? true) ?<button onClick={child.onSubmit}>{child.submitText ?? '确认'}</button> : null}
+              {(child.isCanCelShow ?? true) ? <button onClick={child.onCanCel}>{child.canCelText ?? '取消'}</button> : null}
             </div>
           ) : null}
         </div> 
@@ -41,13 +41,15 @@ const ModalTemplate = (child: ModalChildType) => {
   );
 };
 
-const RsModal = (props: ModalPropsType) => {
+const Modal = (props: ModalPropsType) => {
   return  createPortal(
     props.isOpenModal?
       ModalTemplate({
         titleText: props.titleText,
         isHeaderShow: props.isHeaderShow ?? true,
         isFooterShow: props.isFooterShow ?? true,
+        isCanCelShow: props.isCanCelShow ?? true,
+        isSubmitShow: props.isSubmitShow ?? true,
         body: props.children,
         submitText: props.submitText,
         canCelText: props.canCelText,
@@ -57,4 +59,4 @@ const RsModal = (props: ModalPropsType) => {
       document.body,
     );
 };
-export default RsModal;
+export default Modal;

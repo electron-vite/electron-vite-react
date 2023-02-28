@@ -1,27 +1,18 @@
-import RsModal from "@/components/RsModal"
-import RsProgress from "@/components/RsProgress"
-import { ipcRenderer } from "electron"
-import { forwardRef, useEffect, useImperativeHandle, useState } from "react"
-import "./index.scss"
+import Modal from '@/components/update/Modal'
+import Progress from '@/components/update/Progress'
+import { ipcRenderer } from 'electron'
+import { useEffect, useState } from 'react'
+import './index.scss'
+import { checkUpdateType, isUpdateAvailable, ModalBtnText, VersionInfo } from './type'
 
-interface VersionInfo {
-  oldVersion: string,
-  newVersion: string
-}
-
-interface isUpdateAvailable extends VersionInfo {
-  isUpdate: boolean,
-
-}
-interface ModalBtnText {
-  canCelText: string,
-  submitText: string
-}
 
 let onModalSubmit = () => { }
 let onModalCanCel = () => { }
 
-const Update = forwardRef((props: { checkType: boolean }, ref) => {
+const Update = () => {
+  const [checkBtnText, setCheckBtnText] = useState('check update')
+  const [checkType, setCheckType] = useState(false)
+  const [checkLoading, setCheckLoading] = useState(false)
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
   const [percentNum, setPercentNum] = useState<number>(0)
   const [isNeedUpdate, setIsNeedUpdate] = useState<boolean>(false)
@@ -35,23 +26,33 @@ const Update = forwardRef((props: { checkType: boolean }, ref) => {
     submitText: ''
   })
 
-  useImperativeHandle(ref, () => ({
-    openModal: () => setIsOpenModal(true)
-  }));
-
   useEffect(() => {
     onModalCanCel = () => setIsOpenModal(false)
   }, [])
 
-  /**
-  * @description 获取版本信息和是否需要更新 Get version information and whether to update
-  */
+  // Check for updates
+  const checkUpdate = () => {
+    setCheckLoading(true)
+    setCheckBtnText('checking Update ...')
+    ipcRenderer.send('check-update')
+  }
+
+  // Listen to get the check result
+  ipcRenderer.on('check-update-type', (_event, ...args: checkUpdateType[]) => {
+    setCheckLoading(false)
+    setCheckBtnText('check update')
+    setCheckType(args[0].checkUpdate)
+    setIsOpenModal(true)
+  })
+
+  // Get version information and whether to update
   ipcRenderer.on('is-update-available', (_event, ...args: isUpdateAvailable[]) => {
     setVersionInfo({
       oldVersion: args[0].oldVersion,
       newVersion: args[0].newVersion,
     })
     setIsNeedUpdate(args[0].isUpdate)
+    // Update required
     if (args[0].isUpdate) {
       setModalBtnText({
         canCelText: 'cancel',
@@ -61,21 +62,19 @@ const Update = forwardRef((props: { checkType: boolean }, ref) => {
       onModalCanCel = () => setIsOpenModal(false)
     }
   })
-  /**
-   * @description 如果更新失败了抛出更新失败信息 Throw the update failure message if the update fails
-   */
+
+  // Throw the update failure message when the update fails
   ipcRenderer.on('update-error', (_event, ...args: { updateError: boolean }[]) => {
     setUpdateError(args[0].updateError)
+    setCheckType(false)
   })
-  /**
-   * @description 监听更新进度 update progress 
-   */
+
+  // Get update progress 
   ipcRenderer.on('update-progress', (_event, ...args: { progressInfo: number }[]) => {
     setPercentNum(args[0].progressInfo)
   })
-  /**
-   * @description 监听是否更新完成 is update been completed
-   */
+
+  // is update been completed
   ipcRenderer.on('update-downed', (_event, ...args) => {
     setPercentNum(100)
     setModalBtnText({
@@ -90,34 +89,35 @@ const Update = forwardRef((props: { checkType: boolean }, ref) => {
   })
 
   return (
-    <>
-      <RsModal isOpenModal={isOpenModal} onCanCel={onModalCanCel} onSubmit={onModalSubmit}
+    <div>
+      <Modal isOpenModal={isOpenModal} onCanCel={onModalCanCel} onSubmit={onModalSubmit}
         canCelText={modalBtnText.canCelText} submitText={modalBtnText.submitText}
-        isFooterShow={props.checkType && isNeedUpdate}>
-        <div className="modal-body">
+        isFooterShow={checkType && isNeedUpdate}>
+        <div className='up-modal-body'>
           {updateError ?
-            <div className="update-error">Error downloading the latest version, please contact the developer</div> :
-            props.checkType ? (
+            <div className='update-error'>Error downloading the latest version, please contact the developer</div> :
+            checkType ? (
               isNeedUpdate ? (
                 <div>
                   <div>
                     <span> oldVersion : v.{versionInfo.oldVersion} </span>
                     <span> newVersion : v.{versionInfo.newVersion} </span>
                   </div>
-                  <div className="update-progress">
-                    <span className="progress-title"> update progress : </span>
-                    <RsProgress percent={percentNum} ></RsProgress>
+                  <div className='update-progress'>
+                    <span className='progress-title'> update progress : </span>
+                    <Progress percent={percentNum} ></Progress>
                   </div>
                 </div>)
                 : <span>This is last version : v.{versionInfo.oldVersion} !</span>
             ) : <span>Check update is Error,Please check your network!</span>
           }
-
         </div>
-      </RsModal>
-
-    </>
+      </Modal>
+      <button disabled={checkLoading} onClick={checkUpdate}>
+        {checkBtnText}
+      </button>
+    </div>
   )
-})
+}
 
 export default Update
