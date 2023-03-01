@@ -2,7 +2,7 @@ import Modal from '@/components/update/Modal'
 import Progress from '@/components/update/Progress'
 import { ipcRenderer } from 'electron'
 import { useEffect, useState } from 'react'
-import './index.scss'
+import updateScss from './update.module.scss'
 import { checkUpdateType, isUpdateAvailable, ModalBtnText, VersionInfo } from './type'
 
 
@@ -89,11 +89,11 @@ const Update = () => {
   })
 
   return (
-    <div>
+    <>
       <Modal isOpenModal={isOpenModal} onCanCel={onModalCanCel} onSubmit={onModalSubmit}
         canCelText={modalBtnText.canCelText} submitText={modalBtnText.submitText}
         isFooterShow={checkType && isNeedUpdate}>
-        <div className='up-modal-body'>
+        <div className={updateScss.modalslot}>
           {updateError ?
             <div className='update-error'>Error downloading the latest version, please contact the developer</div> :
             checkType ? (
@@ -116,7 +116,7 @@ const Update = () => {
       <button disabled={checkLoading} onClick={checkUpdate}>
         {checkBtnText}
       </button>
-    </div>
+    </>
   )
 }
 
