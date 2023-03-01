@@ -1,0 +1,19 @@
+.modalslot{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+
+  :global {
+    .progress-title {
+      width: 150px;
+    }
+
+    .update-progress {
+      display: flex;
+    }
+  }
+}
+.a{
+  color: red;
+}
