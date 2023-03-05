@@ -1,62 +1,67 @@
-import { createPortal } from 'react-dom';
-import { ModalChildType, ModalPropsType } from './type';
-import modalScss from './modal.module.scss'
-const ModalTemplate = (child: ModalChildType) => {
-  return (
-    <div className={modalScss.modal}>
-      <div className='modal-bg' onClick={child.onCanCel} />
-      <div className='modal-outboard'>
-        <div className='modal-panel'>
-          {child.isHeaderShow ? (
-            <div className='modal-header'>
-              <div className='modal-header-text'>{child.titleText}</div>
-              <svg
-                onClick={child.onCanCel}
-                className='icon'
-                viewBox='0 0 1026 1024'
-                version='1.1'
-                xmlns='http://www.w3.org/2000/svg'
-              >
-                <path
-                  d='M585.781589 510.748226l423.38657-423.38657A51.071963
-            51.071963 0 0 0 937.156692 14.839469L513.770122 438.736759
-            90.383552 14.839469A51.071963 51.071963 0 0 0 17.861365 87.361656L441.758655 
-            510.748226l-423.89729 423.38657A51.071963 51.071963 0 1 0 89.872832 1006.146263l423.89729-423.38657 
-            423.38657 423.38657a51.071963 51.071963 0 0 0 72.011467-72.011467z'
-                />
-              </svg>
-            </div>
-          ) : null}
+import React, { ReactNode } from 'react'
+import { createPortal } from 'react-dom'
+import styles from './modal.module.scss'
 
-          <div className='modal-body'>{child.body}</div>
-          {child.isFooterShow ? (
+const ModalTemplate: React.FC<React.PropsWithChildren<{
+  title?: ReactNode
+  footer?: ReactNode
+  cancelText?: string
+  okText?: string
+  onCancel?: () => void
+  onOk?: () => void
+  width?: number
+}>> = props => {
+  const {
+    title,
+    children,
+    footer,
+    cancelText = 'Cancel',
+    okText = 'OK',
+    onCancel,
+    onOk,
+    width = 530,
+  } = props
+
+  return (
+    <div className={styles.modal}>
+      <div className='modal-mask' />
+      <div className='modal-warp'>
+        <div className='modal-content' style={{ width }}>
+          <div className='modal-header'>
+            <div className='modal-header-text'>{title}</div>
+            <span
+              className='modal-close'
+              onClick={onCancel}
+            >
+              <svg
+                viewBox="0 0 1024 1024"
+                version="1.1" xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M557.312 513.248l265.28-263.904c12.544-12.48 12.608-32.704 0.128-45.248-12.512-12.576-32.704-12.608-45.248-0.128l-265.344 263.936-263.04-263.84C236.64 191.584 216.384 191.52 203.84 204 191.328 216.48 191.296 236.736 203.776 249.28l262.976 263.776L201.6 776.8c-12.544 12.48-12.608 32.704-0.128 45.248 6.24 6.272 14.464 9.44 22.688 9.44 8.16 0 16.32-3.104 22.56-9.312l265.216-263.808 265.44 266.24c6.24 6.272 14.432 9.408 22.656 9.408 8.192 0 16.352-3.136 22.592-9.344 12.512-12.48 12.544-32.704 0.064-45.248L557.312 513.248z" p-id="2764" fill="currentColor">
+                </path>
+              </svg>
+            </span>
+          </div>
+          <div className='modal-body'>{children}</div>
+          {typeof footer !== 'undefined' ? (
             <div className='modal-footer'>
-              {(child.isSubmitShow ?? true) ?<button onClick={child.onSubmit}>{child.submitText ?? '确认'}</button> : null}
-              {(child.isCanCelShow ?? true) ? <button onClick={child.onCanCel}>{child.canCelText ?? '取消'}</button> : null}
+              <button onClick={onCancel}>{cancelText}</button>
+              <button onClick={onOk}>{okText}</button>
             </div>
-          ) : null}
-        </div> 
+          ) : footer}
+        </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-const Modal = (props: ModalPropsType) => {
-  return  createPortal(
-    props.isOpenModal?
-      ModalTemplate({
-        titleText: props.titleText,
-        isHeaderShow: props.isHeaderShow ?? true,
-        isFooterShow: props.isFooterShow ?? true,
-        isCanCelShow: props.isCanCelShow ?? true,
-        isSubmitShow: props.isSubmitShow ?? true,
-        body: props.children,
-        submitText: props.submitText,
-        canCelText: props.canCelText,
-        onCanCel: props.onCanCel,
-        onSubmit: props.onSubmit,
-      }): <div></div>,
-      document.body,
-    );
-};
-export default Modal;
+const Modal = (props: Parameters<typeof ModalTemplate>[0] & { open: boolean }) => {
+  const { open, ...omit } = props
+
+  return createPortal(
+    open ? ModalTemplate(omit) : null,
+    document.body,
+  )
+}
+
+export default Modal

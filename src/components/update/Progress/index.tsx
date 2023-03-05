@@ -1,22 +1,22 @@
-import { RsProgressType } from './type'
-import progressScss from './progress.module.scss'
+import React from 'react'
+import styles from './progress.module.scss'
 
-const Progress = (props: RsProgressType) => {
+const Progress: React.FC<React.PropsWithChildren<{
+  percent?: number
+}>> = props => {
+  const { percent = 0 } = props
 
   return (
-    <div className={progressScss.progress}>
-      <div className='progress-pr'  style={{ width: props.rateWidth ?? 250 }}>
-      <div
-        className='progress-rate'
-        style={{
-          width: (props.percent ?? 0) * ((props.rateWidth ?? 250) / 100),
-          backgroundColor: props.rateColor ?? 'blue',
-        }}
-      />
+    <div className={styles.progress}>
+      <div className='progress-pr'>
+        <div
+          className='progress-rate'
+          style={{ width: `${percent / 100}%` }}
+        />
+      </div>
+      <span className='progress-num'>{percent}%</span>
     </div>
-      <span className='progress-num'>{props.percent > 100 ? 100 :(props.percent.toString().substring(0,4) ?? 0) }%</span>
-    </div>
-  );
-};
+  )
+}
 
-export default Progress;
+export default Progress

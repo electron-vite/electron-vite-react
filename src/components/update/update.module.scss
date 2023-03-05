@@ -1,19 +1,20 @@
-.modalslot{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100px;
+.modalslot {
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
 
   :global {
-    .progress-title {
-      width: 150px;
-    }
-
     .update-progress {
       display: flex;
     }
+
+    .progress-title {
+      margin-right: 10px;
+    }
+
+    .progress-bar {
+      width: 0;
+      flex-grow: 1;
+    }
   }
-}
-.a{
-  color: red;
 }

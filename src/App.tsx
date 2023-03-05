@@ -1,10 +1,9 @@
 import nodeLogo from './assets/node.svg'
 import { useState } from 'react'
-import './App.scss'
 import Update from '@/components/update'
+import './App.scss'
 
 console.log('[App.tsx]', `Hello world from Electron ${process.versions.electron}!`)
-
 
 function App() {
   const [count, setCount] = useState(0)
@@ -30,6 +29,7 @@ function App() {
       <div className='flex-center'>
         Place static files into the<code>/public</code> folder <img style={{ width: '5em' }} src={nodeLogo} alt='Node logo' />
       </div>
+
       <Update />
     </div>
   )
