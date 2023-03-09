@@ -28,14 +28,12 @@ const Update = () => {
      * @type {import('electron-updater').UpdateCheckResult | null | { message: string, error: Error }}
      */
     const result = await ipcRenderer.invoke('check-update')
+    setProgressInfo({ percent: 0 })
     setChecking(false)
-
+    setModalOpen(true)
     if (result?.error) {
-      console.error(result.error)
       setUpdateAvailable(false)
-    } else {
-      setUpdateAvailable(true)
-      setModalOpen(true)
+      setUpdateError(result?.error)
     }
   }
 
@@ -50,20 +48,27 @@ const Update = () => {
         onCancel: () => setModalOpen(false),
         onOk: () => ipcRenderer.invoke('start-download'),
       }))
+      setUpdateAvailable(true)
+    } else {
+      setUpdateAvailable(false)
+      setUpdateError(undefined)
     }
   }, [])
 
   const onUpdateError = useCallback((_event: Electron.IpcRendererEvent, arg1: ErrorType) => {
-    console.error(arg1.error)
+    console.error('arg1.error',arg1.error)
+    setUpdateAvailable(false)
     setUpdateError(arg1)
   }, [])
 
   const onDownloadProgress = useCallback((_event: Electron.IpcRendererEvent, arg1: ProgressInfo) => {
     console.log(arg1)
+    setUpdateAvailable(true)
     setProgressInfo(arg1)
   }, [])
 
   const onUpdateDownloaded = useCallback((_event: Electron.IpcRendererEvent, ...args: any[]) => {
+    setProgressInfo({ percent: 100 })
     setModalBtn(state => ({
       ...state,
       cancelText: 'Later',
@@ -87,6 +92,8 @@ const Update = () => {
     }
   }, [])
 
+  const isUpdate = updateAvailable && versionInfo
+
   return (
     <>
       <Modal
@@ -95,34 +102,35 @@ const Update = () => {
         okText={modalBtn?.okText}
         onCancel={modalBtn?.onCancel}
         onOk={modalBtn?.onOk}
-        footer={!versionInfo?.update ? /* hide footer */null : undefined}
+        footer={isUpdate ? /* hide footer */null : undefined}
       >
         <div className={styles.modalslot}>
-          {updateError ? (
-            <div className='update-error'>
-              <p>Error downloading the latest version.</p>
-              <p>{updateError.message}</p>
-            </div>
-          ) : null}
-          {!updateAvailable ? (
-            <div className='update-not-available'>
-              <span>Check update is Error, Please check your Network!</span>
-            </div>
-          ) : null}
-          {versionInfo
-            ? (
-              <div>
-                <div>The last version is: v{versionInfo.newVersion}</div>
-                <div>v{versionInfo.version} -&gt; v{versionInfo.newVersion}</div>
-                <div className='update-progress'>
-                  <div className='progress-title'>Update progress:</div>
-                  <div className='progress-bar'>
-                    <Progress percent={progressInfo?.percent} ></Progress>
+          {
+            isUpdate
+              ? (
+                <div>
+                  <div>The last version is: v{versionInfo.newVersion}</div>
+                  <div>v{versionInfo.version} -&gt; v{versionInfo.newVersion}</div>
+                  <div className='update-progress'>
+                    <div className='progress-title'>Update progress:</div>
+                    <div className='progress-bar'>
+                      <Progress percent={progressInfo?.percent} ></Progress>
+                    </div>
                   </div>
                 </div>
-              </div>
-            )
-            : <span>Checking...</span>}
+              )
+              : updateError
+                ? (
+                  <div className='update-error'>
+                    <p>Error downloading the latest version.</p>
+                    <p>{updateError.message}</p>
+                  </div>
+                ) : (
+                  <div>
+                    <div>The last version is: v{versionInfo?.version}</div>
+                  </div>
+                )
+          }
         </div>
       </Modal>
       <button disabled={checking} onClick={checkUpdate}>

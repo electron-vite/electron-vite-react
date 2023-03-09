@@ -11,10 +11,10 @@ const Progress: React.FC<React.PropsWithChildren<{
       <div className='progress-pr'>
         <div
           className='progress-rate'
-          style={{ width: `${percent / 100}%` }}
+          style={{ width: `${percent}%` }}
         />
       </div>
-      <span className='progress-num'>{percent}%</span>
+      <span className='progress-num'>{(percent ?? 0).toString().substring(0,4)}%</span>
     </div>
   )
 }
