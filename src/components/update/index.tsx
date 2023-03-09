@@ -10,7 +10,7 @@ const Update = () => {
   const [updateAvailable, setUpdateAvailable] = useState(false)
   const [versionInfo, setVersionInfo] = useState<VersionInfo>()
   const [updateError, setUpdateError] = useState<ErrorType>()
-  const [progressInfo, setProgressInfo] = useState<ProgressInfo>()
+  const [progressInfo, setProgressInfo] = useState<Partial<ProgressInfo>>()
   const [modalOpen, setModalOpen] = useState<boolean>(false)
   const [modalBtn, setModalBtn] = useState<{
     cancelText?: string
@@ -45,7 +45,6 @@ const Update = () => {
         ...state,
         cancelText: 'Cancel',
         okText: 'Update',
-        onCancel: () => setModalOpen(false),
         onOk: () => ipcRenderer.invoke('start-download'),
       }))
       setUpdateAvailable(true)
@@ -56,13 +55,11 @@ const Update = () => {
   }, [])
 
   const onUpdateError = useCallback((_event: Electron.IpcRendererEvent, arg1: ErrorType) => {
-    console.error('arg1.error',arg1.error)
     setUpdateAvailable(false)
     setUpdateError(arg1)
   }, [])
 
   const onDownloadProgress = useCallback((_event: Electron.IpcRendererEvent, arg1: ProgressInfo) => {
-    console.log(arg1)
     setUpdateAvailable(true)
     setProgressInfo(arg1)
   }, [])
@@ -105,8 +102,13 @@ const Update = () => {
         footer={isUpdate ? /* hide footer */null : undefined}
       >
         <div className={styles.modalslot}>
-          {
-            isUpdate
+          {updateError
+            ? (
+              <div className='update-error'>
+                <p>Error downloading the latest version.</p>
+                <p>{updateError.message}</p>
+              </div>
+            ) : isUpdate
               ? (
                 <div>
                   <div>The last version is: v{versionInfo.newVersion}</div>
@@ -119,18 +121,7 @@ const Update = () => {
                   </div>
                 </div>
               )
-              : updateError
-                ? (
-                  <div className='update-error'>
-                    <p>Error downloading the latest version.</p>
-                    <p>{updateError.message}</p>
-                  </div>
-                ) : (
-                  <div>
-                    <div>The last version is: v{versionInfo?.version}</div>
-                  </div>
-                )
-          }
+              : <div>Checking...</div>}
         </div>
       </Modal>
       <button disabled={checking} onClick={checkUpdate}>

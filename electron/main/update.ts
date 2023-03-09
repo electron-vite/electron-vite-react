@@ -9,9 +9,7 @@ export function update(win: Electron.BrowserWindow) {
 
   // When set to false, the update download will be triggered through the API
   autoUpdater.autoDownload = false
-
   autoUpdater.disableWebInstaller = false
-
   autoUpdater.allowDowngrade = false
 
   // start check
@@ -27,6 +25,11 @@ export function update(win: Electron.BrowserWindow) {
 
   // Checking for updates
   ipcMain.handle('check-update', async () => {
+    if (!app.isPackaged) {
+      const error = new Error('The update feature is only available after the package.')
+      return { message: error.message, error }
+    }
+
     try {
       return await autoUpdater.checkForUpdatesAndNotify()
     } catch (error) {
@@ -52,6 +55,7 @@ export function update(win: Electron.BrowserWindow) {
       }
     )
   })
+
   // Install now
   ipcMain.handle('quit-and-install', () => {
     autoUpdater.quitAndInstall(false, true)
