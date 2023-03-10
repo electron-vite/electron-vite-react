@@ -16,5 +16,17 @@
       width: 0;
       flex-grow: 1;
     }
+
+    .new-version {
+      .new-version-target,.update-progress {
+        margin-left: 40px;
+      }
+    }
+
+    .last-version {
+      height: 80px;
+      line-height: 80px;
+      text-align: center;
+    }
   }
 }
