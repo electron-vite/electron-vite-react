@@ -39,6 +39,7 @@ const Update = () => {
 
   const onUpdateCanAvailable = useCallback((_event: Electron.IpcRendererEvent, arg1: VersionInfo) => {
     setVersionInfo(arg1)
+    setUpdateError(undefined)
     // Can be update
     if (arg1.update) {
       setModalBtn(state => ({
@@ -50,7 +51,6 @@ const Update = () => {
       setUpdateAvailable(true)
     } else {
       setUpdateAvailable(false)
-      setUpdateError(undefined)
     }
   }, [])
 
@@ -89,8 +89,6 @@ const Update = () => {
     }
   }, [])
 
-  const isUpdate = updateAvailable && versionInfo
-
   return (
     <>
       <Modal
@@ -99,7 +97,7 @@ const Update = () => {
         okText={modalBtn?.okText}
         onCancel={modalBtn?.onCancel}
         onOk={modalBtn?.onOk}
-        footer={isUpdate ? /* hide footer */null : undefined}
+        footer={updateAvailable ? /* hide footer */null : undefined}
       >
         <div className={styles.modalslot}>
           {updateError
@@ -108,11 +106,11 @@ const Update = () => {
                 <p>Error downloading the latest version.</p>
                 <p>{updateError.message}</p>
               </div>
-            ) : isUpdate
+            ) : updateAvailable
               ? (
-                <div>
-                  <div>The last version is: v{versionInfo.newVersion}</div>
-                  <div>v{versionInfo.version} -&gt; v{versionInfo.newVersion}</div>
+                <div className='new-version'>
+                  <div>The last version is: v{versionInfo?.newVersion}</div>
+                  <div className='new-version-target'>v{versionInfo?.version} -&gt; v{versionInfo?.newVersion}</div>
                   <div className='update-progress'>
                     <div className='progress-title'>Update progress:</div>
                     <div className='progress-bar'>
@@ -121,7 +119,9 @@ const Update = () => {
                   </div>
                 </div>
               )
-              : <div>Checking...</div>}
+              : (
+                <div className='last-version'>Now is the last version: v{versionInfo?.version}.</div>
+              )}
         </div>
       </Modal>
       <button disabled={checking} onClick={checkUpdate}>
