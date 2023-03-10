@@ -60,7 +60,6 @@ const Update = () => {
   }, [])
 
   const onDownloadProgress = useCallback((_event: Electron.IpcRendererEvent, arg1: ProgressInfo) => {
-    setUpdateAvailable(true)
     setProgressInfo(arg1)
   }, [])
 
@@ -108,7 +107,7 @@ const Update = () => {
               </div>
             ) : updateAvailable
               ? (
-                <div className='new-version'>
+                <div className='can-available'>
                   <div>The last version is: v{versionInfo?.newVersion}</div>
                   <div className='new-version-target'>v{versionInfo?.version} -&gt; v{versionInfo?.newVersion}</div>
                   <div className='update-progress'>
@@ -120,7 +119,7 @@ const Update = () => {
                 </div>
               )
               : (
-                <div className='last-version'>Now is the last version: v{versionInfo?.version}.</div>
+                <div className='can-not-available'>{JSON.stringify(versionInfo ?? {}, null, 2)}</div>
               )}
         </div>
       </Modal>

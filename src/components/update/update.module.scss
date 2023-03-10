@@ -17,15 +17,14 @@
       flex-grow: 1;
     }
 
-    .new-version {
+    .can-available {
       .new-version-target,.update-progress {
         margin-left: 40px;
       }
     }
 
-    .last-version {
-      height: 80px;
-      line-height: 80px;
+    .can-not-available {
+      padding: 20px;
       text-align: center;
     }
   }
