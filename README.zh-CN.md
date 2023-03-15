@@ -67,7 +67,12 @@ export default {
 }
 ```
 
-## FAQ
+## 🔧 额外的功能
+
+1. Electron 自动更新 👉 [阅读文档](src/components/update/README.zh-CN.md)
+2. Playwright 测试
+
+## ❔ FAQ
 
 - [dependencies vs devDependencies](https://github.com/electron-vite/vite-plugin-electron-renderer#dependencies-vs-devdependencies)
 - [C/C++ addons, Node.js modules - Pre-Bundling](https://github.com/electron-vite/vite-plugin-electron-renderer#dependency-pre-bundling)
