@@ -70,10 +70,10 @@ export default {
 }
 ```
 
-## 🔧Additional features
+## 🔧 Additional features
 
-1. electron-auto-update([read it docs](src/components/update/README.md));
-1. playwright;
+1. electron-updater 👉 [see docs](src/components/update/README.md)
+1. playwright
 
 ## ❔ FAQ
 

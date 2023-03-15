@@ -1,8 +1,8 @@
-# electron-auto-update
+# electron-updater
 
 English | [简体中文](README.zh-CN.md)
 
-Use `electron-updater` to realize the update detection, download and installation of the electric program.
+> Use `electron-updater` to realize the update detection, download and installation of the electric program.
 
 ```sh
 npm i electron-updater
@@ -14,12 +14,14 @@ npm i electron-updater
 
    Add a `publish` field to `electron-builder.json5` for configuring the update address and which strategy to use as the update service.
 
-   ```json
-     publish:{ 
-       provider: 'generic', 
-       channel: 'latest',
-       url: 'https://github.com/xxxx/',
-     }
+   ``` json5
+   {
+      "publish": {
+         "provider": "generic",
+         "channel": "latest",
+         "url": "https://foo.com/"
+      }
+   }
    ```
 
    For more information, please refer to : [electron-builder.json5...](https://github.com/electron-vite/electron-vite-react/blob/2f2880a9f19de50ff14a0785b32a4d5427477e55/electron-builder.json5#L38)

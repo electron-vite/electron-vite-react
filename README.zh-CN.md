@@ -67,10 +67,10 @@ export default {
 }
 ```
 
-## 🔧额外的功能
+## 🔧 额外的功能
 
-1. Electron自动更新([阅读文档](src/components/update/README.zh-CN.md));
-2. Playwright测试;
+1. Electron 自动更新 👉 [阅读文档](src/components/update/README.zh-CN.md)
+2. Playwright 测试
 
 ## ❔ FAQ
 
