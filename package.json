@@ -22,20 +22,20 @@
     "electron-updater": "^5.3.0"
   },
   "devDependencies": {
-    "@playwright/test": "^1.31.0",
+    "@playwright/test": "^1.32.0",
     "@types/react": "^18.0.28",
-    "@types/react-dom": "^18.0.11",
+    "@types/react-dom":"^18.0.11",
     "@vitejs/plugin-react": "^3.1.0",
-    "electron": "^23.1.1",
+    "electron": "^23.2.0",
     "electron-builder": "^23.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "sass": "^1.58.3",
-    "typescript": "^4.9.5",
-    "vite": "^4.1.4",
+    "sass": "^1.60.0",
+    "typescript": "^5.0.2",
+    "vite": "^4.2.1",
     "vite-electron-plugin": "^0.8.2",
     "vite-plugin-electron": "^0.11.1",
-    "vite-plugin-electron-renderer": "^0.12.1"
+    "vite-plugin-electron-renderer": "^0.13.6"
   },
   "engines": {
     "node": "^14.18.0 || >=16.0.0"
