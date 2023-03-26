@@ -35,7 +35,7 @@
     "vite": "^4.2.1",
     "vite-electron-plugin": "^0.8.2",
     "vite-plugin-electron": "^0.11.1",
-    "vite-plugin-electron-renderer": "^0.13.6"
+    "vite-plugin-electron-renderer": "^0.13.9"
   },
   "engines": {
     "node": "^14.18.0 || >=16.0.0"
