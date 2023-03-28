@@ -24,7 +24,7 @@
   "devDependencies": {
     "@playwright/test": "^1.32.0",
     "@types/react": "^18.0.28",
-    "@types/react-dom":"^18.0.11",
+    "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react": "^3.1.0",
     "electron": "^23.2.0",
     "electron-builder": "^23.6.0",
@@ -32,10 +32,10 @@
     "react-dom": "^18.2.0",
     "sass": "^1.60.0",
     "typescript": "^5.0.2",
-    "vite": "^4.2.1",
+    "vite": "^4.1.4",
     "vite-electron-plugin": "^0.8.2",
     "vite-plugin-electron": "^0.11.1",
-    "vite-plugin-electron-renderer": "^0.13.11"
+    "vite-plugin-electron-renderer": "^0.13.12"
   },
   "engines": {
     "node": "^14.18.0 || >=16.0.0"
