@@ -5,7 +5,14 @@
   text-align: center;
 }
 
+.logo-box {
+  position: relative;
+  height: 9em;
+}
+
 .logo {
+  position: absolute;
+  left: calc(50% - 4.5em);
   height: 6em;
   padding: 1.5em;
   will-change: filter;
@@ -25,7 +32,7 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .logo {
+  .logo.electron {
     animation: logo-spin infinite 20s linear;
   }
 }

@@ -9,9 +9,10 @@ function App() {
   const [count, setCount] = useState(0)
   return (
     <div className='App'>
-      <div>
+      <div className='logo-box'>
         <a href='https://github.com/electron-vite/electron-vite-react' target='_blank'>
-          <img src='./electron-vite.svg' className='logo' alt='Electron + Vite logo' />
+          <img src='./vite.svg' className='logo vite' alt='Electron + Vite logo' />
+          <img src='./electron.svg' className='logo electron' alt='Electron + Vite logo' />
         </a>
       </div>
       <h1>Electron + Vite + React</h1>
