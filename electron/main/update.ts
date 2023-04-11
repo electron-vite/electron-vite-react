@@ -63,7 +63,7 @@ export function update(win: Electron.BrowserWindow) {
 }
 
 function startDownload(
-  callback: (error: Error | null, info: ProgressInfo) => void,
+  callback: (error: Error | null, info: ProgressInfo | null) => void,
   complete: (event: UpdateDownloadedEvent) => void,
 ) {
   autoUpdater.on('download-progress', info => callback(null, info))
