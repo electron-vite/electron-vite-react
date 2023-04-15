@@ -2,8 +2,11 @@ import { app, ipcMain } from 'electron'
 import {
   type ProgressInfo,
   type UpdateDownloadedEvent,
+  CancellationToken,
   autoUpdater
 } from 'electron-updater'
+
+const cancellationToken = new CancellationToken()
 
 export function update(win: Electron.BrowserWindow) {
 
@@ -56,6 +59,11 @@ export function update(win: Electron.BrowserWindow) {
     )
   })
 
+  // Cancel downloading
+  ipcMain.handle('cancel-download', () => {
+    cancellationToken.cancel()
+  })
+
   // Install now
   ipcMain.handle('quit-and-install', () => {
     autoUpdater.quitAndInstall(false, true)
@@ -69,5 +77,5 @@ function startDownload(
   autoUpdater.on('download-progress', info => callback(null, info))
   autoUpdater.on('error', error => callback(error, null))
   autoUpdater.on('update-downloaded', complete)
-  autoUpdater.downloadUpdate()
+  autoUpdater.downloadUpdate(cancellationToken)
 }
