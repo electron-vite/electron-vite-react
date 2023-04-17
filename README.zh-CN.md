@@ -47,7 +47,7 @@ npm create electron-vite
 └── src                                      渲染进程源码、React代码
 ```
 
-
+<!--
 ## 🚨 这需要留神
 
 默认情况下，该模板在渲染进程中集成了 Node.js，如果你不需要它，你只需要删除下面的选项. [因为它会修改 Vite 默认的配置](https://github.com/electron-vite/vite-plugin-electron-renderer#config-presets-opinionated).
@@ -66,6 +66,7 @@ export default {
   ],
 }
 ```
+-->
 
 ## 🔧 额外的功能
 
@@ -74,8 +75,8 @@ export default {
 
 ## ❔ FAQ
 
-- [dependencies vs devDependencies](https://github.com/electron-vite/vite-plugin-electron-renderer#dependencies-vs-devdependencies)
 - [C/C++ addons, Node.js modules - Pre-Bundling](https://github.com/electron-vite/vite-plugin-electron-renderer#dependency-pre-bundling)
+- [dependencies vs devDependencies](https://github.com/electron-vite/vite-plugin-electron-renderer#dependencies-vs-devdependencies)
 
 ## 🍵 🍰 🍣 🍟
 
