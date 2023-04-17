@@ -33,8 +33,8 @@
     "sass": "^1.60.0",
     "typescript": "^5.0.2",
     "vite": "^4.1.4",
-    "vite-plugin-electron": "^0.11.1",
-    "vite-plugin-electron-renderer": "^0.13.14"
+    "vite-plugin-electron": "^0.11.2",
+    "vite-plugin-electron-renderer": "^0.14.1"
   },
   "engines": {
     "node": "^14.18.0 || >=16.0.0"
