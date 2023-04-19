@@ -6,7 +6,7 @@ import {
   autoUpdater
 } from 'electron-updater'
 
-const cancellationToken = new CancellationToken()
+let cancellationToken = new CancellationToken()
 
 export function update(win: Electron.BrowserWindow) {
 
@@ -62,6 +62,7 @@ export function update(win: Electron.BrowserWindow) {
   // Cancel downloading
   ipcMain.handle('cancel-download', () => {
     cancellationToken.cancel()
+    cancellationToken = new CancellationToken();
   })
 
   // Install now
