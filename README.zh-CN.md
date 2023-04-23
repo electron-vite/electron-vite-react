@@ -23,11 +23,11 @@
 npm create electron-vite
 ```
 
-![electron-vite-react.gif](/public/electron-vite-react.gif)
+![electron-vite-react.gif](/electron-vite-react.gif)
 
 ## 调试
 
-![electron-vite-react-debug.gif](/public/electron-vite-react-debug.gif)
+![electron-vite-react-debug.gif](/electron-vite-react-debug.gif)
 
 ## 目录
 

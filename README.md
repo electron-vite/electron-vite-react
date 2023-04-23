@@ -24,11 +24,11 @@ English | [简体中文](README.zh-CN.md)
 npm create electron-vite
 ```
 
-![electron-vite-react.gif](/public/electron-vite-react.gif)
+![electron-vite-react.gif](/electron-vite-react.gif)
 
 ## 🐞 Debug
 
-![electron-vite-react-debug.gif](/public/electron-vite-react-debug.gif)
+![electron-vite-react-debug.gif](/electron-vite-react-debug.gif)
 
 ## 📂 Directory structure
 
