@@ -18,13 +18,21 @@ English | [简体中文](README.zh-CN.md)
 🐞 Debugger configuration included  
 🖥 Easy to implement multiple windows  
 
-## 🛫 Quick start
+## 🛫 Quick Setup
 
 ```sh
-npm create electron-vite
-```
+# clone the project
+git clone https://github.com/electron-vite/electron-vite-react.git
 
-![electron-vite-react.gif](/electron-vite-react.gif)
+# enter the project directory
+cd electron-vite-react
+
+# install dependency
+npm install
+
+# develop
+npm run dev
+```
 
 ## 🐞 Debug
 

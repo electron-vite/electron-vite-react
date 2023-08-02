@@ -20,10 +20,18 @@
 ## 快速开始
 
 ```sh
-npm create electron-vite
-```
+# clone the project
+git clone https://github.com/electron-vite/electron-vite-react.git
 
-![electron-vite-react.gif](/electron-vite-react.gif)
+# enter the project directory
+cd electron-vite-react
+
+# install dependency
+npm install
+
+# develop
+npm run dev
+```
 
 ## 调试
 
