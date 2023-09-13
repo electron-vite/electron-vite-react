@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 import { createPortal } from 'react-dom'
-import styles from './modal.module.scss'
+import './modal.css'
 
 const ModalTemplate: React.FC<React.PropsWithChildren<{
   title?: ReactNode
@@ -23,14 +23,14 @@ const ModalTemplate: React.FC<React.PropsWithChildren<{
   } = props
 
   return (
-    <div className={styles.modal}>
-      <div className='modal-mask' />
-      <div className='modal-warp'>
-        <div className='modal-content' style={{ width }}>
-          <div className='modal-header'>
-            <div className='modal-header-text'>{title}</div>
+    <div className='update-modal'>
+      <div className='update-modal__mask' />
+      <div className='update-modal__warp'>
+        <div className='update-modal__content' style={{ width }}>
+          <div className='content__header'>
+            <div className='content__header-text'>{title}</div>
             <span
-              className='modal-close'
+              className='update-modal--close'
               onClick={onCancel}
             >
               <svg
@@ -42,9 +42,9 @@ const ModalTemplate: React.FC<React.PropsWithChildren<{
               </svg>
             </span>
           </div>
-          <div className='modal-body'>{children}</div>
+          <div className='content__body'>{children}</div>
           {typeof footer !== 'undefined' ? (
-            <div className='modal-footer'>
+            <div className='content__footer'>
               <button onClick={onCancel}>{cancelText}</button>
               <button onClick={onOk}>{okText}</button>
             </div>
