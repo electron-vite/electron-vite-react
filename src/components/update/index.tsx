@@ -3,7 +3,7 @@ import type { ProgressInfo } from 'electron-updater'
 import { useCallback, useEffect, useState } from 'react'
 import Modal from '@/components/update/Modal'
 import Progress from '@/components/update/Progress'
-import styles from './update.module.scss'
+import './update.css'
 
 const Update = () => {
   const [checking, setChecking] = useState(false)
@@ -98,21 +98,21 @@ const Update = () => {
         onOk={modalBtn?.onOk}
         footer={updateAvailable ? /* hide footer */null : undefined}
       >
-        <div className={styles.modalslot}>
+        <div className='modal-slot'>
           {updateError
             ? (
-              <div className='update-error'>
+              <div>
                 <p>Error downloading the latest version.</p>
                 <p>{updateError.message}</p>
               </div>
             ) : updateAvailable
               ? (
-                <div className='can-available'>
+                <div>
                   <div>The last version is: v{versionInfo?.newVersion}</div>
-                  <div className='new-version-target'>v{versionInfo?.version} -&gt; v{versionInfo?.newVersion}</div>
-                  <div className='update-progress'>
-                    <div className='progress-title'>Update progress:</div>
-                    <div className='progress-bar'>
+                  <div className='new-version__target'>v{versionInfo?.version} -&gt; v{versionInfo?.newVersion}</div>
+                  <div className='update__progress'>
+                    <div className='progress__title'>Update progress:</div>
+                    <div className='progress__bar'>
                       <Progress percent={progressInfo?.percent} ></Progress>
                     </div>
                   </div>
