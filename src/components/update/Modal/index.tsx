@@ -23,7 +23,7 @@ const ModalTemplate: React.FC<React.PropsWithChildren<{
   } = props
 
   return (
-    <div className='update-modals'>
+    <div className='update-modal'>
       <div className='update-modal__mask' />
       <div className='update-modal__warp'>
         <div className='update-modal__content' style={{ width }}>
