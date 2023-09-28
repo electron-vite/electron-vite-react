@@ -12,9 +12,8 @@
     }
   },
   "scripts": {
-    "dev": "vite",
-    "watch-tailwind": "tailwindcss --watch",
-    "build": "tsc && vite build && electron-builder && tailwindcss",
+    "dev": "tailwindcss --watch && vite",
+    "build": "tailwindcss && tsc && vite build && electron-builder",
     "preview": "vite preview",
     "pree2e": "vite build --mode=test",
     "e2e": "playwright test"
