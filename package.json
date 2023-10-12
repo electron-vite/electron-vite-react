@@ -12,7 +12,7 @@
     }
   },
   "scripts": {
-    "dev": "tailwindcss --watch && vite",
+    "dev": "concurrently \"tailwindcss --watch\" \"vite\"",
     "build": "tailwindcss && tsc && vite build && electron-builder",
     "preview": "vite preview",
     "pree2e": "vite build --mode=test",
@@ -27,6 +27,7 @@
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^4.0.4",
     "autoprefixer": "^10.4.16",
+    "concurrently": "^8.2.1",
     "electron": "^26.0.0",
     "electron-builder": "^24.6.3",
     "react": "^18.2.0",
