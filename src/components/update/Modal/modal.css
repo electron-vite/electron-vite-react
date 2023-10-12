@@ -60,7 +60,7 @@
       padding: 10px;
       background-color: #fff;
       display: flex;
-      justify-content: end;
+      justify-content: flex-end;
 
       button {
         padding: 7px 11px;
