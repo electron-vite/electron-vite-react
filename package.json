@@ -1,7 +1,7 @@
 {
   "name": "electron-vite-react",
   "version": "2.2.0",
-  "main": "dist-electron/main/index.js",
+  "main": "dist-electron/main/index.mjs",
   "description": "Electron Vite React boilerplate.",
   "author": "草鞋没号 <308487730@qq.com>",
   "license": "MIT",
@@ -19,23 +19,23 @@
     "e2e": "playwright test"
   },
   "dependencies": {
-    "electron-updater": "^6.1.1"
+    "electron-updater": "^6.1.7"
   },
   "devDependencies": {
-    "@playwright/test": "^1.37.1",
-    "@types/react": "^18.2.20",
-    "@types/react-dom": "^18.2.7",
-    "@vitejs/plugin-react": "^4.0.4",
+    "@playwright/test": "^1.40.1",
+    "@types/react": "^18.2.46",
+    "@types/react-dom": "^18.2.18",
+    "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.16",
-    "electron": "^26.0.0",
-    "electron-builder": "^24.6.3",
-    "postcss": "^8.4.31",
+    "electron": "^28.1.0",
+    "electron-builder": "^24.9.1",
+    "postcss": "^8.4.32",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "tailwindcss": "^3.3.3",
-    "typescript": "^5.1.6",
-    "vite": "^4.4.9",
-    "vite-plugin-electron": "^0.15.5",
+    "tailwindcss": "^3.4.0",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.10",
+    "vite-plugin-electron": "0.28.0-beta.1",
     "vite-plugin-electron-renderer": "^0.14.5"
   },
   "engines": {
