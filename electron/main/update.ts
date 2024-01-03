@@ -1,9 +1,11 @@
 import { app, ipcMain } from 'electron'
-import {
-  type ProgressInfo,
-  type UpdateDownloadedEvent,
-  autoUpdater
+import { createRequire } from 'node:module'
+import type {
+  ProgressInfo,
+  UpdateDownloadedEvent,
 } from 'electron-updater'
+
+const { autoUpdater } = createRequire(import.meta.url)('electron-updater');
 
 export function update(win: Electron.BrowserWindow) {
 

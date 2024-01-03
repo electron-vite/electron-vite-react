@@ -11,6 +11,7 @@
       "VITE_DEV_SERVER_URL": "http://127.0.0.1:7777/"
     }
   },
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build && electron-builder",
@@ -27,18 +28,15 @@
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^4.0.4",
     "autoprefixer": "^10.4.16",
-    "electron": "^26.0.0",
+    "electron": "^28.1.0",
     "electron-builder": "^24.6.3",
     "postcss": "^8.4.31",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tailwindcss": "^3.3.3",
     "typescript": "^5.1.6",
-    "vite": "^4.4.9",
-    "vite-plugin-electron": "^0.15.5",
+    "vite": "^5.0.10",
+    "vite-plugin-electron": "^0.28.0-beta.2",
     "vite-plugin-electron-renderer": "^0.14.5"
-  },
-  "engines": {
-    "node": "^14.18.0 || >=16.0.0"
   }
 }
