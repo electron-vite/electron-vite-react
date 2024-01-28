@@ -20,14 +20,22 @@
 ## 快速开始
 
 ```sh
-npm create electron-vite
-```
+# clone the project
+git clone https://github.com/electron-vite/electron-vite-react.git
 
-![electron-vite-react.gif](/public/electron-vite-react.gif)
+# enter the project directory
+cd electron-vite-react
+
+# install dependency
+npm install
+
+# develop
+npm run dev
+```
 
 ## 调试
 
-![electron-vite-react-debug.gif](/public/electron-vite-react-debug.gif)
+![electron-vite-react-debug.gif](/electron-vite-react-debug.gif)
 
 ## 目录
 
@@ -47,7 +55,7 @@ npm create electron-vite
 └── src                                      渲染进程源码、React代码
 ```
 
-
+<!--
 ## 🚨 这需要留神
 
 默认情况下，该模板在渲染进程中集成了 Node.js，如果你不需要它，你只需要删除下面的选项. [因为它会修改 Vite 默认的配置](https://github.com/electron-vite/vite-plugin-electron-renderer#config-presets-opinionated).
@@ -66,6 +74,7 @@ export default {
   ],
 }
 ```
+-->
 
 ## 🔧 额外的功能
 
@@ -74,8 +83,8 @@ export default {
 
 ## ❔ FAQ
 
-- [dependencies vs devDependencies](https://github.com/electron-vite/vite-plugin-electron-renderer#dependencies-vs-devdependencies)
 - [C/C++ addons, Node.js modules - Pre-Bundling](https://github.com/electron-vite/vite-plugin-electron-renderer#dependency-pre-bundling)
+- [dependencies vs devDependencies](https://github.com/electron-vite/vite-plugin-electron-renderer#dependencies-vs-devdependencies)
 
 ## 🍵 🍰 🍣 🍟
 

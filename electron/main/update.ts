@@ -1,11 +1,13 @@
 import { app, ipcMain } from 'electron'
-import {
-  type ProgressInfo,
-  type UpdateDownloadedEvent,
-  CancellationToken,
-  autoUpdater
+import { createRequire } from 'node:module'
+import type {
+  ProgressInfo,
+  UpdateDownloadedEvent,
+  UpdateInfo,
 } from 'electron-updater'
+import { CancellationToken } from 'electron-updater'
 
+const { autoUpdater } = createRequire(import.meta.url)('electron-updater');
 let cancellationToken = new CancellationToken()
 
 export function update(win: Electron.BrowserWindow) {
@@ -18,11 +20,11 @@ export function update(win: Electron.BrowserWindow) {
   // start check
   autoUpdater.on('checking-for-update', function () { })
   // update available
-  autoUpdater.on('update-available', (arg) => {
+  autoUpdater.on('update-available', (arg: UpdateInfo) => {
     win.webContents.send('update-can-available', { update: true, version: app.getVersion(), newVersion: arg?.version })
   })
   // update not available
-  autoUpdater.on('update-not-available', (arg) => {
+  autoUpdater.on('update-not-available', (arg: UpdateInfo) => {
     win.webContents.send('update-can-available', { update: false, version: app.getVersion(), newVersion: arg?.version })
   })
 
@@ -41,7 +43,7 @@ export function update(win: Electron.BrowserWindow) {
   })
 
   // Start downloading and feedback on progress
-  ipcMain.handle('start-download', (event) => {
+  ipcMain.handle('start-download', (event: Electron.IpcMainInvokeEvent) => {
     startDownload(
       (error, progressInfo) => {
         if (error) {
@@ -75,8 +77,8 @@ function startDownload(
   callback: (error: Error | null, info: ProgressInfo | null) => void,
   complete: (event: UpdateDownloadedEvent) => void,
 ) {
-  autoUpdater.on('download-progress', info => callback(null, info))
-  autoUpdater.on('error', error => callback(error, null))
+  autoUpdater.on('download-progress', (info: ProgressInfo) => callback(null, info))
+  autoUpdater.on('error', (error: Error) => callback(error, null))
   autoUpdater.on('update-downloaded', complete)
   autoUpdater.downloadUpdate(cancellationToken)
 }

@@ -18,17 +18,25 @@ English | [简体中文](README.zh-CN.md)
 🐞 Debugger configuration included  
 🖥 Easy to implement multiple windows  
 
-## 🛫 Quick start
+## 🛫 Quick Setup
 
 ```sh
-npm create electron-vite
-```
+# clone the project
+git clone https://github.com/electron-vite/electron-vite-react.git
 
-![electron-vite-react.gif](/public/electron-vite-react.gif)
+# enter the project directory
+cd electron-vite-react
+
+# install dependency
+npm install
+
+# develop
+npm run dev
+```
 
 ## 🐞 Debug
 
-![electron-vite-react-debug.gif](/public/electron-vite-react-debug.gif)
+![electron-vite-react-debug.gif](/electron-vite-react-debug.gif)
 
 ## 📂 Directory structure
 
@@ -49,6 +57,7 @@ Familiar React application structure, just with `electron` folder on the top :wi
 └── src                                      Renderer source code, your React application
 ```
 
+<!--
 ## 🚨 Be aware
 
 This template integrates Node.js API to the renderer process by default. If you want to follow **Electron Security Concerns** you might want to disable this feature. You will have to expose needed API by yourself.  
@@ -69,6 +78,7 @@ export default {
   ],
 }
 ```
+-->
 
 ## 🔧 Additional features
 
@@ -77,5 +87,5 @@ export default {
 
 ## ❔ FAQ
 
-- [dependencies vs devDependencies](https://github.com/electron-vite/vite-plugin-electron-renderer#dependencies-vs-devdependencies)
 - [C/C++ addons, Node.js modules - Pre-Bundling](https://github.com/electron-vite/vite-plugin-electron-renderer#dependency-pre-bundling)
+- [dependencies vs devDependencies](https://github.com/electron-vite/vite-plugin-electron-renderer#dependencies-vs-devdependencies)
