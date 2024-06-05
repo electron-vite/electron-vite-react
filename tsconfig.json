@@ -19,7 +19,9 @@
     "paths": {
       "@/*": [
         "src/*"
-      ]
+      ],
+      "@components": ["./src/components"],
+      "@shared": ["./src/shared"]
     },
   },
   "include": ["src", "electron"],

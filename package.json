@@ -20,7 +20,10 @@
     "e2e": "playwright test"
   },
   "dependencies": {
-    "electron-updater": "^6.1.8"
+    "@mui/material": "^5.15.19",
+    "@mui/styled-engine-sc": "^6.0.0-alpha.18",
+    "electron-updater": "^6.1.8",
+    "styled-components": "^6.1.11"
   },
   "devDependencies": {
     "@playwright/test": "^1.42.1",
