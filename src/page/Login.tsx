@@ -5,8 +5,6 @@ import {
   Button,
   CssBaseline,
   TextField,
-  FormControlLabel,
-  Checkbox,
   Link,
   Paper,
   Box,
@@ -18,36 +16,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../store/useStore";
-
+import { loginUser, LoginResponse } from "@/api/userLogin";
 const defaultTheme = createTheme();
-
-interface LoginResponse {
-  code: number;
-  status: string;
-  payload: {
-    BearerToken: string;
-  };
-}
-
-const loginUser = async (credentials: {
-  usrcde: string;
-  usrpwd: string;
-}): Promise<LoginResponse> => {
-  const response = await fetch("http://localhost:8080/api/user-ess/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(credentials),
-  });
-
-  if (!response.ok) {
-    throw new Error(`Network response was not ok: ${response.statusText}`);
-  }
-
-  const data = await response.json();
-  return data;
-};
 
 function Copyright(props: any) {
   return (
@@ -154,10 +124,10 @@ export default function Login() {
                 id="password"
                 autoComplete="current-password"
               />
-              <FormControlLabel
+              {/* <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
-              />
+              /> */}
               <Button
                 type="submit"
                 fullWidth
@@ -172,7 +142,7 @@ export default function Login() {
                   {error}
                 </Typography>
               )}
-              <Grid container>
+              {/* <Grid container>
                 <Grid item xs>
                   <Link href="#" variant="body2">
                     Forgot password?
@@ -183,7 +153,7 @@ export default function Login() {
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
-              </Grid>
+              </Grid> */}
               <Copyright sx={{ mt: 5 }} />
             </Box>
           </Box>

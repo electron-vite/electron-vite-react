@@ -10,17 +10,10 @@ import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
 import Link from "@mui/material/Link";
-import MenuIcon from "@mui/icons-material/Menu";
-// import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { mainListItems, secondaryListItems } from "@/components/ListItems";
-import Chart from "@/components/Chart";
-import Deposits from "@/components/Deposits";
-import Orders from "@/components/Orders";
+
+import { ItemList } from "@/components/ItemList";
 
 function Copyright(props: any) {
   return (
@@ -86,10 +79,18 @@ const defaultTheme = createTheme();
 
 export default function Dashboard() {
   const [open, setOpen] = React.useState(true);
-  const toggleDrawer = () => {
-    setOpen(!open);
+
+  const handleMouseEnter = () => {
+    if (!open) {
+      setOpen(true);
+    }
   };
 
+  const handleMouseLeave = () => {
+    if (open) {
+      setOpen(false);
+    }
+  };
   return (
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: "flex" }}>
@@ -100,17 +101,6 @@ export default function Dashboard() {
               pr: "24px", // keep right padding when drawer closed
             }}
           >
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              onMouseEnter={toggleDrawer}
-              sx={{
-                marginRight: "36px",
-              }}
-            >
-              <MenuIcon />
-            </IconButton>
             <Typography
               component="h1"
               variant="h6"
@@ -137,10 +127,13 @@ export default function Dashboard() {
             }}
           ></Toolbar>
           <Divider />
-          <List component="nav">
-            {mainListItems}
+          <List
+            component="nav"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            <ItemList />
             <Divider sx={{ my: 1 }} />
-            {secondaryListItems}
           </List>
         </Drawer>
       </Box>
