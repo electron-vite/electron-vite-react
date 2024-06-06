@@ -1,17 +1,53 @@
-import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
+import React from "react";
+import { Outlet } from "react-router-dom";
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  FormControlLabel,
+  Checkbox,
+  Link,
+  Paper,
+  Box,
+  Grid,
+  Typography,
+} from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
+import useAuthStore from "../store/useStore";
+
+const defaultTheme = createTheme();
+
+interface LoginResponse {
+  code: number;
+  status: string;
+  payload: {
+    BearerToken: string;
+  };
+}
+
+const loginUser = async (credentials: {
+  usrcde: string;
+  usrpwd: string;
+}): Promise<LoginResponse> => {
+  const response = await fetch("http://localhost:8080/api/user-ess/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(credentials),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Network response was not ok: ${response.statusText}`);
+  }
+
+  const data = await response.json();
+  return data;
+};
 
 function Copyright(props: any) {
   return (
@@ -31,17 +67,28 @@ function Copyright(props: any) {
   );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-const defaultTheme = createTheme();
+export default function Login() {
+  const [error, setError] = React.useState<string>("");
+  const setUser = useAuthStore((state) => state.setUser);
+  const navigate = useNavigate();
 
-export default function SignInSide() {
+  const mutation = useMutation(loginUser, {
+    onSuccess: (data) => {
+      setUser(data.payload.BearerToken);
+      navigate("/dashboard");
+    },
+    onError: (err) => {
+      setError("Login failed. Please check your credentials and try again.");
+    },
+  });
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const usrcde = data.get("username") as string;
+    const usrpwd = data.get("password") as string;
+    setError("");
+    mutation.mutate({ usrcde, usrpwd });
   };
 
   return (
@@ -91,10 +138,10 @@ export default function SignInSide() {
                 margin="normal"
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
+                id="username"
+                label="Username"
+                name="username"
+                autoComplete="username"
                 autoFocus
               />
               <TextField
@@ -116,9 +163,15 @@ export default function SignInSide() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                disabled={mutation.isLoading}
               >
-                Sign In
+                {mutation.isLoading ? "Signing in..." : "Sign In"}
               </Button>
+              {error && (
+                <Typography color="error" align="center">
+                  {error}
+                </Typography>
+              )}
               <Grid container>
                 <Grid item xs>
                   <Link href="#" variant="body2">

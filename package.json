@@ -20,15 +20,23 @@
     "e2e": "playwright test"
   },
   "dependencies": {
+    "@emotion/styled": "^11.11.5",
+    "@mui/icons-material": "^5.15.19",
     "@mui/material": "^5.15.19",
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
+    "@mui/x-charts": "^7.6.1",
+    "@mui/x-tree-view": "^7.6.1",
+    "axios": "^1.7.2",
     "electron-updater": "^6.1.8",
-    "styled-components": "^6.1.11"
+    "react-query": "^3.39.3",
+    "react-router-dom": "^6.23.1",
+    "styled-components": "^6.1.11",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@playwright/test": "^1.42.1",
-    "@types/react": "^18.2.64",
-    "@types/react-dom": "^18.2.21",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.18",
     "electron": "^29.1.1",
