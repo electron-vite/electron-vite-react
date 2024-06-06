@@ -15,7 +15,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
-import useAuthStore from "../store/useStore";
+import useAuthStore from "@/store/useStore";
 import { loginUser, LoginResponse } from "@/api/userLogin";
 const defaultTheme = createTheme();
 
