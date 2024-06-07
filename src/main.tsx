@@ -1,17 +1,38 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { QueryClient, QueryClientProvider } from "react-query";
+import App from "./App";
+import "./index.css";
+import { createHashRouter, RouterProvider } from "react-router-dom";
+import Login from "./page/Login";
+import Dashboard from "./page/Dashboard";
+import { AuthProvider } from "./AuthProvider";
 
-import './index.css'
+const router = createHashRouter([
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      {
+        path: "dashboard",
+        element: <Dashboard />,
+      },
+      {
+        path: "/",
+        element: <Login />,
+      },
+    ],
+  },
+]);
 
-import './demos/ipc'
-// If you want use Node.js, the`nodeIntegration` needs to be enabled in the Main process.
-// import './demos/node'
+const queryClient = new QueryClient();
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
-
-postMessage({ payload: 'removeLoading' }, '*')
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </QueryClientProvider>
+  </React.StrictMode>
+);
