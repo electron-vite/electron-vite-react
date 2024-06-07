@@ -6,6 +6,7 @@ import "./index.css";
 import { createHashRouter, RouterProvider } from "react-router-dom";
 import Login from "./page/Login";
 import Dashboard from "./page/Dashboard";
+import { AuthProvider } from "./AuthProvider";
 
 const router = createHashRouter([
   {
@@ -29,7 +30,9 @@ const queryClient = new QueryClient();
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </QueryClientProvider>
   </React.StrictMode>
 );

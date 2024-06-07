@@ -1,5 +1,4 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
+import React, { useState } from "react";
 import {
   Avatar,
   Button,
@@ -13,10 +12,9 @@ import {
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
-import useAuthStore from "@/store/useStore";
-import { loginUser, LoginResponse } from "@/api/userLogin";
+import useAuthStore from "../store/useStore";
+
 const defaultTheme = createTheme();
 
 function Copyright(props: any) {
@@ -37,28 +35,43 @@ function Copyright(props: any) {
   );
 }
 
-export default function Login() {
-  const [error, setError] = React.useState<string>("");
-  const setUser = useAuthStore((state) => state.setUser);
-  const navigate = useNavigate();
-
-  const mutation = useMutation(loginUser, {
-    onSuccess: (data) => {
-      setUser(data.payload.BearerToken);
-      navigate("/dashboard");
+const loginUser = async (credentials: { usrcde: string; usrpwd: string }) => {
+  const response = await fetch("http://180.191.51.65:9130/api/user-ess/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
     },
-    onError: (err) => {
-      setError("Login failed. Please check your credentials and try again.");
-    },
+    body: JSON.stringify(credentials),
   });
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  if (!response.ok) {
+    throw new Error(`Network response was not ok: ${response.statusText}`);
+  }
+
+  const data = await response.json();
+  localStorage.setItem("token", JSON.stringify(data.payload));
+  return data;
+};
+
+export default function Login() {
+  const [error, setError] = useState<string>("");
+  const navigate = useNavigate();
+  const setUser = useAuthStore((state) => state.setUser);
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const usrcde = data.get("username") as string;
     const usrpwd = data.get("password") as string;
     setError("");
-    mutation.mutate({ usrcde, usrpwd });
+
+    try {
+      const userData = await loginUser({ usrcde, usrpwd });
+      setUser(userData.payload.BearerToken);
+      navigate("/dashboard");
+    } catch (error) {
+      setError("Login failed. Please check your credentials and try again.");
+    }
   };
 
   return (
@@ -124,36 +137,19 @@ export default function Login() {
                 id="password"
                 autoComplete="current-password"
               />
-              {/* <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              /> */}
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
-                disabled={mutation.isLoading}
               >
-                {mutation.isLoading ? "Signing in..." : "Sign In"}
+                Sign In
               </Button>
               {error && (
                 <Typography color="error" align="center">
                   {error}
                 </Typography>
               )}
-              {/* <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
-              </Grid> */}
               <Copyright sx={{ mt: 5 }} />
             </Box>
           </Box>
