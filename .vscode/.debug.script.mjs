@@ -17,6 +17,7 @@ spawn(
   process.platform === 'win32' ? 'npm.cmd' : 'npm',
   ['run', 'dev'],
   {
+    shell: true,
     stdio: 'inherit',
     env: Object.assign(process.env, { VSCODE_DEBUG: 'true' }),
   },
