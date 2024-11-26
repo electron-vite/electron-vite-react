@@ -17,7 +17,7 @@ const Update = () => {
     onCancel?: () => void
     onOk?: () => void
   }>({
-    onCancel: () => setModalOpen(false),
+    onCancel: () => window.ipcRenderer.invoke('cancel-download').then(() => setModalOpen(false)),
     onOk: () => window.ipcRenderer.invoke('start-download'),
   })
 
