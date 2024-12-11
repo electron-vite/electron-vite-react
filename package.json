@@ -14,7 +14,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && electron-builder",
+    "build": "tsc && vite build && electron-builder --config electron-builder.config.ts",
     "preview": "vite preview",
     "pretest": "vite build --mode=test",
     "test": "vitest run"
