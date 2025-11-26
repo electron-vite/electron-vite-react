@@ -1,4 +1,4 @@
-import { app, BrowserWindow, shell, ipcMain } from 'electron'
+import { app, BrowserWindow, shell, ipcMain, dialog } from 'electron'
 import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
@@ -50,11 +50,11 @@ async function createWindow() {
     webPreferences: {
       preload,
       // Warning: Enable nodeIntegration and disable contextIsolation is not secure in production
-      // nodeIntegration: true,
+      nodeIntegration: true,
 
       // Consider using contextBridge.exposeInMainWorld
       // Read more on https://www.electronjs.org/docs/latest/tutorial/context-isolation
-      // contextIsolation: false,
+      contextIsolation: false,
     },
   })
 
@@ -121,3 +121,54 @@ ipcMain.handle('open-win', (_, arg) => {
     childWindow.loadFile(indexHtml, { hash: arg })
   }
 })
+
+ipcMain.handle('get-file-icon', async (_, filePath) => {
+  try {
+    const icon = await app.getFileIcon(filePath, { size: 'large' });
+    return icon.toDataURL();
+  } catch (e) {
+    console.error('Failed to get icon', e);
+    return null;
+  }
+});
+
+ipcMain.handle('open-path', async (_, filePath) => {
+  await shell.openPath(filePath);
+});
+
+ipcMain.handle('open-external', async (_, url) => {
+  await shell.openExternal(url);
+});
+
+ipcMain.handle('save-markdown', async (_, { content, defaultPath }) => {
+  const { canceled, filePath } = await dialog.showSaveDialog({
+    defaultPath,
+    filters: [{ name: 'Markdown', extensions: ['md'] }]
+  });
+  if (!canceled && filePath) {
+    const fs = await import('node:fs/promises');
+    await fs.writeFile(filePath, content);
+    return true;
+  }
+  return false;
+});
+
+ipcMain.handle('select-file', async () => {
+  const { canceled, filePaths } = await dialog.showOpenDialog({
+    properties: ['openFile']
+  });
+  if (!canceled && filePaths.length > 0) {
+    return filePaths[0];
+  }
+  return null;
+});
+
+ipcMain.handle('select-folder', async () => {
+  const { canceled, filePaths } = await dialog.showOpenDialog({
+    properties: ['openDirectory']
+  });
+  if (!canceled && filePaths.length > 0) {
+    return filePaths[0];
+  }
+  return null;
+});

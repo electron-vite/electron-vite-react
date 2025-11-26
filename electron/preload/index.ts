@@ -1,7 +1,7 @@
 import { ipcRenderer, contextBridge } from 'electron'
 
 // --------- Expose some API to the Renderer process ---------
-contextBridge.exposeInMainWorld('ipcRenderer', {
+const ipcRendererApi = {
   on(...args: Parameters<typeof ipcRenderer.on>) {
     const [channel, listener] = args
     return ipcRenderer.on(channel, (event, ...args) => listener(event, ...args))
@@ -18,10 +18,18 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
     const [channel, ...omit] = args
     return ipcRenderer.invoke(channel, ...omit)
   },
+}
 
-  // You can expose other APTs you need here.
-  // ...
-})
+if (process.contextIsolated) {
+  try {
+    contextBridge.exposeInMainWorld('ipcRenderer', ipcRendererApi)
+  } catch (error) {
+    console.error(error)
+  }
+} else {
+  // @ts-ignore
+  window.ipcRenderer = ipcRendererApi
+}
 
 // --------- Preload scripts loading ---------
 function domReady(condition: DocumentReadyState[] = ['complete', 'interactive']) {
