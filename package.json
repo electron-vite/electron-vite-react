@@ -20,7 +20,18 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "electron-updater": "^6.3.9"
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
+    "clsx": "^2.1.1",
+    "electron-store": "^11.0.2",
+    "electron-updater": "^6.3.9",
+    "framer-motion": "^12.23.24",
+    "lucide-react": "^0.554.0",
+    "react-markdown": "^10.1.0",
+    "react-textarea-autosize": "^8.5.9",
+    "tailwind-merge": "^3.4.0",
+    "uuid": "^13.0.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.48.2",
