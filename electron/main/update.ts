@@ -4,8 +4,8 @@ import type {
   ProgressInfo,
   UpdateDownloadedEvent,
   UpdateInfo,
+  CancellationToken
 } from 'electron-updater'
-import { CancellationToken } from 'electron-updater'
 
 const { autoUpdater } = createRequire(import.meta.url)('electron-updater');
 let cancellationToken = new CancellationToken()
