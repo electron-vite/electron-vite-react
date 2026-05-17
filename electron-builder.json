@@ -34,8 +34,9 @@
     "deleteAppDataOnUninstall": false
   },
   "publish": {
-    "provider": "generic",
-    "channel": "latest",
-    "url": "https://github.com/electron-vite/electron-vite-react/releases/download/v0.9.9/"
+    "provider": "github",
+    "owner": "electron-vite",
+    "repo": "electron-vite-react",
+    "releaseType": "release"
   }
 }

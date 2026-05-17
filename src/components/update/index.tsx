@@ -1,8 +1,7 @@
 import type { ProgressInfo } from 'electron-updater'
 import { useCallback, useEffect, useState } from 'react'
-import Modal from '@/components/update/Modal'
-import Progress from '@/components/update/Progress'
-import './update.css'
+import Modal from '@/components/update/modal'
+import Progress from '@/components/update/progress'
 
 const Update = () => {
   const [checking, setChecking] = useState(false)
@@ -97,32 +96,38 @@ const Update = () => {
         onOk={modalBtn?.onOk}
         footer={updateAvailable ? /* hide footer */null : undefined}
       >
-        <div className='modal-slot'>
+        <div className='space-y-4'>
           {updateError
             ? (
-              <div>
-                <p>Error downloading the latest version.</p>
-                <p>{updateError.message}</p>
+              <div className='space-y-2 text-sm leading-6 text-rose-100'>
+                <p className='font-semibold text-rose-50'>Error downloading the latest version.</p>
+                <p className='text-rose-100/90'>{updateError.message}</p>
               </div>
             ) : updateAvailable
               ? (
-                <div>
-                  <div>The last version is: v{versionInfo?.newVersion}</div>
-                  <div className='new-version__target'>v{versionInfo?.version} -&gt; v{versionInfo?.newVersion}</div>
-                  <div className='update__progress'>
-                    <div className='progress__title'>Update progress:</div>
-                    <div className='progress__bar'>
+                <div className='space-y-4 text-sm text-slate-700'>
+                  <div className='text-base font-semibold text-slate-900'>The latest version is v{versionInfo?.newVersion}</div>
+                  <div className='ml-0 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-600'>
+                    v{versionInfo?.version} -&gt; v{versionInfo?.newVersion}
+                  </div>
+                  <div className='flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3'>
+                    <div className='shrink-0 font-medium text-slate-700'>Update progress:</div>
+                    <div className='min-w-0 flex-1'>
                       <Progress percent={progressInfo?.percent} ></Progress>
                     </div>
                   </div>
                 </div>
               )
               : (
-                <div className='can-not-available'>{JSON.stringify(versionInfo ?? {}, null, 2)}</div>
+                <pre className='overflow-auto rounded-2xl bg-slate-950 p-4 text-left text-xs leading-6 text-slate-100'>{JSON.stringify(versionInfo ?? {}, null, 2)}</pre>
               )}
         </div>
       </Modal>
-      <button disabled={checking} onClick={checkUpdate}>
+      <button
+        disabled={checking}
+        onClick={checkUpdate}
+        className='inline-flex items-center justify-center rounded-2xl border border-cyan-400/30 bg-cyan-400/10 px-5 py-3 font-semibold text-cyan-100 transition hover:border-cyan-300/50 hover:bg-cyan-400/20 disabled:cursor-not-allowed disabled:opacity-60'
+      >
         {checking ? 'Checking...' : 'Check update'}
       </button>
     </>
