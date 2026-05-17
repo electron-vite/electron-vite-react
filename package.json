@@ -19,6 +19,7 @@
     "preview": "vite preview",
     "pretest": "vite build --mode=test",
     "test": "vitest run",
+    "test:e2e": "pnpm pretest && playwright test",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
