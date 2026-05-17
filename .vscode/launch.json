@@ -45,7 +45,7 @@
       "name": "Debug Renderer Process",
       "port": 9229,
       "request": "attach",
-      "type": "pwa-chrome",
+      "type": "chrome",
       "timeout": 60000,
       "skipFiles": [
         "<node_internals>/**",
