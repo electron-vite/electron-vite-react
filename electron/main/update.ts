@@ -3,9 +3,10 @@ import { createRequire } from 'node:module'
 import type {
   ProgressInfo,
   UpdateDownloadedEvent,
-  UpdateInfo,
-  CancellationToken
+  UpdateInfo
 } from 'electron-updater'
+
+import { CancellationToken } from "electron-updater"
 
 const { autoUpdater } = createRequire(import.meta.url)('electron-updater');
 let cancellationToken = new CancellationToken()
