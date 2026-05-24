@@ -29,6 +29,8 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -40,7 +42,6 @@ jobs:
         with:
           node-version: 22
           cache: pnpm
-
 
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
