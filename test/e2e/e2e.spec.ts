@@ -10,7 +10,7 @@ import {
 } from '@playwright/test'
 import type { BrowserWindow } from 'electron'
 
-const root = path.join(import.meta.dirname, '..')
+const root = path.resolve(import.meta.dirname, '..', '..')
 let electronApp: ElectronApplication
 let page: Page
 let xvfbProcess: ChildProcess | undefined

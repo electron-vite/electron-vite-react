@@ -10,5 +10,5 @@
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true
   },
-  "include": ["vite.config.ts", "vitest.config.ts", "package.json"]
+  "include": ["electron", "vite.config.ts", "vitest.config.ts", "package.json"]
 }

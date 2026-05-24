@@ -23,21 +23,21 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "electron-updater": "^6.3.9",
-    "@playwright/test": "^1.48.2",
+    "@playwright/test": "^1.60.0",
     "@tailwindcss/vite": "^4.3.0",
-    "@types/react": "^19.2.14",
+    "@types/react": "^19.2.15",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.2",
     "electron": "^42.1.0",
     "electron-builder": "^26.8.1",
+    "electron-updater": "^6.8.3",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "tailwindcss": "^4.3.0",
     "typescript": "^6.0.3",
-    "vite": "^8.0.13",
-    "vite-plugin-electron": "^1.0.0-beta.10",
-    "vite-plugin-electron-renderer": "^1.0.0-beta.3",
-    "vitest": "^4.1.6"
+    "vite": "^8.0.14",
+    "vite-plugin-electron": "^1.0.0-beta.12",
+    "vite-plugin-electron-renderer": "^1.0.0-beta.6",
+    "vitest": "^4.1.7"
   }
 }
