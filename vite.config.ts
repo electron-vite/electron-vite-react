@@ -30,13 +30,6 @@ export default defineConfig(({ command }) => {
         main: {
           // Shortcut of `build.lib.entry`
           entry: 'electron/main/index.ts',
-          onstart(args) {
-            if (process.env.VSCODE_DEBUG) {
-              console.log(/* For `.vscode/.debug.script.mjs` */'[startup] Electron App')
-            } else {
-              args.startup()
-            }
-          },
           vite: {
             build: {
               sourcemap,
@@ -69,12 +62,6 @@ export default defineConfig(({ command }) => {
         renderer: {},
       }),
     ],
-    server: process.env.VSCODE_DEBUG 
-      ? {
-        host: url.hostname,
-        port: +url.port,
-      }
-      : undefined,
     clearScreen: false,
   }
 })
