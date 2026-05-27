@@ -9,6 +9,7 @@ import {
 
 const { autoUpdater } = createRequire(import.meta.url)('electron-updater');
 let cancellationToken = new CancellationToken()
+let isDownloading = false
 
 export function update(win: Electron.BrowserWindow) {
 
@@ -36,17 +37,22 @@ export function update(win: Electron.BrowserWindow) {
     }
 
     try {
-      return await autoUpdater.checkForUpdatesAndNotify()
+      return await autoUpdater.checkForUpdates()
     } catch (error) {
-      return { message: 'Network error', error }
+      const resolvedError = error instanceof Error ? error : new Error('Network error')
+      return { message: resolvedError.message, error: resolvedError }
     }
   })
 
   // Start downloading and feedback on progress
   ipcMain.handle('start-download', (event: Electron.IpcMainInvokeEvent) => {
+    if (isDownloading) return
+
+    isDownloading = true
     startDownload(
       (error, progressInfo) => {
         if (error) {
+          isDownloading = false
           // feedback download error message
           event.sender.send('update-error', { message: error.message, error })
         } else {
@@ -55,6 +61,7 @@ export function update(win: Electron.BrowserWindow) {
         }
       },
       () => {
+        isDownloading = false
         // feedback update downloaded message
         event.sender.send('update-downloaded')
       }
@@ -77,8 +84,24 @@ function startDownload(
   callback: (error: Error | null, info: ProgressInfo | null) => void,
   complete: (event: UpdateDownloadedEvent) => void,
 ) {
-  autoUpdater.on('download-progress', (info: ProgressInfo) => callback(null, info))
-  autoUpdater.on('error', (error: Error) => callback(error, null))
-  autoUpdater.on('update-downloaded', complete)
+  const onDownloadProgress = (info: ProgressInfo) => callback(null, info)
+  const onError = (error: Error) => {
+    cleanup()
+    callback(error, null)
+  }
+  const onDownloaded = (event: UpdateDownloadedEvent) => {
+    cleanup()
+    complete(event)
+  }
+
+  const cleanup = () => {
+    autoUpdater.off('download-progress', onDownloadProgress)
+    autoUpdater.off('error', onError)
+    autoUpdater.off('update-downloaded', onDownloaded)
+  }
+
+  autoUpdater.on('download-progress', onDownloadProgress)
+  autoUpdater.on('error', onError)
+  autoUpdater.once('update-downloaded', onDownloaded)
   autoUpdater.downloadUpdate(cancellationToken)
 }

@@ -2,25 +2,32 @@ import { useState } from 'react'
 import UpdateElectron from '@/components/update'
 import logoVite from './assets/logo-vite.svg'
 import logoElectron from './assets/logo-electron.svg'
+import logoTailwind from './assets/logo-tailwindcss.svg'
 
 function App() {
   const [count, setCount] = useState(0)
   return (
-    <div className='min-h-screen px-4 py-8 text-slate-100 sm:px-6 lg:px-8'>
-      <div className='mx-auto flex w-full max-w-6xl flex-col gap-8'>
-        <section className='overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/70 shadow-2xl shadow-cyan-950/30 backdrop-blur'>
+    <div className='relative min-h-screen overflow-hidden bg-slate-50 px-4 py-8 text-slate-900 sm:px-6 lg:px-8'>
+      <div className='pointer-events-none absolute inset-0'>
+        <div className='absolute -left-28 top-10 h-96 w-96 rounded-full bg-cyan-200/50 blur-3xl' />
+        <div className='absolute -right-24 top-28 h-96 w-96 rounded-full bg-sky-200/40 blur-3xl' />
+        <div className='absolute bottom-0 left-1/2 h-72 w-[46rem] -translate-x-1/2 bg-gradient-to-r from-cyan-200/0 via-cyan-300/45 to-cyan-200/0 blur-3xl' />
+      </div>
+
+      <div className='relative mx-auto flex w-full max-w-6xl flex-col gap-8'>
+        <section className='overflow-hidden rounded-[2rem] border border-slate-200 bg-white/90 shadow-[0_24px_70px_-40px_rgba(14,116,144,0.35)] backdrop-blur'>
           <div className='grid gap-8 p-6 md:grid-cols-[1.15fr_0.85fr] md:p-10'>
             <div className='flex flex-col justify-between gap-8'>
               <div className='space-y-6'>
-                <div className='inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.28em] text-cyan-200'>
-                  Electron Vite React
+                <div className='inline-flex items-center gap-2 rounded-full border border-cyan-200 bg-cyan-50 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.24em] text-cyan-800'>
+                  Electron + Vite + React + Tailwind
                 </div>
                 <div className='space-y-4'>
-                  <h1 className='max-w-xl text-4xl font-semibold tracking-tight text-white sm:text-5xl'>
-                    A sharp starter with Tailwind-first styling.
+                  <h1 className='max-w-xl text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl'>
+                    Modern starter, cleaner rhythm, unified visual language.
                   </h1>
-                  <p className='max-w-2xl text-base leading-7 text-slate-300 sm:text-lg'>
-                    The layout, update panel, and global styles now all run through Tailwind classes instead of legacy CSS files.
+                  <p className='max-w-2xl text-base leading-7 text-slate-600 sm:text-lg'>
+                    Refined spacing, balanced contrast, and consistent cards make the page feel more polished while keeping all demo functionality intact.
                   </p>
                 </div>
               </div>
@@ -30,9 +37,9 @@ function App() {
                   href='https://github.com/electron-vite/electron-vite-react'
                   target='_blank'
                   rel='noreferrer'
-                  className='inline-flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 transition hover:border-cyan-400/40 hover:bg-white/10'
+                  className='inline-flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 transition hover:border-cyan-300 hover:bg-cyan-50/40'
                 >
-                  <span className='relative flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-900/80 ring-1 ring-white/10'>
+                  <span className='relative flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-100 ring-1 ring-slate-200'>
                     <img src={logoVite} className='h-8 w-8' alt='Vite logo' />
                     <img
                       src={logoElectron}
@@ -40,25 +47,26 @@ function App() {
                       alt='Electron logo'
                     />
                   </span>
-                  <span className='text-sm font-medium text-slate-200'>Open project repository</span>
+                  <span className='text-sm font-medium text-slate-700'>Open project repository</span>
                 </a>
-                <div className='rounded-2xl border border-emerald-400/20 bg-emerald-400/10 px-4 py-3 text-sm text-emerald-200'>
-                  Tailwind v4 via Vite plugin
-                </div>
               </div>
             </div>
 
-            <div className='flex flex-col justify-center rounded-[1.75rem] border border-white/10 bg-white/5 p-6'>
-              <div className='space-y-4'>
-                <div className='text-sm uppercase tracking-[0.3em] text-slate-400'>Counter demo</div>
-                <div className='text-5xl font-semibold text-white'>{count}</div>
+            <div className='relative overflow-hidden rounded-[1.75rem] border border-slate-200 bg-gradient-to-br from-cyan-50 to-white p-6'>
+              <div className='pointer-events-none absolute -right-8 -top-8 h-28 w-28 rounded-full bg-cyan-200/60 blur-2xl' />
+              <div className='relative space-y-4'>
+                <div className='flex items-center justify-between'>
+                  <div className='text-sm uppercase tracking-[0.3em] text-slate-500'>Counter demo</div>
+                  <img src={logoTailwind} className='h-6 w-6 opacity-90' alt='Tailwind CSS logo' />
+                </div>
+                <div className='text-5xl font-semibold text-slate-900'>{count}</div>
                 <button
                   onClick={() => setCount((value) => value + 1)}
-                  className='inline-flex items-center justify-center rounded-2xl bg-cyan-400 px-5 py-3 font-semibold text-slate-950 transition hover:bg-cyan-300 focus:outline-none focus:ring-2 focus:ring-cyan-300 focus:ring-offset-2 focus:ring-offset-slate-950'
+                  className='inline-flex items-center justify-center rounded-2xl bg-cyan-500 px-5 py-3 font-semibold text-white transition hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-300 focus:ring-offset-2 focus:ring-offset-white'
                 >
                   Increment counter
                 </button>
-                <p className='text-sm leading-6 text-slate-300'>
+                <p className='text-sm leading-6 text-slate-600'>
                   Edit <code>src/App.tsx</code> and save to test HMR.
                 </p>
               </div>
@@ -66,17 +74,28 @@ function App() {
           </div>
         </section>
 
-        <section className='grid gap-4 md:grid-cols-2'>
-          <div className='rounded-3xl border border-white/10 bg-white/5 p-6 text-slate-200 shadow-lg shadow-slate-950/20'>
-            <div className='text-sm uppercase tracking-[0.3em] text-slate-400'>Public assets</div>
+        <section className='grid gap-4 md:grid-cols-3'>
+          <div className='rounded-3xl border border-slate-200 bg-white p-6 text-slate-800 shadow-[0_18px_36px_-28px_rgba(15,23,42,0.35)]'>
+            <div className='text-sm uppercase tracking-[0.3em] text-slate-500'>Public assets</div>
             <p className='mt-3 text-base leading-7'>
               Place static files into the <code>/public</code> folder.
             </p>
           </div>
-          <div className='rounded-3xl border border-white/10 bg-gradient-to-br from-fuchsia-500/10 to-cyan-400/10 p-6 text-slate-200 shadow-lg shadow-slate-950/20'>
-            <div className='text-sm uppercase tracking-[0.3em] text-slate-400'>Update panel</div>
+
+          <div className='rounded-3xl border border-cyan-200 bg-gradient-to-br from-cyan-50 to-sky-50 p-6 text-slate-800 shadow-[0_18px_36px_-28px_rgba(14,116,144,0.4)]'>
+            <div className='flex items-center gap-2 text-sm uppercase tracking-[0.3em] text-cyan-700'>
+              <img src={logoTailwind} className='h-5 w-5' alt='Tailwind CSS logo' />
+              Tailwind system
+            </div>
+            <p className='mt-3 text-base leading-7 text-slate-700'>
+              Unified utility classes now drive layout, hierarchy, and component consistency across the app.
+            </p>
+          </div>
+
+          <div className='rounded-3xl border border-slate-200 bg-white p-6 text-slate-800 shadow-[0_18px_36px_-28px_rgba(15,23,42,0.35)]'>
+            <div className='text-sm uppercase tracking-[0.3em] text-slate-500'>Update panel</div>
             <p className='mt-3 text-base leading-7'>
-              The built-in updater UI also moved to Tailwind class names so the codebase is consistent end to end.
+              Built-in updater UI follows the same spacing and typography rules for a more harmonious experience.
             </p>
           </div>
         </section>

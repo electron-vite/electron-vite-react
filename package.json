@@ -1,18 +1,12 @@
 {
   "name": "electron-vite-react",
   "version": "2.3.0",
-  "main": "dist-electron/main/index.js",
-  "description": "Electron Vite React boilerplate.",
-  "author": "草鞋没号 <308487730@qq.com>",
-  "license": "MIT",
   "private": true,
-  "debug": {
-    "env": {
-      "VITE_DEV_SERVER_URL": "http://127.0.0.1:7777/"
-    }
-  },
+  "description": "Electron Vite React boilerplate.",
+  "license": "MIT",
+  "author": "草鞋没号 <308487730@qq.com>",
   "type": "module",
-  "packageManager": "pnpm@10.32.1",
+  "main": "dist-electron/main/index.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build && electron-builder",
@@ -39,5 +33,6 @@
     "vite-plugin-electron": "1.0.0-beta.13",
     "vite-plugin-electron-renderer": "1.0.0-beta.9",
     "vitest": "^4.1.7"
-  }
+  },
+  "packageManager": "pnpm@10.32.1"
 }

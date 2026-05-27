@@ -6,8 +6,9 @@ import tailwindcss from '@tailwindcss/vite'
 import electron from 'vite-plugin-electron/simple'
 import pkg from './package.json'
 
-const url = new URL(pkg.debug.env.VITE_DEV_SERVER_URL)
-const external = Object.keys('dependencies' in pkg ? pkg.dependencies as Record<string, string> : {})
+const external = Object.keys(
+  'dependencies' in pkg ? (pkg.dependencies as Record<string, string>) : {},
+)
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command }) => {
@@ -20,7 +21,7 @@ export default defineConfig(({ command }) => {
   return {
     resolve: {
       alias: {
-        '@': path.join(__dirname, 'src')
+        '@': path.join(__dirname, 'src'),
       },
     },
     plugins: [
