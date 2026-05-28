@@ -8,9 +8,9 @@ English | [简体中文](README.zh-CN.md)
 pnpm add electron-updater
 ```
 
-### Main Flow
+## Main Flow
 
-#### 1. Configure the update server
+### 1. Configure the update server
 
 Add a `publish` field to `electron-builder.json` to define the update source and provider.
 
@@ -26,7 +26,7 @@ Add a `publish` field to `electron-builder.json` to define the update source and
 
 For more information, please refer to [electron-builder.json](https://github.com/electron-vite/electron-vite-react/blob/main/electron-builder.json)
 
-#### 2. Main-process update logic
+### 2. Main-process update logic
 
 This project keeps `autoDownload` disabled, so users start downloads manually.
 
@@ -38,7 +38,7 @@ This project keeps `autoDownload` disabled, so users start downloads manually.
 
 For more information, please refer to [update.ts](https://github.com/electron-vite/electron-vite-react/blob/main/electron/main/update.ts)
 
-#### 3. Renderer UI
+### 3. Renderer UI
 
 The update page is the user-facing entry point for the flow above. Users click the page button to trigger update actions in Electron.
 

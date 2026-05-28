@@ -8,9 +8,9 @@
 pnpm add electron-updater
 ```
 
-### 主要流程
+## 主要流程
 
-#### 1. 配置更新服务
+### 1. 配置更新服务
 
 在 `electron-builder.json` 中添加 `publish` 字段，用来配置更新地址和 provider。
 
@@ -26,7 +26,7 @@ pnpm add electron-updater
 
 更多详情请见：[electron-builder.json](https://github.com/electron-vite/electron-vite-react/blob/main/electron-builder.json)
 
-#### 2. 主进程更新逻辑
+### 2. 主进程更新逻辑
 
 本项目保持 `autoDownload` 关闭，因此下载需要由用户手动触发。
 
@@ -38,7 +38,7 @@ pnpm add electron-updater
 
 更多详情请见：[update.ts](https://github.com/electron-vite/electron-vite-react/blob/main/electron/main/update.ts)
 
-#### 3. 渲染进程 UI
+### 3. 渲染进程 UI
 
 更新页面是用户触发上述流程的入口，用户通过页面按钮触发 Electron 的更新动作。
 
