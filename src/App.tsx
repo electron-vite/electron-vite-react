@@ -32,24 +32,24 @@ function App() {
                 </div>
               </div>
 
-              <div className='flex flex-wrap items-center gap-3'>
-                <a
-                  href='https://github.com/electron-vite/electron-vite-react'
-                  target='_blank'
-                  rel='noreferrer'
-                  className='inline-flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 transition hover:border-cyan-300 hover:bg-cyan-50/40'
-                >
-                  <span className='relative flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-100 ring-1 ring-slate-200'>
-                    <img src={logoVite} className='h-8 w-8' alt='Vite logo' />
-                    <img
-                      src={logoElectron}
-                      className='absolute h-8 w-8 motion-safe:animate-spin [animation-duration:20s]'
-                      alt='Electron logo'
-                    />
-                  </span>
-                  <span className='text-sm font-medium text-slate-700'>Open project repository</span>
-                </a>
-              </div>
+              <a
+                href='https://github.com/electron-vite/electron-vite-react'
+                target='_blank'
+                rel='noreferrer'
+                className='group inline-flex w-fit items-center gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all hover:border-cyan-300 hover:shadow-md'
+              >
+                <span className='relative flex h-10 w-10 items-center justify-center'>
+                  <img src={logoVite} className='h-8 w-8' alt='Vite logo' />
+                  <img
+                    src={logoElectron}
+                    className='absolute h-8 w-8 motion-safe:animate-spin [animation-duration:20s]'
+                    alt='Electron logo'
+                  />
+                </span>
+                <span className='pr-2 text-sm font-semibold text-slate-700 transition-colors group-hover:text-cyan-700'>
+                  Open project repository
+                </span>
+              </a>
             </div>
 
             <div className='relative overflow-hidden rounded-[1.75rem] border border-slate-200 bg-gradient-to-br from-cyan-50 to-white p-6'>

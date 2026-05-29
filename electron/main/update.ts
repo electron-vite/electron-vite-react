@@ -1,13 +1,12 @@
 import { app, ipcMain } from 'electron'
-import { createRequire } from 'node:module'
 import {
   CancellationToken,
+  autoUpdater,
   type ProgressInfo,
   type UpdateDownloadedEvent,
   type UpdateInfo,
 } from 'electron-updater'
 
-const { autoUpdater } = createRequire(import.meta.url)('electron-updater');
 let cancellationToken = new CancellationToken()
 let isDownloading = false
 

@@ -107,7 +107,7 @@ const Update = () => {
           {updateError ? (
             <div className="text-sm leading-6 text-rose-700">
               <p className="font-semibold text-rose-900">Error downloading the latest version.</p>
-              <p className="mt-1">{updateError.message}</p>
+              <p className="mt-1 max-h-40 overflow-auto">{updateError.message}</p>
             </div>
           ) : updateAvailable ? (
             <div className="space-y-3 text-sm text-slate-700">
