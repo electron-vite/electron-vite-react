@@ -1,91 +1,79 @@
-# vite-react-electron
+# electron-vite-react
 
 [![awesome-vite](https://awesome.re/mentioned-badge.svg)](https://github.com/vitejs/awesome-vite)
-![GitHub stars](https://img.shields.io/github/stars/caoxiemeihao/vite-react-electron?color=fa6470)
-![GitHub issues](https://img.shields.io/github/issues/caoxiemeihao/vite-react-electron?color=d8b22d)
-![GitHub license](https://img.shields.io/github/license/caoxiemeihao/vite-react-electron)
-[![Required Node.JS >= 14.18.0 || >=16.0.0](https://img.shields.io/static/v1?label=node&message=14.18.0%20||%20%3E=16.0.0&logo=node.js&color=3f893e)](https://nodejs.org/about/releases)
+![GitHub stars](https://img.shields.io/github/stars/electron-vite/electron-vite-react?color=fa6470)
+![GitHub issues](https://img.shields.io/github/issues/electron-vite/electron-vite-react?color=d8b22d)
+![GitHub license](https://img.shields.io/github/license/electron-vite/electron-vite-react)
+[![Required Node.js >= 20.19.0 || >= 22.12.0](https://img.shields.io/static/v1?label=node&message=%3E=20.19.0%20||%20%3E=22.12.0&logo=node.js&color=3f893e)](https://nodejs.org/about/releases)
 
 [English](README.md) | 简体中文
 
-## 概述
+## 概览
 
-📦 开箱即用  
-🎯 基于官方的 [template-react-ts](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts), 低侵入性  
-🌱 结构清晰，可塑性强  
-💪 支持在渲染进程中使用 Electron、Node.js API  
-🔩 支持 C/C++ 模块  
-🖥 很容易实现多窗口  
+- 开箱即用。
+- 基于官方的 [template-react-ts](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts)。
+- 支持在渲染进程中使用 Electron 和 Node.js API。
+- 支持 C/C++ 原生模块。
+- 包含调试配置。
+- 易于扩展为多窗口应用。
 
 ## 快速开始
 
 ```sh
-# clone the project
+# 克隆项目
 git clone https://github.com/electron-vite/electron-vite-react.git
 
-# enter the project directory
+# 进入项目目录
 cd electron-vite-react
 
-# install dependency
-npm install
+# 安装依赖
+pnpm install
 
-# develop
-npm run dev
+# 启动开发环境
+pnpm dev
 ```
 
-## 调试
+## 可用脚本
 
-![electron-vite-react-debug.gif](/electron-vite-react-debug.gif)
+- `pnpm dev`：启动 Vite 开发服务器。
+- `pnpm build`：构建渲染进程并使用 electron-builder 打包应用。
+- `pnpm preview`：本地预览生产构建结果。
+- `pnpm test`：运行 Vitest 单元测试。
+- `pnpm test:e2e`：构建测试模式产物并运行 Playwright 测试。
+- `pnpm typecheck`：运行 TypeScript 类型检查。
 
-## 目录
-
-*🚨 默认情况下, `electron` 文件夹下的文件将会被构建到 `dist-electron`*
+## 项目结构
 
 ```tree
-├── electron                                 Electron 源码文件夹
-│   ├── main                                 Main-process 源码
-│   └── preload                              Preload-scripts 源码
-│
-├── release                                  构建后生成程序目录
-│   └── {version}
-│       ├── {os}-{os_arch}                   未打包的程序(绿色运行版)
-│       └── {app_name}_{version}.{ext}       应用安装文件
-│
-├── public                                   同 Vite 模板的 public
-└── src                                      渲染进程源码、React代码
+├── build/            打包资源
+├── dist-electron/    编译后的 Electron 输出
+├── electron/         主进程和 preload 源码
+│   ├── main/
+│   └── preload/
+├── public/           静态资源
+├── src/              渲染进程源码
+│   ├── components/
+│   │   └── update/
+│   ├── demos/
+│   └── type/
+└── test/             单元测试和端到端测试
+    └── e2e/
 ```
 
-<!--
-## 🚨 这需要留神
+`electron/` 下的文件会被编译到 `dist-electron/`。
 
-默认情况下，该模板在渲染进程中集成了 Node.js，如果你不需要它，你只需要删除下面的选项. [因为它会修改 Vite 默认的配置](https://github.com/electron-vite/vite-plugin-electron-renderer#config-presets-opinionated).
+## 安全说明
 
-```diff
-# vite.config.ts
+`vite.config.ts` 里的 `renderer: {}` 只是给 Vite 用的适配器，用来在渲染进程中修复 Electron、Node.js API 和原生模块的使用，它本身并不等同于开启 Node integration。若确实需要在渲染进程中直接使用 Node.js，请在主进程创建 `BrowserWindow` 时开启 `nodeIntegration`，并谨慎评估安全影响。
 
-export default {
-  plugins: [
-    ...
--   // Use Node.js API in the Renderer-process
--   renderer({
--     nodeIntegration: true,
--   }),
-    ...
-  ],
-}
-```
--->
+## 功能
 
-## 🔧 额外的功能
+1. Electron 自动更新，文档见 [src/components/update/README.md](src/components/update/README.md)。
+2. Vitest 单元测试和 Playwright 端到端测试。
+3. TailwindCSS v4。
 
-1. Electron 自动更新 👉 [阅读文档](src/components/update/README.zh-CN.md)
-2. Playwright 测试
+## 资源
 
-## ❔ FAQ
-
+- 自动更新文档：[English](src/components/update/README.md) | [简体中文](src/components/update/README.zh-CN.md)
 - [C/C++ addons, Node.js modules - Pre-Bundling](https://github.com/electron-vite/vite-plugin-electron-renderer#dependency-pre-bundling)
 - [dependencies vs devDependencies](https://github.com/electron-vite/vite-plugin-electron-renderer#dependencies-vs-devdependencies)
-
-## 🍵 🍰 🍣 🍟
-
-<img width="270" src="https://github.com/caoxiemeihao/blog/blob/main/assets/$qrcode/$.png?raw=true">
