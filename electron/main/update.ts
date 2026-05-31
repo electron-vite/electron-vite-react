@@ -1,13 +1,14 @@
 import { app, ipcMain } from 'electron'
-import {
-  CancellationToken,
-  autoUpdater,
-  type ProgressInfo,
-  type UpdateDownloadedEvent,
-  type UpdateInfo,
+import type {
+  ProgressInfo,
+  UpdateDownloadedEvent,
+  UpdateInfo,
 } from 'electron-updater'
+// Pure cjs module does not support named exports, so we need to import the default export and access the autoUpdater property
+import updater from 'electron-updater'
 
-let cancellationToken = new CancellationToken()
+const autoUpdater = updater.autoUpdater
+let cancellationToken = new updater.CancellationToken()
 let isDownloading = false
 
 export function update(win: Electron.BrowserWindow) {
@@ -70,7 +71,7 @@ export function update(win: Electron.BrowserWindow) {
   // Cancel downloading
   ipcMain.handle('cancel-download', () => {
     cancellationToken.cancel()
-    cancellationToken = new CancellationToken();
+    cancellationToken = new updater.CancellationToken();
   })
 
   // Install now
